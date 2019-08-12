@@ -31,6 +31,8 @@ app.post('/signup', upload.none(), (req, res) => {
             return
         }
         else {
+            //this is for create the user & the cart in the backend
+            dbo.collection('cart').insertOne({ username, items: [] })
             dbo.collection("users").insertOne({ username, password: sha1(password) })
             res.send({ success: true })
             return
@@ -66,15 +68,44 @@ app.post('/newItem', upload.fields({ name: "images", maxCount: 5 }), (req, res) 
     let stock = req.body.stock
     let cat = req.body.categorie
     let files = req.files
-    let price = req.
-        files.forEach(file => {
-            let frontendPath = '/upload/' + file.filenmae
-            images.push(frontendPath)
-        })
-    dbo.collection(cat).insertOne({ name, description: desc, seller, stock, images })
+    let price = req.body.price
+    files.forEach(file => {
+        // Each image path was send in the images array
+        let frontendPath = '/upload/' + file.filenmae
+        images.push(frontendPath)
+    })
+    dbo.collection(cat).insertOne({ name, description: desc, seller, stock, images, price })
     res.send({ success: true })
 })
-app.post('/purchase', uplod.none(), (req, res) => {
+app.post('/addTocart', upload.none(), (req, res) => {
+    let username = req.body.username
+    let item = req.body.id
+    let cat = req.body.cat
+    dbo.collection(cat).findOne({ "_id": item }), (err, it) => {
+        //this is for find the id of the item for stack it in the cart collection with the username
+        if (err) {
+            console.log(err, "add to cart error")
+            res.send({ success: false })
+        }
+        if (it._id === item) {
+            dbo.collection('cart').findOne({ username }), (err, user) => {
+                //this is for find the good cart for stack the items inside of them.
+                if (err) {
+                    console.log(err, "erreur find cart user")
+                    res.send({ success: false })
+                    return
+                }
+                if (username) {
+                    let newItems = it.items.concat(item)
+                    dbo.collection('cart').updateOne({ username, items: newItems })
+                    res.send({ success: true })
+                    return
+                }
+            }
+        }
+    }
+})
+app.post('/checkout', uplod.none(), (req, res) => {
 
 })
 // Your endpoints go before this line
