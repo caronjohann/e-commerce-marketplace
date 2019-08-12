@@ -1,7 +1,7 @@
 let express = require('express')
 let app = express()
-let mongoClient = require("mongodb").mongoClient
-let objectID = require("mongodb").ObjectID
+let MongoClient = require("mongodb").MongoClient
+let ObjectID = require("mongodb").ObjectID
 let sha1 = require('sha1')
 let multer = require('multer')
 let upload = multer({ dest: __dirname + '/upload/' })
@@ -9,7 +9,7 @@ let reloadMagic = require('./reload-magic.js')
 reloadMagic(app)
 let dbo = undefined
 let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
-mongoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
+MongoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
 app.use('/uploads', express.static("upload"))
@@ -82,7 +82,8 @@ app.post('/addTocart', upload.none(), (req, res) => {
     let item = req.body.id
     let cat = req.body.cat
     dbo.collection(cat).findOne({ "_id": item }), (err, it) => {
-        //this is for find the id of the item for stack it in the cart collection with the username
+        //this is for find the id of the item for stack it in the cart 
+        // collection with the username
         if (err) {
             console.log(err, "add to cart error")
             res.send({ success: false })
@@ -96,7 +97,9 @@ app.post('/addTocart', upload.none(), (req, res) => {
                     return
                 }
                 if (username) {
-                    let newItems = it.items.concat(item)
+                    //we concat an object each time the user click on add to cart
+                    // with categorie for property and the id of the item.
+                    let newItems = it.items.concat({ cat: item })
                     dbo.collection('cart').updateOne({ username, items: newItems })
                     res.send({ success: true })
                     return
@@ -105,7 +108,7 @@ app.post('/addTocart', upload.none(), (req, res) => {
         }
     }
 })
-app.post('/checkout', uplod.none(), (req, res) => {
+app.post('/checkout', upload.none(), (req, res) => {
     let username = req.body.username
     dbo.collection('cart').findOne({ username }), (err, user) => {
         if (err) {
@@ -114,7 +117,19 @@ app.post('/checkout', uplod.none(), (req, res) => {
             return
         }
         if (username) {
-
+            let items = []
+            user.items.forEach(it => {
+                let categorie = Object.keys(it)
+                let id = Object.values(it)
+                dbo.collection(categorie).findOne({ _id: id }), (err, user) => {
+                    if (err) {
+                        console.log(err, "cart find item error")
+                        res.send({ success: false })
+                    }
+                }
+            })
+            dbo.collection
+            res.send()
             return
         }
         console.log("username not find")
