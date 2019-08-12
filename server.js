@@ -30,7 +30,7 @@ app.post('/signup', upload.none(), (req, res) => {
             res.send(JSON.stringify({ success: false }))
             return
         }
-        else {
+        if (user === undefined) {
             //this is for create the user & the cart in the backend
             dbo.collection('cart').insertOne({ username, items: [] })
             dbo.collection("users").insertOne({ username, password: sha1(password) })
@@ -106,7 +106,10 @@ app.post('/addTocart', upload.none(), (req, res) => {
                 }
             }
         }
+
     }
+    res.send({ success: false })
+    return
 })
 app.post('/checkout', upload.none(), (req, res) => {
     let username = req.body.username
@@ -126,15 +129,20 @@ app.post('/checkout', upload.none(), (req, res) => {
                         console.log(err, "cart find item error")
                         res.send({ success: false })
                     }
+                    if (_id) {
+
+                        res.send(user)
+                    }
                 }
             })
             dbo.collection
             res.send()
             return
         }
-        console.log("username not find")
-        res.send({ success: false })
     }
+    console.log("username not find")
+    res.send({ success: false })
+    return
 })
 // Your endpoints go before this line
 
