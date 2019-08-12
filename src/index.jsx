@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import React from "react";
 import { Provider } from "react-redux";
 import { connect } from "react-redux";
-import Store from "./Store.jsx";
+import store from "./store.jsx";
 
 import reloadMagic from "./reload-magic-client.js"; // automatic reload
 reloadMagic(); // automatic reload
