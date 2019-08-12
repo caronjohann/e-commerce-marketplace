@@ -3,7 +3,7 @@ let reducer = (state, action) => {
   if (action.type === "query") {
     return { ...state, searchQuery: action.q };
   }
-
+  
   return state;
 };
 
