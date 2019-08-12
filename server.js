@@ -1,7 +1,7 @@
 let express = require('express')
 let app = express()
-let mangoClient = require("mangodb").mangoClient
-let objectID = require("mangodb").ObjectID
+let mongoClient = require("mongodb").mongoClient
+let objectID = require("mongodb").ObjectID
 let sha1 = require('sha1')
 let multer = require('multer')
 let upload = multer({ dest: __dirname + '/upload/' })
@@ -9,7 +9,7 @@ let reloadMagic = require('./reload-magic.js')
 reloadMagic(app)
 let dbo = undefined
 let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
-mangoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
+mongoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
 app.use('/uploads', express.static("upload"))
@@ -106,7 +106,20 @@ app.post('/addTocart', upload.none(), (req, res) => {
     }
 })
 app.post('/checkout', uplod.none(), (req, res) => {
+    let username = req.body.username
+    dbo.collection('cart').findOne({ username }), (err, user) => {
+        if (err) {
+            console.log(err, "cart error")
+            res.send({ success: false })
+            return
+        }
+        if (username) {
 
+            return
+        }
+        console.log("username not find")
+        res.send({ success: false })
+    }
 })
 // Your endpoints go before this line
 
