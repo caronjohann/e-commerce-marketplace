@@ -1,10 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class App extends Component {
-    render = () => {
-        return "Hello world!"
-    }
+  render = () => {
+    return (
+      <div>
+        <Items />
+        <Header />
+        <Footer />
+      </div>
+    );
+  };
 }
 
-
-export default App
+export default App;

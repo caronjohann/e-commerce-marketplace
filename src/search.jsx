@@ -7,12 +7,12 @@ class UnconnectedSearch extends Component {
   render = () => {
     return (
       <div>
-        <div>
-          Search query
+        <div className="searchbar">
           <input
             type="text"
             onChange={this.handleQuery}
             value={this.props.query}
+            placeholder="search...."
           />
         </div>
       </div>
