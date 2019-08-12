@@ -9,7 +9,7 @@ let reloadMagic = require('./reload-magic.js')
 reloadMagic(app)
 let dbo = undefined
 let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
-MongoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
+MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
 app.use('/uploads', express.static("upload"))
@@ -99,7 +99,7 @@ app.post('/addTocart', upload.none(), (req, res) => {
                 if (username) {
                     //we concat an object each time the user click on add to cart
                     // with categorie for property and the id of the item.
-                    let newItems = it.items.concat({ cat: item })
+                    let newItems = it.items.concat({ cat: ObjectID(item) })
                     dbo.collection('cart').updateOne({ username, items: newItems })
                     res.send({ success: true })
                     return
@@ -121,7 +121,7 @@ app.post('/checkout', upload.none(), (req, res) => {
             user.items.forEach(it => {
                 let categorie = Object.keys(it)
                 let id = Object.values(it)
-                dbo.collection(categorie).findOne({ _id: id }), (err, user) => {
+                dbo.collection(categorie).findOne({ _id: ObjectID(id) }), (err, user) => {
                     if (err) {
                         console.log(err, "cart find item error")
                         res.send({ success: false })
