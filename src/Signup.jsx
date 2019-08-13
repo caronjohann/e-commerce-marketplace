@@ -8,50 +8,59 @@ class Signup extends Component {
       password: "",
       firstName: "",
       lastName: "",
-      registered: false
+      registered: null
     };
   }
   firstNameHandler = evt => {
-    console.log("firstName", evt.target.value)
-    this.setState({ firstName: evt.target.value })
+    console.log("firstName", evt.target.value);
+    this.setState({ firstName: evt.target.value });
   };
   lastNameHandler = evt => {
-    console.log("lastName", evt.target.value)
-    this.setState({ lastName: evt.target.value })
+    console.log("lastName", evt.target.value);
+    this.setState({ lastName: evt.target.value });
   };
   emailHandler = evt => {
-    console.log("username", evt.target.value)
-    this.setState({ username: evt.target.value })
+    console.log("username", evt.target.value);
+    this.setState({ username: evt.target.value });
   };
   passwordHandler = evt => {
-    console.log("password", evt.target.value)
-    this.setState({ password: evt.target.value })
+    console.log("password", evt.target.value);
+    this.setState({ password: evt.target.value });
   };
   submitHandler = async evt => {
     evt.preventDefault();
-    let data = new FormData
-    data.append("username", this.state.username)
-    data.append("password", this.state.password)
-    data.append("firstName", this.state.firstName)
-    data.append("lastName", this.state.lastName)
-    let response = await fetch('/signup', {
+    let data = new FormData();
+    data.append("username", this.state.username);
+    data.append("password", this.state.password);
+    data.append("firstName", this.state.firstName);
+    data.append("lastName", this.state.lastName);
+    let response = await fetch("/signup", {
       method: "POST",
       body: data,
       credentials: "include"
-    })
-    let responseBody = await response.text()
-    console.log("responseBody form signup", responseBody)
-    let body = JSON.parse(responseBody)
-    console.log("parsed body", body)
+    });
+    let responseBody = await response.text();
+    console.log("responseBody form signup", responseBody);
+    let body = JSON.parse(responseBody);
+    if (body.success === false) {
+      this.setState({ registered: false });
+    }
+    console.log("parsed body", body);
     this.setState({ registered: true });
   };
   render = () => {
-    if (this.state.registered) {
+    if (this.state.registered === true) {
       return (
         <div>
           <h2>
             Your account has been created! <a>Return to marketplace</a>
           </h2>
+        </div>
+      );
+    } else if (this.state.registered === false) {
+      return (
+        <div>
+          <h2>Sorry this email address already exists.</h2>
         </div>
       );
     } else {
