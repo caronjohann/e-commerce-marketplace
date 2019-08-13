@@ -27,3 +27,13 @@ body {
   margin: 0 1rem;
   position: relative;
 }
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
