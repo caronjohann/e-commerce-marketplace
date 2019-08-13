@@ -9,16 +9,19 @@ let reloadMagic = require('./reload-magic.js')
 reloadMagic(app)
 let dbo = undefined
 let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
-MongoClient.connect(url, { userNewUrlParser: true }, (err, db) => {
+MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
 app.use('/uploads', express.static("upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
-// Your endpoints go after this line
+
 app.post('/signup', upload.none(), (req, res) => {
     let username = req.body.username
+    let fName = req.body.firstName
+    let lName = req.body.lastName
     let password = req.body.password
+    console.log(req.body, "body")
     dbo.collection('users').findOne({ username }), (err, user) => {
         if (err) {
             console.log(err, "signup err")
@@ -29,15 +32,16 @@ app.post('/signup', upload.none(), (req, res) => {
             console.log("same username")
             res.send(JSON.stringify({ success: false }))
             return
-        }
-        else {
+        } else {
+            console.log("test")
             //this is for create the user & the cart in the backend
             dbo.collection('cart').insertOne({ username, items: [] })
-            dbo.collection("users").insertOne({ username, password: sha1(password) })
+            dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
             res.send({ success: true })
             return
         }
     }
+
 })
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
@@ -99,14 +103,17 @@ app.post('/addTocart', upload.none(), (req, res) => {
                 if (username) {
                     //we concat an object each time the user click on add to cart
                     // with categorie for property and the id of the item.
-                    let newItems = it.items.concat({ cat: item })
+                    let newItems = it.items.concat({ cat: ObjectID(item) })
                     dbo.collection('cart').updateOne({ username, items: newItems })
                     res.send({ success: true })
                     return
                 }
             }
         }
+
     }
+    res.send({ success: false })
+    return
 })
 app.post('/checkout', upload.none(), (req, res) => {
     let username = req.body.username
@@ -121,10 +128,14 @@ app.post('/checkout', upload.none(), (req, res) => {
             user.items.forEach(it => {
                 let categorie = Object.keys(it)
                 let id = Object.values(it)
-                dbo.collection(categorie).findOne({ _id: id }), (err, user) => {
+                dbo.collection(categorie).findOne({ _id: ObjectID(id) }), (err, user) => {
                     if (err) {
                         console.log(err, "cart find item error")
                         res.send({ success: false })
+                    }
+                    if (_id) {
+
+                        res.send(user)
                     }
                 }
             })
@@ -132,11 +143,12 @@ app.post('/checkout', upload.none(), (req, res) => {
             res.send()
             return
         }
-        console.log("username not find")
-        res.send({ success: false })
     }
+    console.log("username not find")
+    res.send({ success: false })
+    return
 })
-// Your endpoints go before this line
+// app.post('sellerItemsList')
 
 app.all('/*', (req, res, next) => { // needed for react router
     res.sendFile(__dirname + '/build/index.html');

@@ -8,6 +8,8 @@ import Banner from "./Banner.jsx";
 
 class Header extends Component {
   render = () => {
+    if (this.props.loggedIn) {
+    }
     return (
       <div>
         <Logo />
