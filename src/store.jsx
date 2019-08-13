@@ -1,9 +1,8 @@
 import { createStore } from "redux";
 let reducer = (state, action) => {
-  if (action.type === "query") {
-    return { ...state, searchQuery: action.q };
+  if (action.type === "search") {
+    return { ...state, searchQuery: action.typedSearch };
   }
-  
   return state;
 };
 

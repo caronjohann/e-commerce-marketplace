@@ -2,7 +2,11 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 class UnconnectedSearch extends Component {
   handleQuery = evt => {
-    this.props.dispatch({ type: "query", q: evt.target.value });
+    console.log("Typed search:", evt.target.value);
+    this.props.dispatch({
+      type: "search",
+      typedSearch: evt.target.value
+    });
   };
   render = () => {
     return (
@@ -21,9 +25,9 @@ class UnconnectedSearch extends Component {
   };
 }
 
-let mapStateToProps = st => {
+let mapStateToProps = storeState => {
   return {
-    query: st.searchQuery
+    query: storeState.searchQuery
   };
 };
 let Search = connect(mapStateToProps)(UnconnectedSearch);
