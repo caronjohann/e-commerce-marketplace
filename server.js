@@ -73,21 +73,21 @@ app.post('/login', upload.none(), (req, res) => {
     }
 
 })
-app.post('/newItem', upload.fields({ name: "images", maxCount: 5 }), (req, res) => {
+app.post('/newItem', upload.array({ name: "images", maxCount: 5 }), (req, res) => {
     let images = []
     let seller = req.body.firstName
-    let name = req.body.itemName
-    let desc = req.body.desc
-    let stock = req.body.stock
-    let cat = req.body.categorie
+    let name = req.body.title
+    let desc = req.body.descrpition
+    let cat = req.body.categeries
     let files = req.files
     let price = req.body.price
+    console.log(req.body, "body")
     files.forEach(file => {
         // Each image path was send in the images array
         let frontendPath = '/upload/' + file.filenmae
         images.push(frontendPath)
     })
-    dbo.collection(cat).insertOne({ name, description: desc, seller, stock, images, price })
+    dbo.collection(cat).insertOne({ name, description: desc, seller, images, price })
     res.send({ success: true })
 })
 app.post('/addTocart', upload.none(), (req, res) => {
