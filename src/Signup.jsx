@@ -33,10 +33,11 @@ class Signup extends Component {
     data.append("username", this.state.username)
     data.append("password", this.state.password)
     data.append("firstName", this.state.firstName)
-    data.append("lastName", this.state.lastname)
+    data.append("lastName", this.state.lastName)
     let response = await fetch('/signup', {
       method: "POST",
-      body: data
+      body: data,
+      credentials: "include"
     })
     let responseBody = await response.text()
     console.log("responseBody form signup", responseBody)

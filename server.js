@@ -21,6 +21,7 @@ app.post('/signup', upload.none(), (req, res) => {
     let fName = req.body.firstName
     let lName = req.body.lastName
     let password = req.body.password
+    console.log(req.body, "body")
     dbo.collection('users').findOne({ username }), (err, user) => {
         if (err) {
             console.log(err, "signup err")
@@ -31,8 +32,8 @@ app.post('/signup', upload.none(), (req, res) => {
             console.log("same username")
             res.send(JSON.stringify({ success: false }))
             return
-        }
-        if (user === undefined) {
+        } else {
+            console.log("test")
             //this is for create the user & the cart in the backend
             dbo.collection('cart').insertOne({ username, items: [] })
             dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
@@ -40,6 +41,7 @@ app.post('/signup', upload.none(), (req, res) => {
             return
         }
     }
+
 })
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
