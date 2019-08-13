@@ -4,7 +4,7 @@ class Item extends Component {
   render = () => {
     return (
       <div>
-        <Item />
+        {this.state.allItems}.map(item=>(<Items>{allItems.title}</Items>)
       </div>
     );
   };

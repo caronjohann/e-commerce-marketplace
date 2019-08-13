@@ -17,8 +17,8 @@ let renderHomePage = () => {
     </div>
   );
 };
-let renderSearchPage = () => {
-  return (
+let renderSearchPage = allItems => {
+  return () => (
     <div>
       <Search />
     </div>
@@ -32,25 +32,23 @@ let renderLoginPage = () => {
   );
 };
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      allItems:[]
-    }
-  };
-  
-  render = () => {
-    renderItems = () =>{
-      let response= await fetch("/send-items");
-      let body= await response.text();
-      console.log("send-items",body);
-      body =JSON.parse(body);
-      this.setState({allItems:body});
+  constructor(props) {
+    super(props);
+    this.state = {
+      allItems: []
     };
-    setInterval(renderItems, 500)      
-    
-    return (
+  }
+  componentDidMount = async () => {
+    let response = await fetch("/send-items");
+    let body = await response.text();
+    console.log("send-items", body);
+    body = JSON.parse(body);
+    this.setState({ allItems: body });
+  };
 
+  render = () => {
+    // this.renderItems();
+    return (
       <BrowserRouter>
         <div>
           <Route exact={true} path="/" render={renderHomePage} />
@@ -58,8 +56,6 @@ class App extends Component {
           <Route exact={true} path="/login" render={renderLoginPage} />
         </div>
       </BrowserRouter>
-     
-
     );
   };
 }
