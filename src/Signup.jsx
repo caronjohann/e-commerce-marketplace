@@ -44,6 +44,7 @@ class Signup extends Component {
     let body = JSON.parse(responseBody);
     if (body.success === false) {
       this.setState({ registered: false });
+      return
     }
     console.log("parsed body", body);
     this.setState({ registered: true });

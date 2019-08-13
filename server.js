@@ -22,13 +22,14 @@ app.post('/signup', upload.none(), (req, res) => {
     let lName = req.body.lastName
     let password = req.body.password
     console.log(req.body, "body")
-    dbo.collection('users').findOne({ username }), (err, user) => {
+    dbo.collection('users').findOne({ username: username }, (err, user) => {
+        console.log(user, "user")
         if (err) {
             console.log(err, "signup err")
             res.send(JSON.stringify({ succes: false }))
             return
         }
-        if (user === username) {
+        if (user !== null) {
             console.log("same username")
             res.send(JSON.stringify({ success: false }))
             return
@@ -40,8 +41,7 @@ app.post('/signup', upload.none(), (req, res) => {
             res.send({ success: true })
             return
         }
-    }
-
+    })
 })
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
