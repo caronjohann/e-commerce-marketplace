@@ -12,9 +12,10 @@ class UnconnectedSearch extends Component {
             type="text"
             onChange={this.handleQuery}
             value={this.props.query}
-            placeholder="search...."
+            placeholder="Search...."
           />
         </div>
+        <div className="close" />
       </div>
     );
   };
