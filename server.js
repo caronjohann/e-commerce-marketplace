@@ -22,51 +22,60 @@ app.post('/signup', upload.none(), (req, res) => {
     let lName = req.body.lastName
     let password = req.body.password
     console.log(req.body, "body")
-    dbo.collection('users').findOne({ username: username }, (err, user) => {
-        console.log(user, "user")
-        if (err) {
-            console.log(err, "signup err")
-            res.send(JSON.stringify({ succes: false }))
-            return
-        }
-        if (user !== null) {
-            console.log("same username")
-            res.send(JSON.stringify({ success: false }))
-            return
-        } else {
-            console.log("test")
-            //this is for create the user & the cart in the backend
-            dbo.collection('cart').insertOne({ username, items: [] })
-            dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
-            res.send({ success: true })
-            return
-        }
-    })
+    if (username !== "" && password !== "") {
+        dbo.collection('users').findOne({ username: username }, (err, user) => {
+            console.log(user, "user")
+            if (err) {
+                console.log(err, "signup err")
+                res.send(JSON.stringify({ succes: false }))
+                return
+            }
+            if (user !== null) {
+                console.log("same username")
+                res.send(JSON.stringify({ success: false }))
+                return
+            } else {
+                console.log("test")
+                //this is for create the user & the cart in the backend
+                dbo.collection('cart').insertOne({ username, items: [] })
+                dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
+                res.send({ success: true })
+                return
+            }
+        })
+    }
+
 })
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
     let password = req.body.password
     let hashedPwd = sha1(password)
-    dbo.collection("users").findOne({ username }), (err, user) => {
-        if (err) {
-            console.log(err, "login error")
+    console.log(hashedPwd, "body")
+    if (username !== "" && password !== "") {
+        dbo.collection("users").findOne({ username: username }, (err, user) => {
+            if (err) {
+                console.log(err, "login error")
+                res.send({ success: false })
+                return
+            }
+            if (user === null) {
+                console.log("test")
+                res.send({ success: false })
+                return
+            }
+            if (user.password === hashedPwd) {
+                console.log("test")
+                res.send({ success: true })
+                return
+            }
             res.send({ success: false })
-            return
-        }
-        if (user === null) {
-            res.send({ success: false })
-            return
-        }
-        if (user.password === hashedPwd) {
-            res.send({ success: true })
-            return
-        }
-        res.send({ success: false })
+        })
     }
+
 })
 app.post('/newItem', upload.fields({ name: "images", maxCount: 5 }), (req, res) => {
     let images = []
-    let seller = req.body.username
+    let seller = req.body.firstName
     let name = req.body.itemName
     let desc = req.body.desc
     let stock = req.body.stock
@@ -115,9 +124,27 @@ app.post('/addTocart', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
+app.post('/itemSearch', upload.none(), (req, res) => {
+    let name = req.body.name
+    dbo.collection().find({ name: name }, (err, item) => {
+        if (err) {
+            console.log(err, "items search error")
+            res.send({ success: false })
+            return
+        }
+        if (name === null) {
+            console.log("test")
+            res.send({ success: false })
+            return
+        } else {
+            console.log("result item search")
+            res.send(item)
+        }
+    })
+})
 app.post('/checkout', upload.none(), (req, res) => {
     let username = req.body.username
-    dbo.collection('cart').findOne({ username }), (err, user) => {
+    dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
             console.log(err, "cart error")
             res.send({ success: false })
@@ -128,22 +155,25 @@ app.post('/checkout', upload.none(), (req, res) => {
             user.items.forEach(it => {
                 let categorie = Object.keys(it)
                 let id = Object.values(it)
-                dbo.collection(categorie).findOne({ _id: ObjectID(id) }), (err, user) => {
+                dbo.collection(categorie).findOne({ _id: ObjectID(id) }, (err, item) => {
                     if (err) {
                         console.log(err, "cart find item error")
                         res.send({ success: false })
                     }
-                    if (_id) {
-
-                        res.send(user)
+                    if (_id === null) {
+                        console.log("test")
+                        res.send({ success: false })
+                        return
+                    } else {
+                        res.send(item)
                     }
-                }
+                })
             })
             dbo.collection
             res.send()
             return
         }
-    }
+    })
     console.log("username not find")
     res.send({ success: false })
     return
