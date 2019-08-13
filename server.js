@@ -74,14 +74,17 @@ app.post('/login', upload.none(), (req, res) => {
 
 })
 app.post('/newItem', upload.array({ name: "images", maxCount: 5 }), (req, res) => {
-    let images = []
+    let img = []
     let seller = req.body.firstName
     let name = req.body.title
     let desc = req.body.descrpition
     let cat = req.body.categeries
+    let images = req.body.images
     let files = req.files
+    console.log(req.file)
     let price = req.body.price
-    console.log(req.body, "body")
+    console.log(images, "img")
+    console.log(cat, "categories")
     files.forEach(file => {
         // Each image path was send in the images array
         let frontendPath = '/upload/' + file.filenmae
@@ -124,9 +127,20 @@ app.post('/addTocart', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
+app.get('/send-items', (req, res) => {
+    dbo.collection('items').find({}).toArray((err, items) => {
+        if (err) {
+            console.log("error", err)
+            res.send({ success: false })
+            return
+        }
+        console.log("items", items)
+        res.send(JSON.stringify(items))
+    })
+})
 app.post('/itemSearch', upload.none(), (req, res) => {
     let name = req.body.name
-    dbo.collection().find({ name: name }, (err, item) => {
+    dbo.collection('items').find({ name: name }, (err, item) => {
         if (err) {
             console.log(err, "items search error")
             res.send({ success: false })

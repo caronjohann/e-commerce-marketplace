@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-export default class NewItems extends Component {
+class NewItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,11 @@ export default class NewItems extends Component {
   };
   itemImages = evt => {
     console.log("images", evt.target.files);
-    this.state.images.push(evt.target.files)
+    let imgsFile = evt.target.files
+    imgsFile.forEach(img => {
+      let test = img.File.name
+      console.log(test, "test")
+    });
     this.setState({ images: evt.target.files });
   };
   itemCategeries = evt => {
@@ -40,7 +44,7 @@ export default class NewItems extends Component {
     data.append("title", this.state.title);
     data.append("descrpition", this.state.description);
     data.append("price", this.state.price);
-    data.append("image", this.state.image);
+    data.append("images", this.state.images);
     data.append("categeries", this.state.categeries);
     let response = await fetch("/newItem", {
       method: "POST",
@@ -101,3 +105,4 @@ export default class NewItems extends Component {
   }
 };
 // }
+export default NewItems
