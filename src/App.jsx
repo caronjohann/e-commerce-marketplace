@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 // import { connect } from "react-redux"
-// import Login from "./Login.jsx";
-// import Signup from "./Signup.jsx";
-// import Search from './Search.jsx'
+import Login from "./Login.jsx";
+import Signup from "./Signup.jsx";
+import Search from "./Search.jsx";
 import "./main.css";
 import Header from "./Header.jsx";
 // import Items from "./Items.jsx";
@@ -50,6 +50,7 @@ class App extends Component {
     setInterval(renderItems, 500)      
     
     return (
+
       <BrowserRouter>
         <div>
           <Route exact={true} path="/" render={renderHomePage} />
@@ -58,6 +59,7 @@ class App extends Component {
         </div>
       </BrowserRouter>
      
+
     );
   };
 }
