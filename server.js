@@ -15,9 +15,11 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
 app.use('/uploads', express.static("upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
-// Your endpoints go after this line
+
 app.post('/signup', upload.none(), (req, res) => {
     let username = req.body.username
+    let fName = req.body.firstName
+    let lName = req.body.lastName
     let password = req.body.password
     dbo.collection('users').findOne({ username }), (err, user) => {
         if (err) {
@@ -33,7 +35,7 @@ app.post('/signup', upload.none(), (req, res) => {
         if (user === undefined) {
             //this is for create the user & the cart in the backend
             dbo.collection('cart').insertOne({ username, items: [] })
-            dbo.collection("users").insertOne({ username, password: sha1(password) })
+            dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
             res.send({ success: true })
             return
         }
@@ -144,7 +146,7 @@ app.post('/checkout', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
-// Your endpoints go before this line
+// app.post('sellerItemsList')
 
 app.all('/*', (req, res, next) => { // needed for react router
     res.sendFile(__dirname + '/build/index.html');

@@ -6,13 +6,42 @@ class Signup extends Component {
     this.state = {
       username: "",
       password: "",
-      user: "",
+      firstName: "",
+      lastName: "",
       registered: false
     };
   }
-  firstNameHandler = evt => {};
-  submitHandler = evt => {
+  firstNameHandler = evt => {
+    console.log("firstName", evt.target.value)
+    this.setState({ firstName: evt.target.value })
+  };
+  lastNameHandler = evt => {
+    console.log("lastName", evt.target.value)
+    this.setState({ lastName: evt.target.value })
+  };
+  emailHandler = evt => {
+    console.log("username", evt.target.value)
+    this.setState({ username: evt.target.value })
+  };
+  passwordHandler = evt => {
+    console.log("password", evt.target.value)
+    this.setState({ password: evt.target.value })
+  };
+  submitHandler = async evt => {
     evt.preventDefault();
+    let data = new FormData
+    data.append("username", this.state.username)
+    data.append("password", this.state.password)
+    data.append("firstName", this.state.firstName)
+    data.append("lastName", this.state.lastname)
+    let response = await fetch('/signup', {
+      method: "POST",
+      body: data
+    })
+    let responseBody = await response.text()
+    console.log("responseBody form signup", responseBody)
+    let body = JSON.parse(responseBody)
+    console.log("parsed body", body)
     this.setState({ registered: true });
   };
   render = () => {
