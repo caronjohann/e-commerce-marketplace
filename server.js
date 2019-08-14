@@ -12,7 +12,7 @@ let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
-app.use('/uploads', express.static("upload"))
+app.use('/upload', express.static("/upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
 
@@ -21,7 +21,7 @@ app.post('/signup', upload.none(), (req, res) => {
     let fName = req.body.firstName
     let lName = req.body.lastName
     let password = req.body.password
-    console.log(req.body, "body")
+
     if (username !== "" && password !== "") {
         dbo.collection('users').findOne({ username: username }, (err, user) => {
             console.log(user, "user")
@@ -46,6 +46,7 @@ app.post('/signup', upload.none(), (req, res) => {
     }
 
 })
+
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
     let password = req.body.password
@@ -59,7 +60,7 @@ app.post('/login', upload.none(), (req, res) => {
                 return
             }
             if (user === null) {
-                console.log("test")
+                console.log("test complet")
                 res.send({ success: false })
                 return
             }
@@ -68,31 +69,25 @@ app.post('/login', upload.none(), (req, res) => {
                 res.send({ success: true })
                 return
             }
-            res.send({ success: false })
         })
     }
 
 })
-app.post('/newItem', upload.array({ name: "images", maxCount: 5 }), (req, res) => {
-    let img = []
-    let seller = req.body.firstName
-    let name = req.body.title
+
+// app.post('/logout')
+
+app.post('/newItem', upload.array("files", 5), (req, res) => {
+    // let seller = req.body.firstName
+    let title = req.body.title
     let desc = req.body.descrpition
-    let cat = req.body.categeries
-    let images = req.body.images
-    let files = req.files
-    console.log(req.file)
+    let cat = req.body.categories
     let price = req.body.price
-    console.log(images, "img")
-    console.log(cat, "categories")
-    files.forEach(file => {
-        // Each image path was send in the images array
-        let frontendPath = '/upload/' + file.filenmae
-        images.push(frontendPath)
-    })
-    dbo.collection(cat).insertOne({ name, description: desc, seller, images, price })
+    let images = req.body.images
+    let newImg = images.split(',')
+    dbo.collection(cat).insertOne({ title: title, description: desc, price: price, images: newImg })
     res.send({ success: true })
 })
+
 app.post('/addTocart', upload.none(), (req, res) => {
     let username = req.body.username
     let item = req.body.id
@@ -127,33 +122,17 @@ app.post('/addTocart', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
-app.get('/send-items', (req, res) => {
-    dbo.collection('items').find({}).toArray((err, items) => {
+app.post('/send-items', upload.none(), (req, res) => {
+    let collection = req.body.categorie
+    console.log(collection, "test")
+    dbo.collection(collection).find({}).toArray((err, items) => {
+        console.log(items, 'items')
         if (err) {
             console.log("error", err)
             res.send({ success: false })
             return
         }
-        console.log("items", items)
         res.send(JSON.stringify(items))
-    })
-})
-app.post('/itemSearch', upload.none(), (req, res) => {
-    let name = req.body.name
-    dbo.collection('items').find({ name: name }, (err, item) => {
-        if (err) {
-            console.log(err, "items search error")
-            res.send({ success: false })
-            return
-        }
-        if (name === null) {
-            console.log("test")
-            res.send({ success: false })
-            return
-        } else {
-            console.log("result item search")
-            res.send(item)
-        }
     })
 })
 app.post('/checkout', upload.none(), (req, res) => {
