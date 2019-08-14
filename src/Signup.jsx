@@ -11,22 +11,13 @@ class Signup extends Component {
       registered: null
     };
   }
-  firstNameHandler = evt => {
-    console.log("firstName", evt.target.value);
-    this.setState({ firstName: evt.target.value });
-  };
-  lastNameHandler = evt => {
-    console.log("lastName", evt.target.value);
-    this.setState({ lastName: evt.target.value });
-  };
-  emailHandler = evt => {
-    console.log("username", evt.target.value);
-    this.setState({ username: evt.target.value });
-  };
-  passwordHandler = evt => {
-    console.log("password", evt.target.value);
-    this.setState({ password: evt.target.value });
-  };
+
+  handleChange = (evt, name) => {
+    this.setState({
+      [name]: event.target.value
+    })
+  }
+
   submitHandler = async evt => {
     evt.preventDefault();
     let data = new FormData();
@@ -70,13 +61,13 @@ class Signup extends Component {
           <form onSubmit={this.submitHandler}>
             <h2>Register</h2>
             <h3>First Name</h3>
-            <input type="text" onChange={this.firstNameHandler} />
+            <input type="text" onChange={(e) => this.handleChange(e, 'firsName')} />
             <h3>Last Name</h3>
-            <input type="text" onChange={this.lastNameHandler} />
+            <input type="text" onChange={(e) => this.handleChange(e, 'lastName')} />
             <h3>Email Address</h3>
-            <input type="email" onChange={this.emailHandler} />
+            <input type="email" onChange={(e) => this.handleChange(e, 'email')} />
             <h3>Password</h3>
-            <input type="password" onChange={this.passwordHandler} />
+            <input type="password" onChange={(e) => this.handleChange(e, 'password')} />
             <input type="checkbox" id="newsletter" name="newsletter" checked />
             <label for="scales">
               Sign me up for emails to get exclusive offers
