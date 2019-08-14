@@ -2,12 +2,7 @@ import React, { Component } from "react";
 
 class Item extends Component {
   render = () => {
-    return (
-      <div>
-        {this.state.allItems}.map(item=>(<Items>{allItems.title}</Items>)
-
-      </div>
-    );
+    return <div />;
   };
 }
 
