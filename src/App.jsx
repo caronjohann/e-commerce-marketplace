@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Search from "./Search.jsx";
+import SearchResults from "./SearchResults.jsx";
 import "./main.css";
 import Header from "./Header.jsx";
 import Items from "./Items.jsx";
@@ -15,16 +16,22 @@ class App extends Component {
       <div>
         <Header />
 
-        <Items items={this.props.allItems} />
+        {/* <Items /> */}
 
         <Footer />
       </div>
     );
   };
-  renderSearchPage = allItems => {
-    return () => (
+  renderSearchPage = () => {
+    return (
       <div>
-        <Search items={this.props.allItems} />
+        <div>
+          <Search />
+        </div>
+
+        <div>
+          <SearchResults />
+        </div>
       </div>
     );
   };

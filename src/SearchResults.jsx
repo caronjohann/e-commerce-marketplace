@@ -2,17 +2,28 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 class UnconnectedSearchResults extends Component {
   render = () => {
+    if (this.props.query === "" || undefined) {
+      return <div />;
+    }
+    let searchResults = this.props.allItems.filter(each => {
+      return (
+        each.title.includes(this.props.query) ||
+        each.description.includes(this.props.query)
+      );
+    });
     return (
       <div>
-        <div className="searchbar">
-          <input
-            type="text"
-            onChange={this.handleQuery}
-            value={this.props.query}
-            placeholder="Search...."
-          />
-        </div>
-        <div className="close" />
+        {searchResults.map(each => {
+          return (
+            <div>
+              <div>
+                <img src={each.images[0]} />
+              </div>
+              <div>{each.title}</div>
+              <div>{each.price}</div>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -20,7 +31,8 @@ class UnconnectedSearchResults extends Component {
 
 let mapStateToProps = storeState => {
   return {
-    query: storeState.searchQuery
+    query: storeState.searchQuery,
+    allItems: storeState.allItems
   };
 };
 let SearchResults = connect(mapStateToProps)(UnconnectedSearchResults);
