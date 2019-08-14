@@ -12,7 +12,7 @@ let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
-app.use('/uploads', express.static("upload"))
+app.use('/upload', express.static("upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
 

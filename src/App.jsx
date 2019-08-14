@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Search from "./Search.jsx";
+import SearchResults from "./SearchResults.jsx";
 import "./main.css";
 import Header from "./Header.jsx";
 import Items from "./Items.jsx";
+import ItemDescription from "./ItemDescription.jsx";
 import NewItems from "./NewItems.jsx";
+import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
 
 class App extends Component {
@@ -22,15 +25,22 @@ class App extends Component {
           </Link>
         </div> */}
 
+        {/* <Items /> */}
         <Footer />
       </div>
     );
   };
 
-  renderSearchPage = allItems => {
+  renderSearchPage = () => {
     return (
       <div>
-        <Search items={this.props.allItems} />
+        <div>
+          <Search />
+        </div>
+
+        <div>
+          <SearchResults />
+        </div>
       </div>
     );
   };
@@ -50,6 +60,17 @@ class App extends Component {
     return <div>{/* <ItemDescription item={item} /> */}</div>;
   };
 
+  // renderCartPage = () => {
+  //   let body = new FormData
+  //   body.append()
+  //   let response = await fetch('/checkout');
+  //   let body = await response.text();
+  //   console.log("checkout", body);
+  //   body = JSON.parse(body);
+  //   // this.props.dispatch({
+  //   //   cart: body
+  //   // });
+  // }
   componentDidMount = async () => {
     let response = await fetch("/send-items");
     let body = await response.text();
@@ -75,6 +96,7 @@ class App extends Component {
           />
         </div>
       </BrowserRouter>
+      //   <div><Cart /></div>
     );
   };
 }
