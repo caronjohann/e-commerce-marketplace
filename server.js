@@ -145,13 +145,6 @@ app.post('/addTocart', upload.none(), (req, res) => {
       res.send();
       return;
     }
-<<<<<<< HEAD
-  });
-  console.log("username not find");
-  res.send({ success: false });
-  return;
-});
-=======
     res.send({ success: false })
     return
 })
@@ -204,7 +197,6 @@ app.post('/checkout', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
->>>>>>> 6c7572e0062a8dce8b2a21168e8b4055dbbbbfe5
 // app.post('sellerItemsList')
 
 app.all("/*", (req, res, next) => {
