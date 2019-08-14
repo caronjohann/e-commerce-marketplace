@@ -21,6 +21,7 @@ body {
   right: 200px;
   background-color: white;
 }
+
 .searchbar {
   width: 25rem;
   height: 100%;
@@ -36,4 +37,21 @@ body {
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+.checkoutBox {
+  display: flex;
+  flex-Direction: row;
+  justify-Content: space-between;
+  margin: auto;
+  width: 65%;
+  border: 3px solid grey;
+  padding: 10px;
+  align-Items: center
+}
+
+.imgCart {
+  height: 100px;
+  display: flex;
+  align-Items: flex-start
 }

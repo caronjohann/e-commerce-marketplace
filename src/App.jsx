@@ -35,6 +35,13 @@ class App extends Component {
       </div>
     );
   };
+  renderCartPage = () => {
+    return (
+      <div>
+        <Cart />
+      </div>
+    )
+  }
   renderLoginPage = () => {
     return (
       <div>
@@ -42,21 +49,10 @@ class App extends Component {
       </div>
     );
   };
-  // renderCartPage = () => {
-  //   let body = new FormData
-  //   body.append()
-  //   let response = await fetch('/checkout');
-  //   let body = await response.text();
-  //   console.log("checkout", body);
-  //   body = JSON.parse(body);
-  //   // this.props.dispatch({
-  //   //   cart: body
-  //   // });
-  // }
+
   componentDidMount = async () => {
     let response = await fetch("/send-items");
     let body = await response.text();
-    console.log("send-items", body);
     body = JSON.parse(body);
     this.props.dispatch({
       type: "all-items",
@@ -66,14 +62,15 @@ class App extends Component {
 
   render = () => {
     return (
-      // <BrowserRouter>
-      //   <div>
-      //     <Route exact={true} path="/" render={this.renderHomePage} />
-      //     <Route exact={true} path="/search" render={this.renderSearchPage} />
+      <BrowserRouter>
+        <div>
+          <Route exact={true} path="/" render={this.renderHomePage} />
+          <Cart />
+      {/* //     <Route exact={true} path="/search" render={this.renderSearchPage} />
       //     <Route exact={true} path="/login" render={this.renderLoginPage} />
+      //     <Route exact={true} path="/cart/uid" render={this.renderCartPage} /> */}
       //   </div>
       // </BrowserRouter>
-      <div><Cart /></div>
     );
   };
 }
