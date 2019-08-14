@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
-// import { connect } from "react-redux"
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Search from "./Search.jsx";
@@ -10,6 +9,7 @@ import Header from "./Header.jsx";
 import Items from "./Items.jsx";
 import NewItems from "./NewItems.jsx";
 import Footer from "./Footer.jsx";
+<<<<<<< HEAD
 let renderHomePage = () => {
   return (
     <div>
@@ -32,12 +32,58 @@ let renderLoginPage = () => {
     </div>
   );
 };
+=======
+>>>>>>> cad294fed114669243a8b2f6151c59ed86f60129
 class App extends Component {
+  renderHomePage = () => {
+    return (
+      <div>
+        <Header />
+
+        <Items items={this.props.allItems} />
+
+        <Footer />
+      </div>
+    );
+  };
+  renderSearchPage = allItems => {
+    return () => (
+      <div>
+        <Search items={this.props.allItems} />
+      </div>
+    );
+  };
+  renderLoginPage = () => {
+    return (
+      <div>
+        <Login />
+      </div>
+    );
+  };
   componentDidMount = async () => {
+<<<<<<< HEAD
     let response = await fetch("/send-items");
     let body = await response.text();
     console.log("send-items", body);
     body = JSON.parse(body);
+=======
+    let collection = ["Mens", "Womens", "accesseries", "Other"];
+    let data = new FormData();
+    let allItems = [];
+    for (let i = 0; i < collection.length; i++) {
+      let col = collection[i];
+      data.append("categorie", col);
+      let response = await fetch("/send-items", {
+        method: "POST",
+        body: data
+      });
+      let body = await response.text();
+      console.log(body, "item search");
+      body = JSON.parse(body);
+      allItems.push(body);
+      console.log(allItems, "all Items");
+    }
+>>>>>>> cad294fed114669243a8b2f6151c59ed86f60129
     this.props.dispatch({
       type: "all-items",
       allItems: body
@@ -48,14 +94,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact={true} path="/" render={renderHomePage} />
-          <Route exact={true} path="/search" render={renderSearchPage} />
-          <Route exact={true} path="/login" render={renderLoginPage} />
+          <Route exact={true} path="/" render={this.renderHomePage} />
+          <Route exact={true} path="/search" render={this.renderSearchPage} />
+          <Route exact={true} path="/login" render={this.renderLoginPage} />
         </div>
       </BrowserRouter>
     );
   };
 }
-
-let connectedApp = connect()(App);
+let mapStateToProps = st => {
+  return { allItems: st.allItems };
+};
+let connectedApp = connect(mapStateToProps)(App);
 export default connectedApp;
