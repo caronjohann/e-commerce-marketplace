@@ -8,9 +8,9 @@ import SearchResults from "./SearchResults.jsx";
 import "./main.css";
 import Header from "./Header.jsx";
 import Items from "./Items.jsx";
-import ItemDescription from './ItemDescription.jsx'
+import ItemDescription from "./ItemDescription.jsx";
 import NewItems from "./NewItems.jsx";
-import Cart from './Cart.jsx'
+import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
 class App extends Component {
   renderHomePage = () => {
@@ -66,14 +66,14 @@ class App extends Component {
 
   render = () => {
     return (
-      // <BrowserRouter>
-      //   <div>
-      //     <Route exact={true} path="/" render={this.renderHomePage} />
-      //     <Route exact={true} path="/search" render={this.renderSearchPage} />
-      //     <Route exact={true} path="/login" render={this.renderLoginPage} />
-      //   </div>
-      // </BrowserRouter>
-      <div><Cart /></div>
+      <BrowserRouter>
+        <div>
+          <Route exact={true} path="/" render={this.renderHomePage} />
+          <Route exact={true} path="/search" render={this.renderSearchPage} />
+          <Route exact={true} path="/login" render={this.renderLoginPage} />
+        </div>
+      </BrowserRouter>
+      //   <div><Cart /></div>
     );
   };
 }
