@@ -55,9 +55,9 @@ class App extends Component {
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
     let item = this.props.allItems.filter(item => {
-      return item._id == itemId;
+      return item._id === itemId;
     })[0];
-    return <div>{/* <ItemDescription item={item} /> */}</div>;
+    return <div>{<ItemDescription item={item} />}</div>;
   };
 
   // renderCartPage = () => {
