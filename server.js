@@ -1,15 +1,14 @@
-let express = require("express");
-let app = express();
-let MongoClient = require("mongodb").MongoClient;
-let ObjectID = require("mongodb").ObjectID;
-let sha1 = require("sha1");
-let multer = require("multer");
-let upload = multer({ dest: __dirname + "/upload/" });
-let reloadMagic = require("./reload-magic.js");
-reloadMagic(app);
-let dbo = undefined;
-let url =
-  "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority";
+let express = require('express')
+let app = express()
+let MongoClient = require("mongodb").MongoClient
+let ObjectID = require("mongodb").ObjectID
+let sha1 = require('sha1')
+let multer = require('multer')
+let upload = multer({ dest: __dirname + '/upload/' })
+let reloadMagic = require('./reload-magic.js')
+reloadMagic(app)
+let dbo = undefined
+let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
@@ -27,45 +26,23 @@ app.post('/signup', upload.none(), (req, res) => {
         dbo.collection('users').findOne({ username: username }, (err, user) => {
             console.log(user, "user")
             if (err) {
-              console.log(err, "erreur find cart user");
-              res.send({ success: false });
-              return;
+                console.log(err, "signup err")
+                res.send(JSON.stringify({ succes: false }))
+                return
             }
-            if (username) {
-              //we concat an object each time the user click on add to cart
-              // with categorie for property and the id of the item.
-              let newItems = it.items.concat({ cat: ObjectID(item) });
-              dbo.collection("cart").updateOne({ username, items: newItems });
-              res.send({ success: true });
-              return;
+            if (user !== null) {
+                console.log("same username")
+                res.send(JSON.stringify({ success: false }))
+                return
+            } else {
+                console.log("test")
+                //this is for create the user & the cart in the backend
+                dbo.collection('cart').insertOne({ username, items: [] })
+                dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
+                res.send({ success: true })
+                return
             }
-          };
-      }
-    };
-  res.send({ success: false });
-  return;
-});
-app.get("/send-items", (req, res) => {
-  dbo
-    .collection("items")
-    .find({})
-    .toArray((err, items) => {
-      if (err) {
-        console.log("error", err);
-        res.send({ success: false });
-        return;
-      }
-      console.log("items", items);
-      res.send(JSON.stringify(items));
-    });
-});
-app.post("/itemSearch", upload.none(), (req, res) => {
-  let name = req.body.name;
-  dbo.collection("items").find({ name: name }, (err, item) => {
-    if (err) {
-      console.log(err, "items search error");
-      res.send({ success: false });
-      return;
+        })
     }
 
 })
@@ -139,19 +116,9 @@ app.post('/addTocart', upload.none(), (req, res) => {
                     return
                 }
             }
-          });
-      });
-      dbo.collection;
-      res.send();
-      return;
+        }
+
     }
-<<<<<<< HEAD
-  });
-  console.log("username not find");
-  res.send({ success: false });
-  return;
-});
-=======
     res.send({ success: false })
     return
 })
@@ -204,14 +171,11 @@ app.post('/checkout', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
->>>>>>> 6c7572e0062a8dce8b2a21168e8b4055dbbbbfe5
 // app.post('sellerItemsList')
 
-app.all("/*", (req, res, next) => {
-  // needed for react router
-  res.sendFile(__dirname + "/build/index.html");
-});
+app.all('/*', (req, res, next) => { // needed for react router
+    res.sendFile(__dirname + '/build/index.html');
+})
 
-app.listen(4000, "0.0.0.0", () => {
-  console.log("Server running on port 4000");
-});
+
+app.listen(4000, '0.0.0.0', () => { console.log("Server running on port 4000") })
