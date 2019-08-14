@@ -123,9 +123,7 @@ app.post('/addTocart', upload.none(), (req, res) => {
     return
 })
 app.post('/send-items', upload.none(), (req, res) => {
-    let collection = req.body.categorie
-    console.log(collection, "test")
-    dbo.collection(collection).find({}).toArray((err, items) => {
+    dbo.collection('items').find({}).toArray((err, items) => {
         console.log(items, 'items')
         if (err) {
             console.log("error", err)
