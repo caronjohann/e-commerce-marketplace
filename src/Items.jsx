@@ -7,6 +7,10 @@ class UnconnectedItems extends Component {
   render = () => {
     return (
       <div className="flex container">
+        <div>
+          <Link to="/">All Products</Link>
+        </div>
+        
         {this.props.allItems.map(item => {
           return (
             <div>
@@ -15,6 +19,7 @@ class UnconnectedItems extends Component {
                 {item.title}${item.price}
               </Link>
             </div>
+
           );
         })}
       </div>
