@@ -19,12 +19,6 @@ class App extends Component {
       <div>
         <Header />
         <Items />
-        {/* <div>
-          <Link to={"/cart/"}>
-            <img height="20px" width="20px" src="/cart.png" />
-          </Link>
-        </div> */}
-
         {/* <Items /> */}
         <Footer />
       </div>
@@ -44,6 +38,13 @@ class App extends Component {
       </div>
     );
   };
+  renderCartPage = () => {
+    return (
+      <div>
+        <Cart />
+      </div>
+    )
+  }
   renderLoginPage = () => {
     return (
       <div>
@@ -62,9 +63,9 @@ class App extends Component {
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
     let item = this.props.allItems.filter(item => {
-      return item._id == itemId;
+      return item._id === itemId;
     })[0];
-    return <div>{/* <ItemDescription item={item} /> */}</div>;
+    return <div>{<ItemDescription item={item} />}</div>;
   };
 
   renderCartPage = () => {
@@ -78,7 +79,6 @@ class App extends Component {
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
     let body = await response.text();
-    console.log("send-items", body);
     body = JSON.parse(body);
     this.props.dispatch({
       type: "all-items",

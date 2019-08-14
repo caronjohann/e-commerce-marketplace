@@ -66,7 +66,7 @@ app.post('/login', upload.none(), (req, res) => {
             }
             if (user.password === hashedPwd) {
                 console.log("test")
-                res.send({ success: true })
+                res.send({ success: true, username: username })
                 return
             }
         })
@@ -143,30 +143,16 @@ app.post('/checkout', upload.none(), (req, res) => {
         if (username) {
             let items = []
             user.items.forEach(it => {
-                let categorie = Object.keys(it)
-                let id = Object.values(it)
-                dbo.collection(categorie).findOne({ _id: ObjectID(id) }, (err, item) => {
-                    if (err) {
-                        console.log(err, "cart find item error")
-                        res.send({ success: false })
-                    }
-                    if (_id === null) {
-                        console.log("test")
-                        res.send({ success: false })
-                        return
-                    } else {
-                        res.send(item)
-                    }
-                })
+                items.push(it)
             })
-            dbo.collection
-            res.send()
+            res.send(JSON.stringify(items))
             return
         }
+        console.log("username not find")
+        res.send({ success: false })
+        return
     })
-    console.log("username not find")
-    res.send({ success: false })
-    return
+
 })
 // app.post('sellerItemsList')
 

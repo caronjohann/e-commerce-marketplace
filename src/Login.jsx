@@ -38,6 +38,10 @@ class UnconnectedLogin extends Component {
       return;
     }
     if (body.success) {
+      this.props.dispatch({
+        type: "username",
+        action: body.username
+      })
       this.setState({ failedLogin: false });
     }
   };
@@ -73,5 +77,6 @@ class UnconnectedLogin extends Component {
     );
   };
 }
+
 let Login = connect()(UnconnectedLogin);
 export default Login;
