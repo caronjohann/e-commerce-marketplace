@@ -37,6 +37,17 @@ class App extends Component {
       </div>
     );
   };
+  renderCartPage = () => {
+    let body = new FormData
+    body.append()
+    let response = await fetch('/checkout');
+    let body = await response.text();
+    console.log("checkout", body);
+    body = JSON.parse(body);
+    // this.props.dispatch({
+    //   cart: body
+    // });
+  }
   componentDidMount = async () => {
     let response = await fetch("/send-items");
     let body = await response.text();
