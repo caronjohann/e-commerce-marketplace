@@ -10,10 +10,18 @@ class UnconnectedItems extends Component {
         {this.props.allItems.map(item => {
           return (
             <div>
-              <Link to={"/itemDescription/" + item._id}>
-                <img src={item.images[0]} height="200px" />
-                {item.title}${item.price}
-              </Link>
+              <div>
+                <Link to={"/itemDescription/" + item._id}>
+                  <img src={item.images[0]} height="200px" />
+                </Link>
+              </div>
+              <div>
+                <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
+              </div>
+              <div>${item.price}</div>
+              <div>
+                <Link to={"/shopping-cart"}>Add to cart</Link>
+              </div>
             </div>
           );
         })}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +15,8 @@ class Signup extends Component {
   handleChange = (evt, name) => {
     this.setState({
       [name]: event.target.value
-    })
-  }
+    });
+  };
 
   submitHandler = async evt => {
     evt.preventDefault();
@@ -35,7 +35,7 @@ class Signup extends Component {
     let body = JSON.parse(responseBody);
     if (body.success === false) {
       this.setState({ registered: false });
-      return
+      return;
     }
     console.log("parsed body", body);
     this.setState({ registered: true });
@@ -61,19 +61,30 @@ class Signup extends Component {
           <form onSubmit={this.submitHandler}>
             <h2>Register</h2>
             <h3>First Name</h3>
-            <input type="text" onChange={(e) => this.handleChange(e, 'firsName')} />
+            <input
+              type="text"
+              onChange={e => this.handleChange(e, "firsName")}
+            />
             <h3>Last Name</h3>
-            <input type="text" onChange={(e) => this.handleChange(e, 'lastName')} />
+            <input
+              type="text"
+              onChange={e => this.handleChange(e, "lastName")}
+            />
             <h3>Email Address</h3>
-            <input type="email" onChange={(e) => this.handleChange(e, 'email')} />
+            <input type="email" onChange={e => this.handleChange(e, "email")} />
             <h3>Password</h3>
-            <input type="password" onChange={(e) => this.handleChange(e, 'password')} />
-            <input type="checkbox" id="newsletter" name="newsletter" checked />
-            <label for="scales">
-              Sign me up for emails to get exclusive offers
-            </label>
+            <input
+              type="password"
+              onChange={e => this.handleChange(e, "password")}
+            />
+            <div>
+              <input type="checkbox" id="newsletter" name="newsletter" />
+              <label for="scales">
+                Sign me up for emails to get exclusive offers
+              </label>
+            </div>
             <input type="submit" value="Register" />
-            <p>Or return to marketplace</p>
+            <Link to="/">Or return to marketplace</Link>
           </form>
         </div>
       );

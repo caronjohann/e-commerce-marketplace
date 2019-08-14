@@ -51,6 +51,13 @@ class App extends Component {
       </div>
     );
   };
+  renderSignupPage = () => {
+    return (
+      <div>
+        <Signup />
+      </div>
+    );
+  };
 
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
@@ -60,18 +67,15 @@ class App extends Component {
     return <div>{/* <ItemDescription item={item} /> */}</div>;
   };
 
-  // renderCartPage = () => {
-  //   let body = new FormData
-  //   body.append()
-  //   let response = await fetch('/checkout');
-  //   let body = await response.text();
-  //   console.log("checkout", body);
-  //   body = JSON.parse(body);
-  //   // this.props.dispatch({
-  //   //   cart: body
-  //   // });
-  // }
+  renderCartPage = () => {
+    return (
+      <div>
+        <Cart />
+      </div>
+    );
+  };
   componentDidMount = async () => {
+    // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
     let body = await response.text();
     console.log("send-items", body);
@@ -89,6 +93,12 @@ class App extends Component {
           <Route exact={true} path="/" render={this.renderHomePage} />
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
+          <Route exact={true} path="/signup" render={this.renderSignupPage} />
+          <Route
+            exact={true}
+            path="/shopping-cart"
+            render={this.renderCartPage}
+          />
           <Route
             exact={true}
             path="/itemDescription/:_id"
@@ -96,7 +106,6 @@ class App extends Component {
           />
         </div>
       </BrowserRouter>
-      //   <div><Cart /></div>
     );
   };
 }
