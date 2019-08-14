@@ -43,8 +43,8 @@ class App extends Component {
       <div>
         <Cart />
       </div>
-    )
-  }
+    );
+  };
   renderLoginPage = () => {
     return (
       <div>

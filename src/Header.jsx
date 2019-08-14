@@ -19,14 +19,9 @@ class Header extends Component {
         <div>
           <Link to="/search">Search</Link>
         </div>
-
         <div>
           <Link to="/login">Login</Link>
         </div>
-        <div>
-          <Link to="/">All Products</Link>
-        </div>
-        
       </div>
     );
   };
