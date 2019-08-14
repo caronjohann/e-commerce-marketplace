@@ -9,12 +9,15 @@ let reducer = (state, action) => {
   if (action.type === "username") {
     return { ...state, username: action.username }
   }
+  if (action.type === "cart") {
+    return { ...state, cartList: action.cartList }
+  }
   return state;
 };
 
 const store = createStore(
   reducer,
-  { searchQuery: "", allItems: [], username: "" },
+  { searchQuery: "", allItems: [], username: "", cartList: [] },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 export default store;

@@ -5,14 +5,18 @@ class UnconnectedCart extends Component {
         super(props);
         this.state = {
             username: "",
+            allItems: [],
+            result: []
         };
     }
-    deleteItem = () => {
+    deleteItem = (id) => {
+        console.log(id, "id")
 
     }
 
 
-    renderItemsList = async () => {
+
+    componentDidMount = async () => {
         let data = new FormData
         // data.append("username", username)
         data.append("username", "bob@decode.com")
@@ -23,21 +27,42 @@ class UnconnectedCart extends Component {
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
         console.log(body, "body")
-        console.log(this.props.allItems)
-        return (
-            <div className="checkoutBox">
-                <img className="imgCart" src='/upload/1cf9bca0-59e6-48c2-a0e9-99f1a4f72722.jpeg' />
-                <div>description of my items</div>
-                <div>$200</div>
-                <button onClick={this.deleteItem}>Delete</button>
-            </div >
-        )
+        this.props.dispatch({ type: "cart", cartList: body })
+        let response2 = await fetch("/send-items");
+        let body2 = await response2.text();
+        body2 = JSON.parse(body2);
+        this.setState({ allItems: body2 })
+        let newArr = []
+        for (let i = 0; i < this.props.cartList.length; i++) {
+            for (let e = 0; e < this.state.allItems.length; e++) {
+                if (this.props.cartList[i] === this.state.allItems[e]._id) {
+                    newArr.push(this.state.allItems[e])
+                }
+            }
+        }
+        this.setState({ result: newArr })
     }
 
     render = () => {
+
+
         return (
             <div>
-                {this.renderItemsList()}
+                {this.state.result.map(item => {
+                    return (
+                        <div className="checkoutBox">
+                            <img className="imgCart" src={item.images[0]} />
+                            <div>{item.title}</div>
+                            <div>{item.price}</div>
+                            <form onSubmit={this.deleteItem(item._id)}>
+                                <button>Delete</button>
+                            </form>
+                        </div>
+                    )
+
+
+
+                })}
                 <form >
                     <input type="submit" value="checkout"></input>
                 </form>
@@ -48,6 +73,7 @@ class UnconnectedCart extends Component {
 let mapStateToProps = state => {
     return {
         username: state.username,
+        cartList: state.cartList,
         allItems: state.allItems
     };
 };

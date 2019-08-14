@@ -40,7 +40,7 @@ class UnconnectedLogin extends Component {
     if (body.success) {
       this.props.dispatch({
         type: "username",
-        action: body.username
+        username: body.username
       })
       this.setState({ failedLogin: false });
     }
