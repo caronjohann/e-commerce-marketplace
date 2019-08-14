@@ -17,9 +17,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-
-        {/* <Items /> */}
-
+        <Items />
         <Footer />
       </div>
     );
@@ -27,7 +25,6 @@ class App extends Component {
   renderSearchPage = () => {
     return (
       <div>
-<<<<<<< HEAD
         <div>
           <Search />
         </div>
@@ -35,9 +32,7 @@ class App extends Component {
         <div>
           <SearchResults />
         </div>
-=======
         <Search />
->>>>>>> fbf980e76be9c61114cbec7b3177793c97ec716d
       </div>
     );
   };
