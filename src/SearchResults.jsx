@@ -15,9 +15,9 @@ class UnconnectedSearchResults extends Component {
       <div>
         {searchResults.map(each => {
           return (
-            <div>
+            <div className="flex">
               <div>
-                <img src={each.images[0]} />
+                <img src={each.images[0]} width="100px" />
               </div>
               <div>{each.title}</div>
               <div>{each.price}</div>

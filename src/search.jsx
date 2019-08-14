@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class UnconnectedSearch extends Component {
   handleQuery = evt => {
     console.log("Typed search:", evt.target.value);
@@ -19,7 +20,9 @@ class UnconnectedSearch extends Component {
             placeholder="Search...."
           />
         </div>
-        <div className="close" />
+        <div className="close">
+          <Link to="/">Close</Link>
+        </div>
       </div>
     );
   };

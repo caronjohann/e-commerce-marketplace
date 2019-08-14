@@ -1,16 +1,19 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import ItemDescription from "./ItemDescription.jsx";
+import { Link } from "react-router-dom";
 
-class Items extends Component {
+class UnconnectedItems extends Component {
   render = () => {
     return (
-      <div>
-        {this.props.items.map(r => {
+      <div className="flex container">
+        {this.props.allItems.map(item => {
           return (
             <div>
-              <img src={r.images[0]} />
-              {r.title}${r.price}
+              <Link to={"/itemDescription/" + item._id}>
+                <img src={item.images[0]} height="200px" />
+                {item.title}${item.price}
+              </Link>
             </div>
           );
         })}
@@ -19,4 +22,9 @@ class Items extends Component {
   };
 }
 
+let mapStateToProps = st => {
+  return { allItems: st.allItems };
+};
+
+let Items = connect(mapStateToProps)(UnconnectedItems);
 export default Items;
