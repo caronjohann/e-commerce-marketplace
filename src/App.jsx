@@ -36,22 +36,10 @@ class App extends Component {
     );
   };
   componentDidMount = async () => {
-    let collection = ["Mens", "Womens", "accesseries", "Other"];
-    let data = new FormData();
-    let allItems = [];
-    for (let i = 0; i < collection.length; i++) {
-      let col = collection[i];
-      data.append("categorie", col);
-      let response = await fetch("/send-items", {
-        method: "POST",
-        body: data
-      });
-      let body = await response.text();
-      console.log(body, "item search");
-      body = JSON.parse(body);
-      allItems.push(body);
-      console.log(allItems, "all Items");
-    }
+    let response = await fetch("/send-items");
+    let body = await response.text();
+    console.log("send-items", body);
+    body = JSON.parse(body);
     this.props.dispatch({
       type: "all-items",
       allItems: body
