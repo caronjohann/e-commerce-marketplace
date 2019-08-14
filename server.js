@@ -12,7 +12,7 @@ let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
-app.use('/upload', express.static("/upload"))
+app.use('/uploads', express.static("upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
 
@@ -122,11 +122,8 @@ app.post('/addTocart', upload.none(), (req, res) => {
     res.send({ success: false })
     return
 })
-app.post('/send-items', upload.none(), (req, res) => {
-    let collection = req.body.categorie
-    console.log(collection, "test")
-    dbo.collection(collection).find({}).toArray((err, items) => {
-        console.log(items, 'items')
+app.get('/send-items', (req, res) => {
+    dbo.collection('items').find({}).toArray((err, items) => {
         if (err) {
             console.log("error", err)
             res.send({ success: false })

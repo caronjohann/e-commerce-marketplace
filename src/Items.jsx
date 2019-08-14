@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import Item from "./Item.jsx";
+import ItemDescription from "./ItemDescription.jsx";
 
 class Items extends Component {
   render = () => {

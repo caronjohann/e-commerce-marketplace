@@ -5,6 +5,7 @@ class Item extends Component {
     return (
       <div>
         {this.state.allItems}.map(item=>(<Items>{allItems.title}</Items>)
+
       </div>
     );
   };
