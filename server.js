@@ -24,8 +24,9 @@ app.post('/signup', upload.none(), (req, res) => {
     let fName = req.body.firstName
     let lName = req.body.lastName
     let password = req.body.password
-
+    console.log("test")
     if (username !== "" && password !== "") {
+        console.log('test 2')
         dbo.collection('users').findOne({ username: username }, (err, user) => {
             console.log(user, "user")
             if (err) {
