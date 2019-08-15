@@ -67,10 +67,15 @@ class App extends Component {
     return <div>{<ItemDescription item={item} />}</div>;
   };
 
-  renderCartPage = () => {
+  renderCartPage = async routerData => {
+    let itemId = routerData.match.params._id;
+    console.log(itemId, "itemId")
+    let user = this.props.allItems.filter(item => {
+      return item._id === itemId;
+    })[0];
     return (
       <div>
-        <Cart />
+        <Cart user={user} />
       </div>
     );
   };

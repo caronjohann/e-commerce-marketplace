@@ -139,10 +139,6 @@ app.get('/send-items', (req, res) => {
 })
 app.post('/checkout', upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
-    let itemId = routerData.match.params.sid
-    let candidates = initialItems.filter(item => {
-        return item.id === itemId;
-    });
     let username = sessions[sessionId]
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
@@ -152,7 +148,6 @@ app.post('/checkout', upload.none(), (req, res) => {
         }
         if (username) {
             let items = []
-
             user.items.forEach(it => {
                 items.push(it)
             })

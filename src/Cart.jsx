@@ -24,9 +24,6 @@ class UnconnectedCart extends Component {
         })
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
-        if (body.success) {
-            location.reload()
-        }
         console.log(body, "body")
     }
 
@@ -34,6 +31,7 @@ class UnconnectedCart extends Component {
 
     componentDidMount = async () => {
         let data = new FormData
+        data.append("sid", this.props.sid)
         data.append("username", this.props.username)
         // data.append("username", "bob@decode.com")
         let response = await fetch('/checkout', {
@@ -64,7 +62,6 @@ class UnconnectedCart extends Component {
     render = () => {
         return (
             <div>
-                <Link to="/"></Link>
                 {this.state.result.map(item => {
                     return (
                         <div className="checkoutBox">
@@ -91,7 +88,8 @@ let mapStateToProps = state => {
     return {
         username: state.username,
         cartList: state.cartList,
-        allItems: state.allItems
+        allItems: state.allItems,
+        sid: state.sid
     };
 };
 let Cart = connect(mapStateToProps)(UnconnectedCart)
