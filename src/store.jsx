@@ -7,7 +7,7 @@ let reducer = (state, action) => {
     return { ...state, allItems: action.allItems };
   }
   if (action.type === "username") {
-    return { ...state, username: action.username };
+    return { ...state, username: action.username, sessionId: action.sid };
   }
   if (action.type === "cart") {
     return { ...state, cartList: action.cartList };

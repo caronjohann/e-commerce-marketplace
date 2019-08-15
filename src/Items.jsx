@@ -8,100 +8,64 @@ class UnconnectedItems extends Component {
     super(props);
     console.log(this.props.allItems);
     this.state = {
-      userWantedItems: this.props.allItems
-      //category: "all"
+      category: undefined
     };
   }
 
   handleWomens = evt => {
-    console.log("clicked womens", evt.target.value);
+    console.log("clicked womens");
     evt.preventDefault();
-    let userWantedItems = this.props.allItems.filter(item => {
-      return item.category === "womens";
-    });
-    console.log("uuuuu", userWantedItems);
-    this.setState({ userWantedItems });
+    this.setState({ category: "womens" });
   };
 
   handleMens = evt => {
     evt.preventDefault();
-    let userWantedItems = this.props.allItems.filter(item => {
-      return item.category === "mens";
-    });
-    this.setState({ userWantedItems });
+    this.setState({ category: "mens" });
   };
 
   handleAccessories = evt => {
     evt.preventDefault();
-    let userWantedItems = this.props.allItems.filter(item => {
-      return item.category === "accessories";
-    });
-    this.setState({ userWantedItems });
+    this.setState({ category: "accessories" });
   };
+
   handleAll = evt => {
     evt.preventDefault();
-    let userWantedItems = this.props.allItems;
-    this.setState({ userWantedItems });
+    this.setState({ category: undefined });
   };
 
   render = () => {
-    // this.props.allItems
-    //   .filer(item => {
-    //     return item.category === this.state.category;
-    //   })
-    //   .map(item => {});
-    // if (this.state.category === "all") {
+    let toDisplayItems = this.props.allItems;
+    if (this.state.category !== undefined)
+      toDisplayItems = this.props.allItems.filter(item => {
+        return item.category == this.state.category;
+      });
     return (
-      <div className="flex container">
-        <div>
-          <form onSubmit={this.handleAll}>
-            <input
-              type="submit"
-              // name="category"
-              // value={this.state.category}
-
-              value="All Products"
-            />
-          </form>
-        </div>
-        <div>
-          <form onSubmit={this.handleWomens}>
-            <input
-              value="women"
-              type="submit"
-              // name="category"
-              // value={this.state.category}
-
-              value="Women"
-            />
-          </form>
-        </div>
-        <div>
-          <form onSubmit={this.handleMens}>
-            <input
-              value="mens"
-              type="submit"
-              // name="category"
-              // value={this.state.category}
-
-              value=" Mens"
-            />
-          </form>
-        </div>
-        <div>
-          <form onSubmit={this.handleAccessories}>
-            <input
-              type="submit"
-              // name="category"
-              // value={this.state.category}
-
-              value=" Accessories"
-            />
-          </form>
+      <div>
+        <div className="flex container">
+          <div>
+            <form onSubmit={this.handleAll}>
+              <input type="submit" value="All Products" />
+            </form>
+          </div>
+          <div>
+            <form onSubmit={this.handleWomens}>
+              <input type="submit" value="Women" />
+            </form>
+          </div>
+          <div>
+            <form onSubmit={this.handleMens}>
+              <input type="submit" value=" Mens" />
+            </form>
+          </div>
+          <div>
+            <form onSubmit={this.handleAccessories}>
+              <input type="submit" value=" Accessories" />
+            </form>
+          </div>
         </div>
 
-        <div>
-          {this.props.allItems.map(item => {
+        <div className="flex container item-cont">
+          {toDisplayItems.map(item => {
             return (
               <div>
                 <div>
@@ -120,25 +84,6 @@ class UnconnectedItems extends Component {
             );
           })}
         </div>
-
-        {this.state.userWantedItems.map(item => {
-          return (
-            <div>
-              <div>
-                <Link to={"/itemDescription/" + item._id}>
-                  <img src={item.images[0]} height="200px" />
-                </Link>
-              </div>
-              <div>
-                <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
-              </div>
-              <div>${item.price}</div>
-              <div>
-                <Link to={"/shopping-cart"}>Add to cart</Link>
-              </div>
-            </div>
-          );
-        })}
       </div>
     );
   };

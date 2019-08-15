@@ -90,14 +90,12 @@ app.post("/newItem", upload.array("files", 5), (req, res) => {
   let price = req.body.price;
   let images = req.body.images;
   let newImg = images.split(",");
-  dbo
-    .collection(cat)
-    .insertOne({
-      title: title,
-      description: desc,
-      price: price,
-      images: newImg
-    });
+  dbo.collection(cat).insertOne({
+    title: title,
+    description: desc,
+    price: price,
+    images: newImg
+  });
   res.send({ success: true });
 });
 
