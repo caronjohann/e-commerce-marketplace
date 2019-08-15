@@ -6,13 +6,16 @@ class UnconnectedItemDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItemClicked: 0
+      currentItemClicked: 0,
+      cartList: ""
     };
   }
   imageClickHander = index => {
     this.setState({ currentItemClicked: index });
   };
-
+  handleClick = () => {
+    return (this.setState.cartList = this.props.item._id);
+  };
   render = () => {
     return (
       <div className="flex container">
@@ -41,14 +44,14 @@ class UnconnectedItemDescription extends Component {
           <div> {this.props.item.title}</div>
           <div> {this.props.item.description}</div>
           <div> {this.props.item.price}</div>
-          <Link to={"/shopping-cart/"}>Add to cart</Link>
+          <button onClick={this.handleClick}> Add to cart </button>
         </div>
       </div>
     );
   };
 }
 let mapStateToProps = st => {
-  return { allItems: st.allItems };
+  return { allItems: st.allItems, cartList: st.cartList };
 };
 let connectedItemDescription = connect(mapStateToProps)(
   UnconnectedItemDescription
