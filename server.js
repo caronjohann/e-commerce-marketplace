@@ -163,6 +163,7 @@ app.post('/checkout', upload.none(), (req, res) => {
 app.post('/deleteItemCart', upload.none(), (req, res) => {
     let id = req.body.id
     let username = req.body.username
+    console.log(username)
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
             console.log(err, "cart error")
@@ -170,12 +171,15 @@ app.post('/deleteItemCart', upload.none(), (req, res) => {
             return
         }
         if (username) {
-            console.log(username, 'username')
-            // let items = []
-            // user.items.forEach(it => {
+            let newCart = user.items.filter(item => {
+                return (
+                    item !== id
+                )
 
-            // })
-            // res.send(JSON.stringify(items))
+            })
+            let cartId = user._id
+            dbo.collection('cart').updateOne({ "_id": ObjectID(cartId) }, { $set: { items: newCart } })
+            res.send({ success: true })
             return
         }
         console.log("username not find")

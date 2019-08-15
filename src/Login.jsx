@@ -81,12 +81,5 @@ class UnconnectedLogin extends Component {
     );
   };
 }
-
-let mapStateToProps = state => {
-  return {
-    username: state.username,
-  };
-};
-
-let Login = connect(mapStateToProps)(UnconnectedLogin);
+let Login = connect()(UnconnectedLogin);
 export default Login;
