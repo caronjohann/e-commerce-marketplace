@@ -6,17 +6,26 @@ class UnconnectedItemDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItemClicked: 0,
-      cartList: []
+      currentItemClicked: 0
     };
   }
   imageClickHander = index => {
     this.setState({ currentItemClicked: index });
   };
-  handleClick = () => {
-    let addToCartItem = event.target.value;
-    cartList.push(addToCartItem);
+
+  handleClick = async item => {
+    data.apprend("item", this.props.item._id);
+    data.apprend("cat", this.props.item.category);
+    fetch("/addTocart", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
+    let response = await fetch("/addTocart");
+    let body = await response.text();
+    body = JSON.parse(body);
   };
+
   render = () => {
     return (
       <div className="flex container">
