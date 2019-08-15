@@ -49,7 +49,7 @@ class Header extends Component {
             <a>{this.props.username}</a>
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
-          <NavLink to="/shopping-cart/:uid">
+          <NavLink to="/shopping-cart">
             <div />
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>

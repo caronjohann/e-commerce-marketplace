@@ -67,10 +67,14 @@ class App extends Component {
     return <div>{<ItemDescription item={item} />}</div>;
   };
 
-  renderCartPage = () => {
+  renderCartPage = async () => {
+    let response = await fetch("/user-cart");
+    let responseBody = await response.text();
+    let body = JSON.parse(responseBody);
+    console.log(body, "body");
     return (
       <div>
-        <Cart />
+        <Cart user={body} />
       </div>
     );
   };
@@ -122,7 +126,10 @@ class App extends Component {
 }
 
 let mapStateToProps = st => {
-  return { allItems: st.allItems };
+  return {
+    allItems: st.allItems,
+    sid: st.sessionId
+  };
 };
 
 let connectedApp = connect(mapStateToProps)(App);

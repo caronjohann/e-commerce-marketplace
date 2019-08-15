@@ -67,7 +67,7 @@ class UnconnectedItems extends Component {
         <div className="flex container item-cont">
           {toDisplayItems.map(item => {
             return (
-              <div>
+              <div className="item">
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
                     <img src={item.images[0]} height="200px" />
