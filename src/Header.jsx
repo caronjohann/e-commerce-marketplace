@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // import Logo from "./Logo.jsx";
 // import Search from "./Search.jsx";
 // import Login from "./Login.jsx";
@@ -22,6 +22,10 @@ class Header extends Component {
         <div>
           <Link to="/login">Login</Link>
         </div>
+        <NavLink to="/shopping-cart/:uid">
+          <div></div>
+          <img src="/upload/13-512.png" width="20px" />
+        </NavLink>
       </div>
     );
   };

@@ -6,12 +6,15 @@ let sha1 = require('sha1')
 let multer = require('multer')
 let upload = multer({ dest: __dirname + '/upload/' })
 let reloadMagic = require('./reload-magic.js')
+let cookieParser = require('cookie-parser')
 reloadMagic(app)
 let dbo = undefined
 let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
+let sessions = {}
+app.use(cookieParser())
 app.use('/upload', express.static("upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
@@ -35,7 +38,6 @@ app.post('/signup', upload.none(), (req, res) => {
                 res.send(JSON.stringify({ success: false }))
                 return
             } else {
-                console.log("test")
                 //this is for create the user & the cart in the backend
                 dbo.collection('cart').insertOne({ username, items: [] })
                 dbo.collection("users").insertOne({ username, password: sha1(password), fName, lName })
@@ -51,7 +53,6 @@ app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
     let password = req.body.password
     let hashedPwd = sha1(password)
-    console.log(hashedPwd, "body")
     if (username !== "" && password !== "") {
         dbo.collection("users").findOne({ username: username }, (err, user) => {
             if (err) {
@@ -60,12 +61,13 @@ app.post('/login', upload.none(), (req, res) => {
                 return
             }
             if (user === null) {
-                console.log("test complet")
                 res.send({ success: false })
                 return
             }
             if (user.password === hashedPwd) {
-                console.log("test")
+                let sid = Math.floor(Math.random() * 10000000)
+                sessions[sid] = username
+                res.cookie('sid', sid)
                 res.send({ success: true, username: username })
                 return
             }
@@ -74,7 +76,10 @@ app.post('/login', upload.none(), (req, res) => {
 
 })
 
-// app.post('/logout')
+app.get('/logout', (req, res) => {
+    let sessionId = req.cookies.sid
+    delete sessions[sessionId]
+})
 
 app.post('/newItem', upload.array("files", 5), (req, res) => {
     // let seller = req.body.firstName
@@ -133,7 +138,8 @@ app.get('/send-items', (req, res) => {
     })
 })
 app.post('/checkout', upload.none(), (req, res) => {
-    let username = req.body.username
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
             console.log(err, "cart error")
@@ -153,6 +159,33 @@ app.post('/checkout', upload.none(), (req, res) => {
         return
     })
 
+})
+app.post('/deleteItemCart', upload.none(), (req, res) => {
+    let id = req.body.id
+    let username = req.body.username
+    console.log(username)
+    dbo.collection('cart').findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log(err, "cart error")
+            res.send({ success: false })
+            return
+        }
+        if (username) {
+            let newCart = user.items.filter(item => {
+                return (
+                    item !== id
+                )
+
+            })
+            let cartId = user._id
+            dbo.collection('cart').updateOne({ "_id": ObjectID(cartId) }, { $set: { items: newCart } })
+            res.send({ success: true })
+            return
+        }
+        console.log("username not find")
+        res.send({ success: false })
+        return
+    })
 })
 // app.post('sellerItemsList')
 

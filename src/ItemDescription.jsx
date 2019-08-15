@@ -41,7 +41,7 @@ class UnconnectedItemDescription extends Component {
           <div> {this.props.item.title}</div>
           <div> {this.props.item.description}</div>
           <div> {this.props.item.price}</div>
-          <Link to={"/shopping-cart/" + this.props.item._id}>Add to cart</Link>
+          <Link to={"/shopping-cart/"}>Add to cart</Link>
         </div>
       </div>
     );

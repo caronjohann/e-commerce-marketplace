@@ -6,19 +6,42 @@ import { Link } from "react-router-dom";
 class UnconnectedItems extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.allItems);
     this.state = {
-      category: "all"
+      userWantedItems: this.props.allItems
+      //category: "all"
     };
   }
-  handleWomens = evt => {
-    console.log("clicked All", evt.target.value);
-    let category = evt.target.value;
-    this.setState(this.state.category);
-  };
-  handleMens = evt => {
-    console.log("clicked Mens", evt.target.value);
 
-    this.setState(this.state.category);
+  handleWomens = evt => {
+    console.log("clicked womens", evt.target.value);
+    evt.preventDefault();
+    let userWantedItems = this.props.allItems.filter(item => {
+      return item.category === "womens";
+    });
+    console.log("uuuuu", userWantedItems);
+    this.setState({ userWantedItems });
+  };
+
+  handleMens = evt => {
+    evt.preventDefault();
+    let userWantedItems = this.props.allItems.filter(item => {
+      return item.category === "mens";
+    });
+    this.setState({ userWantedItems });
+  };
+
+  handleAccessories = evt => {
+    evt.preventDefault();
+    let userWantedItems = this.props.allItems.filter(item => {
+      return item.category === "accessories";
+    });
+    this.setState({ userWantedItems });
+  };
+  handleAll = evt => {
+    evt.preventDefault();
+    let userWantedItems = this.props.allItems;
+    this.setState({ userWantedItems });
   };
 
   render = () => {
@@ -27,28 +50,74 @@ class UnconnectedItems extends Component {
     //     return item.category === this.state.category;
     //   })
     //   .map(item => {});
-    if (this.state.category === "all") {
-      return (
-        <div className="flex container">
-          <div>
+    // if (this.state.category === "all") {
+    return (
+      <div className="flex container">
+        <div>
+          <form onSubmit={this.handleAll}>
+            <input
+              type="submit"
+              // name="category"
+              // value={this.state.category}
+
+              value="All Products"
+            />
+          </form>
+        </div>
+        <div>
+          <form onSubmit={this.handleWomens}>
             <input
               value="women"
               type="submit"
+<<<<<<< HEAD
               name="category"
               value={this.state.category}
               onChange={this.handleAll}
             />
           </div>
           <div>
+=======
+              // name="category"
+              // value={this.state.category}
+
+              value="Women"
+            />
+          </form>
+        </div>
+        <div>
+          <form onSubmit={this.handleMens}>
+>>>>>>> 40026cb3f736687724c555e912b2cd60cae03352
             <input
               value="mens"
               type="submit"
+<<<<<<< HEAD
               name="category"
               value={this.state.category}
               onChange={this.handleMens}
             />
           </div>
+=======
+              // name="category"
+              // value={this.state.category}
+>>>>>>> 40026cb3f736687724c555e912b2cd60cae03352
 
+              value=" Mens"
+            />
+          </form>
+        </div>
+        <div>
+          <form onSubmit={this.handleAccessories}>
+            <input
+              type="submit"
+              // name="category"
+              // value={this.state.category}
+
+              value=" Accessories"
+            />
+          </form>
+        </div>
+
+        <div>
           {this.props.allItems.map(item => {
             return (
               <div>
@@ -68,11 +137,27 @@ class UnconnectedItems extends Component {
             );
           })}
         </div>
-      );
-    } else if (this.state.category === "mens") {
-    } else if (this.category === "womens") {
-    } else if (this.category === "other") {
-    }
+
+        {this.state.userWantedItems.map(item => {
+          return (
+            <div>
+              <div>
+                <Link to={"/itemDescription/" + item._id}>
+                  <img src={item.images[0]} height="200px" />
+                </Link>
+              </div>
+              <div>
+                <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
+              </div>
+              <div>${item.price}</div>
+              <div>
+                <Link to={"/shopping-cart"}>Add to cart</Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 }
 

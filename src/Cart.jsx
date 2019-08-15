@@ -1,33 +1,51 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 class UnconnectedCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
             allItems: [],
-            result: []
+            result: [],
+            id: ""
         };
     }
-    deleteItem = (id) => {
-        console.log(id, "id")
-
+    deleteItem = async evt => {
+        evt.preventDefault()
+        let data = new FormData
+        data.append('username', this.props.username)
+        // data.append("username", "bob@decode.com")
+        data.append('id', this.state.id)
+        let response = await fetch('/deleteItemCart', {
+            method: "POST",
+            body: data,
+            credentials: "include"
+        })
+        let responseBody = await response.text()
+        let body = JSON.parse(responseBody)
+        if (body.success) {
+            location.reload()
+        }
+        console.log(body, "body")
     }
 
 
 
     componentDidMount = async () => {
         let data = new FormData
-        // data.append("username", username)
-        data.append("username", "bob@decode.com")
+        data.append("username", this.props.username)
+        // data.append("username", "bob@decode.com")
         let response = await fetch('/checkout', {
             method: "POST",
-            body: data
+            body: data,
+            credentials: "include"
         })
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
         console.log(body, "body")
         this.props.dispatch({ type: "cart", cartList: body })
+        console.log(body)
         let response2 = await fetch("/send-items");
         let body2 = await response2.text();
         body2 = JSON.parse(body2);
@@ -44,18 +62,17 @@ class UnconnectedCart extends Component {
     }
 
     render = () => {
-
-
         return (
             <div>
+                <Link to="/"></Link>
                 {this.state.result.map(item => {
                     return (
                         <div className="checkoutBox">
                             <img className="imgCart" src={item.images[0]} />
                             <div>{item.title}</div>
                             <div>{item.price}</div>
-                            <form onSubmit={this.deleteItem(item._id)}>
-                                <button>Delete</button>
+                            <form onSubmit={this.deleteItem}>
+                                <input type="submit" onClick={() => { this.setState({ id: item._id }) }} value="Delete" />
                             </form>
                         </div>
                     )

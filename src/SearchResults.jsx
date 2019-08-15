@@ -6,9 +6,11 @@ class UnconnectedSearchResults extends Component {
       return <div />;
     }
     let searchResults = this.props.allItems.filter(each => {
+      let title = each.title.toLowerCase()
+      let desc = each.description.toLowerCase()
       return (
-        each.title.includes(this.props.query) ||
-        each.description.includes(this.props.query)
+        title.includes(this.props.query) ||
+        desc.includes(this.props.query)
       );
     });
     return (
