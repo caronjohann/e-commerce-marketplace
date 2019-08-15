@@ -38,7 +38,6 @@ class NewItems extends Component {
     data.append("title", this.state.title);
     data.append("descrpition", this.state.description);
     data.append("price", this.state.price);
-    console.log(this.state.images)
     data.append("images", this.state.images);
     data.append("categories", this.state.categories);
     let response = await fetch("/newItem", {

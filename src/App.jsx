@@ -79,7 +79,6 @@ class App extends Component {
     );
   };
   componentDidMount = async () => {
-
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
     let body = await response.text();
@@ -91,6 +90,7 @@ class App extends Component {
   };
 
   render = () => {
+
     return (
       <BrowserRouter>
         <div>
@@ -100,7 +100,7 @@ class App extends Component {
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
           <Route
             exact={true}
-            path="/shopping-cart/"
+            path="/shopping-cart"
             render={this.renderCartPage()}
           />
           <Route

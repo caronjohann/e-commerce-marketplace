@@ -7,15 +7,13 @@ class UnconnectedCart extends Component {
         this.state = {
             username: "",
             allItems: [],
-            result: [],
-            id: ""
+            result: []
         };
     }
     deleteItem = async evt => {
         evt.preventDefault()
         let data = new FormData
         data.append('username', this.props.username)
-        // data.append("username", "bob@decode.com")
         data.append('id', this.state.id)
         let response = await fetch('/deleteItemCart', {
             method: "POST",
@@ -30,10 +28,8 @@ class UnconnectedCart extends Component {
 
 
     componentDidMount = async () => {
-        let data = new FormData
-        data.append("sid", this.props.sid)
+        let data = new FormData()
         data.append("username", this.props.username)
-        // data.append("username", "bob@decode.com")
         let response = await fetch('/checkout', {
             method: "POST",
             body: data,
