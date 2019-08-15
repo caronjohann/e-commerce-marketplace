@@ -74,6 +74,13 @@ class App extends Component {
       </div>
     );
   };
+  renderListingPage = () => {
+    return (
+      <div>
+        <NewItems />
+      </div>
+    );
+  };
   componentDidMount = async () => {
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
@@ -93,6 +100,11 @@ class App extends Component {
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
+          <Route
+            exact={true}
+            path="/new-listing"
+            render={this.renderListingPage}
+          />
           <Route
             exact={true}
             path="/shopping-cart"

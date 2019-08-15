@@ -43,6 +43,9 @@ class Header extends Component {
             <Link to="/search">Search</Link>
           </div>
           <div>
+            <Link to="/new-listing">Create Listing</Link>
+          </div>
+          <div>
             <a>{this.props.username}</a>
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
