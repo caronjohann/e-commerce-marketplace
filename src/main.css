@@ -55,6 +55,11 @@ body {
   display: flex;
   align-items: flex-start;
 }
+
 .item-cont {
   flex-wrap: wrap;
+}
+
+.item {
+  width: 200px
 }

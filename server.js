@@ -15,7 +15,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
 })
 let sessions = {}
 app.use(cookieParser())
-app.use('/upload', express.static("upload"))
+app.use('/upload', express.static(__dirname + "/upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
 
@@ -24,8 +24,9 @@ app.post('/signup', upload.none(), (req, res) => {
     let fName = req.body.firstName
     let lName = req.body.lastName
     let password = req.body.password
-
+    console.log("test")
     if (username !== "" && password !== "") {
+        console.log('test 2')
         dbo.collection('users').findOne({ username: username }, (err, user) => {
             console.log(user, "user")
             if (err) {
@@ -89,7 +90,7 @@ app.post('/newItem', upload.array("files", 5), (req, res) => {
     let price = req.body.price
     let images = req.body.images
     let newImg = images.split(',')
-    dbo.collection(cat).insertOne({ title: title, description: desc, price: price, images: newImg })
+    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: newImg, cat })
     res.send({ success: true })
 })
 
@@ -137,12 +138,12 @@ app.get('/send-items', (req, res) => {
         res.send(JSON.stringify(items))
     })
 })
+app.get('/user-cart', (req, res) => {
+    let sessionId = req.cookies.sid
+    res.send({ user: sessions[sessionId] })
+})
 app.post('/checkout', upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
-    let itemId = routerData.match.params.sid
-    let candidates = initialItems.filter(item => {
-        return item.id === itemId;
-    });
     let username = sessions[sessionId]
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
@@ -152,7 +153,6 @@ app.post('/checkout', upload.none(), (req, res) => {
         }
         if (username) {
             let items = []
-
             user.items.forEach(it => {
                 items.push(it)
             })
