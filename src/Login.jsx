@@ -34,6 +34,10 @@ class UnconnectedLogin extends Component {
     let body = JSON.parse(responseBody);
     console.log("parsed body", body);
     if (!body.success) {
+      this.props.dispatch({
+        type: "username",
+        username: ""
+      })
       this.setState({ failedLogin: true });
       return;
     }
@@ -78,5 +82,11 @@ class UnconnectedLogin extends Component {
   };
 }
 
-let Login = connect()(UnconnectedLogin);
+let mapStateToProps = state => {
+  return {
+    username: state.username,
+  };
+};
+
+let Login = connect(mapStateToProps)(UnconnectedLogin);
 export default Login;
