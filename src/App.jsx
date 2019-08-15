@@ -86,6 +86,7 @@ class App extends Component {
     );
   };
   componentDidMount = async () => {
+
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
     let body = await response.text();

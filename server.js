@@ -15,7 +15,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
 })
 let sessions = {}
 app.use(cookieParser())
-app.use('/upload', express.static("upload"))
+app.use('/upload', express.static(__dirname + "/upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
 
