@@ -24,9 +24,7 @@ app.post('/signup', upload.none(), (req, res) => {
     let fName = req.body.firstName
     let lName = req.body.lastName
     let password = req.body.password
-    console.log("test")
     if (username !== "" && password !== "") {
-        console.log('test 2')
         dbo.collection('users').findOne({ username: username }, (err, user) => {
             console.log(user, "user")
             if (err) {
@@ -82,15 +80,15 @@ app.get('/logout', (req, res) => {
     delete sessions[sessionId]
 })
 
-app.post('/newItem', upload.array("files", 5), (req, res) => {
+app.post('/newItem', upload.single("image"), (req, res) => {
+    console.log(req.file, "req.files")
     // let seller = req.body.firstName
     let title = req.body.title
     let desc = req.body.descrpition
     let cat = req.body.categories
     let price = req.body.price
-    let images = req.body.images
-    let newImg = images.split(',')
-    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: newImg, cat })
+    let image = ["/upload/" + req.file.filename]
+    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: image, cat })
     res.send({ success: true })
 })
 
@@ -145,6 +143,7 @@ app.get('/user-cart', (req, res) => {
 app.post('/checkout', upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
     let username = sessions[sessionId]
+    console.log(username, "username")
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
             console.log(err, "cart error")

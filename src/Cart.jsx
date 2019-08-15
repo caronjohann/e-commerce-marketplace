@@ -1,33 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 class UnconnectedCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            username: this.props.user,
             allItems: [],
             result: []
         };
     }
-    deleteItem = async evt => {
-        evt.preventDefault()
-        let data = new FormData
-        data.append('username', this.props.username)
-        data.append('id', this.state.id)
-        let response = await fetch('/deleteItemCart', {
-            method: "POST",
-            body: data,
-            credentials: "include"
-        })
-        let responseBody = await response.text()
-        let body = JSON.parse(responseBody)
-        console.log(body, "body")
-    }
-
-
-
-    componentDidMount = async () => {
+    renderCart = async () => {
         let data = new FormData()
         data.append("username", this.props.username)
         let response = await fetch('/checkout', {
@@ -53,6 +35,28 @@ class UnconnectedCart extends Component {
             }
         }
         this.setState({ result: newArr })
+
+    }
+    deleteItem = async evt => {
+        evt.preventDefault()
+        let data = new FormData
+        data.append('username', this.props.username)
+        data.append('id', this.state.id)
+        let response = await fetch('/deleteItemCart', {
+            method: "POST",
+            body: data,
+            credentials: "include"
+        })
+        let responseBody = await response.text()
+        let body = JSON.parse(responseBody)
+        console.log(body, "body")
+        this.renderCart()
+    }
+
+
+
+    componentDidMount = () => {
+        this.renderCart()
     }
 
     render = () => {
