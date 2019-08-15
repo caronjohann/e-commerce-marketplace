@@ -37,13 +37,6 @@ class App extends Component {
       </div>
     );
   };
-  renderCartPage = () => {
-    return (
-      <div>
-        <Cart />
-      </div>
-    );
-  };
   renderLoginPage = () => {
     return (
       <div>
@@ -67,19 +60,12 @@ class App extends Component {
     return <div>{<ItemDescription item={item} />}</div>;
   };
 
-  renderCartPage = async () => {
-    let response = await fetch('/user-cart')
-    let responseBody = await response.text()
-    let body = JSON.parse(responseBody)
-    console.log(body, "body")
+  renderCartPage = () => {
     return (
-      <div>
-        <Cart user={body} />
-      </div>
+      <Cart />
     );
   };
   componentDidMount = async () => {
-
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
     let body = await response.text();
@@ -91,6 +77,7 @@ class App extends Component {
   };
 
   render = () => {
+
     return (
       <BrowserRouter>
         <div>
@@ -100,8 +87,8 @@ class App extends Component {
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
           <Route
             exact={true}
-            path="/shopping-cart/"
-            render={this.renderCartPage()}
+            path="/shopping-cart"
+            render={() => this.renderCartPage()}
           />
           <Route
             exact={true}
@@ -110,6 +97,7 @@ class App extends Component {
           />
         </div>
       </BrowserRouter>
+      // <div><NewItems /></div>
     );
   };
 }

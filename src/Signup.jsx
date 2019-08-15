@@ -13,7 +13,6 @@ class Signup extends Component {
   }
 
   handleChange = (evt, name) => {
-    console.log(name)
     this.setState({
       [name]: evt.target.value
     });
