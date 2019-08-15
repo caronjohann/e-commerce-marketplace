@@ -32,23 +32,21 @@ class UnconnectedItems extends Component {
         <div className="flex container">
           <div>
             <input
+              value="women"
               type="submit"
               name="category"
               value={this.state.category}
               onChange={this.handleAll}
-            >
-              Womens
-            </input>
+            />
           </div>
           <div>
             <input
+              value="mens"
               type="submit"
               name="category"
               value={this.state.category}
               onChange={this.handleMens}
-            >
-              Mens
-            </input>
+            />
           </div>
 
           {this.props.allItems.map(item => {

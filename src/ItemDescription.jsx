@@ -3,17 +3,37 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class UnconnectedItemDescription extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentItemClicked: 0
+    };
+  }
+  imageClickHander = index => {
+    this.setState({ currentItemClicked: index });
+  };
+
   render = () => {
     return (
       <div className="flex container">
         <div>
           <div>
-            {" "}
-            <img src={this.props.item.images[0]} height="200px" />
+            <img
+              src={this.props.item.images[this.state.currentItemClicked]}
+              height="200px"
+            />
           </div>
           <div className="flex container">
-            {this.props.item.images.map(each => {
-              return <img src={each} height="100px" />;
+            {this.props.item.images.map((each, index) => {
+              return (
+                <img
+                  src={each}
+                  onClick={() => {
+                    this.imageClickHander(index);
+                  }}
+                  height="100px"
+                />
+              );
             })}
           </div>
         </div>

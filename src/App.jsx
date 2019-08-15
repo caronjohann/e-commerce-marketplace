@@ -19,7 +19,6 @@ class App extends Component {
       <div>
         <Header />
         <Items />
-        {/* <Items /> */}
         <Footer />
       </div>
     );
