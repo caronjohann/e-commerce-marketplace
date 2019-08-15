@@ -69,14 +69,6 @@ class UnconnectedItems extends Component {
             <input
               value="women"
               type="submit"
-<<<<<<< HEAD
-              name="category"
-              value={this.state.category}
-              onChange={this.handleAll}
-            />
-          </div>
-          <div>
-=======
               // name="category"
               // value={this.state.category}
 
@@ -86,20 +78,11 @@ class UnconnectedItems extends Component {
         </div>
         <div>
           <form onSubmit={this.handleMens}>
->>>>>>> 40026cb3f736687724c555e912b2cd60cae03352
             <input
               value="mens"
               type="submit"
-<<<<<<< HEAD
-              name="category"
-              value={this.state.category}
-              onChange={this.handleMens}
-            />
-          </div>
-=======
               // name="category"
               // value={this.state.category}
->>>>>>> 40026cb3f736687724c555e912b2cd60cae03352
 
               value=" Mens"
             />
