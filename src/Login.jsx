@@ -42,9 +42,11 @@ class UnconnectedLogin extends Component {
       return;
     }
     if (body.success) {
+      console.log(body, "body")
       this.props.dispatch({
         type: "username",
-        username: body.username
+        username: body.username,
+        sid: body.sid
       })
       this.setState({ failedLogin: false });
     }
@@ -81,12 +83,5 @@ class UnconnectedLogin extends Component {
     );
   };
 }
-
-let mapStateToProps = state => {
-  return {
-    username: state.username,
-  };
-};
-
-let Login = connect(mapStateToProps)(UnconnectedLogin);
+let Login = connect()(UnconnectedLogin);
 export default Login;

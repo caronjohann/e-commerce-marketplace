@@ -22,7 +22,8 @@ class Header extends Component {
         <div>
           <Link to="/login">Login</Link>
         </div>
-        <NavLink to="/shopping-cart/">
+        <NavLink to="/shopping-cart/:uid">
+          <div></div>
           <img src="/upload/13-512.png" width="20px" />
         </NavLink>
       </div>

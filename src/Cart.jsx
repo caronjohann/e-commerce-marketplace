@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 class UnconnectedCart extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,7 @@ class UnconnectedCart extends Component {
     deleteItem = async evt => {
         evt.preventDefault()
         let data = new FormData
-        data.append('username', this.state.username)
+        data.append('username', this.props.username)
         // data.append("username", "bob@decode.com")
         data.append('id', this.state.id)
         let response = await fetch('/deleteItemCart', {
@@ -23,6 +24,9 @@ class UnconnectedCart extends Component {
         })
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
+        if (body.success) {
+            location.reload()
+        }
         console.log(body, "body")
     }
 
@@ -58,10 +62,9 @@ class UnconnectedCart extends Component {
     }
 
     render = () => {
-
-
         return (
             <div>
+                <Link to="/"></Link>
                 {this.state.result.map(item => {
                     return (
                         <div className="checkoutBox">

@@ -68,7 +68,7 @@ app.post('/login', upload.none(), (req, res) => {
                 let sid = Math.floor(Math.random() * 10000000)
                 sessions[sid] = username
                 res.cookie('sid', sid)
-                res.send({ success: true, username: username })
+                res.send({ success: true, username: username, sid: sid })
                 return
             }
         })
@@ -139,6 +139,10 @@ app.get('/send-items', (req, res) => {
 })
 app.post('/checkout', upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
+    let itemId = routerData.match.params.sid
+    let candidates = initialItems.filter(item => {
+        return item.id === itemId;
+    });
     let username = sessions[sessionId]
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
@@ -148,6 +152,7 @@ app.post('/checkout', upload.none(), (req, res) => {
         }
         if (username) {
             let items = []
+
             user.items.forEach(it => {
                 items.push(it)
             })
@@ -163,6 +168,7 @@ app.post('/checkout', upload.none(), (req, res) => {
 app.post('/deleteItemCart', upload.none(), (req, res) => {
     let id = req.body.id
     let username = req.body.username
+    console.log(username)
     dbo.collection('cart').findOne({ username: username }, (err, user) => {
         if (err) {
             console.log(err, "cart error")
@@ -170,12 +176,15 @@ app.post('/deleteItemCart', upload.none(), (req, res) => {
             return
         }
         if (username) {
-            console.log(username, 'username')
-            // let items = []
-            // user.items.forEach(it => {
+            let newCart = user.items.filter(item => {
+                return (
+                    item !== id
+                )
 
-            // })
-            // res.send(JSON.stringify(items))
+            })
+            let cartId = user._id
+            dbo.collection('cart').updateOne({ "_id": ObjectID(cartId) }, { $set: { items: newCart } })
+            res.send({ success: true })
             return
         }
         console.log("username not find")
