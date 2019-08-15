@@ -41,17 +41,17 @@ body {
 
 .checkoutBox {
   display: flex;
-  flex-Direction: row;
-  justify-Content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
   margin: auto;
   width: 65%;
   border: 3px solid grey;
   padding: 10px;
-  align-Items: center
+  align-items: center;
 }
 
 .imgCart {
   height: 100px;
   display: flex;
-  align-Items: flex-start
+  align-items: flex-start;
 }
