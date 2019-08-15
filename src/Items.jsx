@@ -28,6 +28,16 @@ class UnconnectedItems extends Component {
     this.setState({ category: "accessories" });
   };
 
+  handleAccessories = evt => {
+    evt.preventDefault();
+    this.setState({ category: "accessories" });
+  };
+
+  handleOther = evt => {
+    evt.preventDefault();
+    this.setState({ category: "other" });
+  };
+
   handleAll = evt => {
     evt.preventDefault();
     this.setState({ category: undefined });
@@ -60,6 +70,11 @@ class UnconnectedItems extends Component {
           <div>
             <form onSubmit={this.handleAccessories}>
               <input type="submit" value=" Accessories" />
+            </form>
+          </div>
+          <div>
+            <form onSubmit={this.handleOther}>
+              <input type="submit" value=" Other" />
             </form>
           </div>
         </div>
