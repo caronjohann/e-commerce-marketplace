@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 class UnconnectedItemDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentItemClicked: 0,
-      cartList: ""
+      cartList: []
     };
   }
   imageClickHander = index => {
     this.setState({ currentItemClicked: index });
   };
   handleClick = () => {
-    return (this.setState.cartList = this.props.item._id);
+    let addToCartItem = event.target.value;
+    cartList.push(addToCartItem);
   };
   render = () => {
     return (
