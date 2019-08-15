@@ -89,7 +89,7 @@ let mapStateToProps = state => {
         username: state.username,
         cartList: state.cartList,
         allItems: state.allItems,
-        sid: state.sid
+        sid: state.sessionId
     };
 };
 let Cart = connect(mapStateToProps)(UnconnectedCart)

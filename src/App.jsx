@@ -67,15 +67,14 @@ class App extends Component {
     return <div>{<ItemDescription item={item} />}</div>;
   };
 
-  renderCartPage = async routerData => {
-    let itemId = routerData.match.params._id;
-    console.log(itemId, "itemId")
-    let user = this.props.allItems.filter(item => {
-      return item._id === itemId;
-    })[0];
+  renderCartPage = async () => {
+    let response = await fetch('/user-cart')
+    let responseBody = await response.text()
+    let body = JSON.parse(responseBody)
+    console.log(body, "body")
     return (
       <div>
-        <Cart user={user} />
+        <Cart user={body} />
       </div>
     );
   };
@@ -100,8 +99,8 @@ class App extends Component {
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
           <Route
             exact={true}
-            path="/shopping-cart"
-            render={this.renderCartPage}
+            path="/shopping-cart/"
+            render={this.renderCartPage()}
           />
           <Route
             exact={true}
@@ -115,7 +114,10 @@ class App extends Component {
 }
 
 let mapStateToProps = st => {
-  return { allItems: st.allItems };
+  return {
+    allItems: st.allItems,
+    sid: st.sessionId
+  };
 };
 
 let connectedApp = connect(mapStateToProps)(App);

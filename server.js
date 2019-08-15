@@ -89,7 +89,7 @@ app.post('/newItem', upload.array("files", 5), (req, res) => {
     let price = req.body.price
     let images = req.body.images
     let newImg = images.split(',')
-    dbo.collection(cat).insertOne({ title: title, description: desc, price: price, images: newImg })
+    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: newImg, cat })
     res.send({ success: true })
 })
 
@@ -136,6 +136,10 @@ app.get('/send-items', (req, res) => {
         }
         res.send(JSON.stringify(items))
     })
+})
+app.get('/user-cart', (req, res) => {
+    let sessionId = req.cookies.sid
+    res.send({ user: sessions[sessionId] })
 })
 app.post('/checkout', upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
