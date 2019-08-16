@@ -18,7 +18,7 @@ app.use(cookieParser())
 app.use('/upload', express.static(__dirname + "/upload"))
 app.use('/', express.static('build')); // Needed for the HTML and JS files
 app.use('/', express.static('public')); // Needed for local assets
-
+​
 app.post('/signup', upload.none(), (req, res) => {
     let username = req.body.username
     let fName = req.body.firstName
@@ -45,9 +45,9 @@ app.post('/signup', upload.none(), (req, res) => {
             }
         })
     }
-
+​
 })
-
+​
 app.post('/login', upload.none(), (req, res) => {
     let username = req.body.username
     let password = req.body.password
@@ -72,26 +72,27 @@ app.post('/login', upload.none(), (req, res) => {
             }
         })
     }
-
+​
 })
-
+​
 app.get('/logout', (req, res) => {
     let sessionId = req.cookies.sid
     delete sessions[sessionId]
 })
-
+​
 app.post('/newItem', upload.single("image"), (req, res) => {
     console.log(req.file, "req.files")
-    // let seller = req.body.firstName
+    let sessionId = req.cookies.sid
+    let user = sessions[sessionId]
     let title = req.body.title
     let desc = req.body.descrpition
     let cat = req.body.categories
     let price = req.body.price
     let image = ["/upload/" + req.file.filename]
-    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: image, cat })
+    dbo.collection('items').insertOne({ title: title, description: desc, price: price, images: image, cat, seller: user })
     res.send({ success: true })
 })
-
+​
 app.post('/addTocart', upload.none(), (req, res) => {
     let username = req.body.username
     let item = req.body.id
@@ -121,7 +122,7 @@ app.post('/addTocart', upload.none(), (req, res) => {
                 }
             }
         }
-
+​
     }
     res.send({ success: false })
     return
@@ -162,7 +163,7 @@ app.post('/checkout', upload.none(), (req, res) => {
         res.send({ success: false })
         return
     })
-
+​
 })
 app.post('/deleteItemCart', upload.none(), (req, res) => {
     let id = req.body.id
@@ -179,7 +180,7 @@ app.post('/deleteItemCart', upload.none(), (req, res) => {
                 return (
                     item !== id
                 )
-
+​
             })
             let cartId = user._id
             dbo.collection('cart').updateOne({ "_id": ObjectID(cartId) }, { $set: { items: newCart } })
@@ -192,10 +193,20 @@ app.post('/deleteItemCart', upload.none(), (req, res) => {
     })
 })
 // app.post('sellerItemsList')
-
+​
 app.all('/*', (req, res, next) => { // needed for react router
     res.sendFile(__dirname + '/build/index.html');
 })
-
-
+​
+​
 app.listen(4000, '0.0.0.0', () => { console.log("Server running on port 4000") })
+Collapse
+
+
+
+
+
+
+
+
+

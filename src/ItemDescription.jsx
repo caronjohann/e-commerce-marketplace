@@ -25,6 +25,7 @@ class UnconnectedItemDescription extends Component {
     let response = await fetch("/addTocart");
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
+    this.props.dispatch({ type: "cart", cartList: body });
   };
 
   render = () => {
@@ -62,7 +63,7 @@ class UnconnectedItemDescription extends Component {
   };
 }
 let mapStateToProps = st => {
-  return { allItems: st.allItems, cartList: st.cartList };
+  return { allItems: st.allItems };
 };
 let connectedItemDescription = connect(mapStateToProps)(
   UnconnectedItemDescription

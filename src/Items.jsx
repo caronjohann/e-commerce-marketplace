@@ -89,12 +89,12 @@ class UnconnectedItems extends Component {
                   </Link>
                 </div>
                 <div>
-                  <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
+                  <Link to={"/itemDescription/" + item._id}>
+                    {item.title}
+                    {<img src="/upload/13-512.png" width="10px" />}
+                  </Link>
                 </div>
                 <div>${item.price}</div>
-                <div>
-                  <Link to={"/shopping-cart"}>Add to cart</Link>
-                </div>
               </div>
             );
           })}
