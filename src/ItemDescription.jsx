@@ -74,6 +74,9 @@ class UnconnectedItemDescription extends Component {
           </div>
           <button onClick={this.handleClick}> Add to cart </button>
         </div>
+        <div>
+          <a>Suggestion</a>
+        </div>
       </div>
     );
   };

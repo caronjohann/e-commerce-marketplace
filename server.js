@@ -69,7 +69,7 @@ app.post("/login", upload.none(), (req, res) => {
                 let sid = Math.floor(Math.random() * 10000000);
                 sessions[sid] = username;
                 res.cookie("sid", sid);
-                res.send({ success: true, username: username, sid: sid });
+                res.send({ success: true, username: username, sid: sid, fName: user.fName, lName: user.lName });
                 return;
             }
         });
@@ -85,6 +85,7 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
 
     let sessionId = req.cookies.sid;
     let user = sessions[sessionId];
+    let name = req.body.fName.charAt(0).toUpperCase() + req.body.fName.slice(1) + " " + req.body.lName.charAt(0).toUpperCase() + req.body.lName.slice(1)
     let title = req.body.title;
     let desc = req.body.descrpition;
     let cat = req.body.categories;
@@ -103,7 +104,7 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
             price: price,
             images: img,
             category: cat,
-            seller: user
+            seller: name
         });
     res.send({ success: true });
 });

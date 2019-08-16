@@ -53,6 +53,7 @@ class App extends Component {
 
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
+    console.log(routerData)
     let item = this.props.allItems.filter(item => {
       return item._id === itemId;
     })[0];

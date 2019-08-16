@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
-class NewItems extends Component {
+import { connect } from "http2";
+class UnconnectedNewItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +32,8 @@ class NewItems extends Component {
     data.append("title", this.state.title);
     data.append("descrpition", this.state.description);
     data.append("price", this.state.price);
+    data.append("fName", this.props.firstName)
+    data.append('lName', this.props.lastName)
     for (let i = 0; i < this.state.image.length; i++) {
       data.append("image", this.state.image[i]);
     }
@@ -114,4 +117,12 @@ class NewItems extends Component {
     }
   };
 }
+let mapStateToProps = storeState => {
+  return {
+    username: storeState.username,
+    firstName: storeState.firstName,
+    lastName: storeState.lastname
+  };
+};
+let NewItems = connect(mapStateToProps)(UnconnectedNewItems)
 export default NewItems;
