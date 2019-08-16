@@ -86,7 +86,6 @@ class UnconnectedItems extends Component {
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
                     {item.title}
-                    {<img src="/upload/13-512.png" width="10px" />}
                   </Link>
                 </div>
                 <div>${item.price}</div>

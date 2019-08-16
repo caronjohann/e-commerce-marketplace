@@ -35,7 +35,7 @@ class UnconnectedCart extends Component {
                     newArr.push(this.state.allItems[e])
                     console.log(this.state.allItems[e].price)
                     console.log(typeof parseInt(this.state.allItems[e].price))
-                    priceTotal += parseInt(this.state.allItems[e].price) * 100
+                    priceTotal += parseFloat(this.state.allItems[e].price)
                 }
             }
         }

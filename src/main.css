@@ -53,9 +53,9 @@ body {
 .totalBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: auto;
-  width: 65%;
+  width: 35%;
   border: 3px solid grey;
   padding: 10px;
   align-items: center;

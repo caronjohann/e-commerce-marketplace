@@ -17,9 +17,7 @@ class App extends Component {
   renderHomePage = () => {
     return (
       <div>
-        <Header />
         <Items />
-        <Footer />
       </div>
     );
   };
@@ -85,6 +83,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <Header />
           <Route exact={true} path="/" render={this.renderHomePage} />
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
@@ -104,6 +103,7 @@ class App extends Component {
             path="/itemDescription/:_id"
             render={this.renderItemDescriptionPage}
           />
+          <Footer />
         </div>
       </BrowserRouter>
       // <div><NewItems /></div>
