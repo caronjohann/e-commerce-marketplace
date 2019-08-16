@@ -75,7 +75,7 @@ class NewItems extends Component {
             <h3>Price</h3>
             <input type="number" min="0" onChange={(e) => this.handleChange(e, 'price')} />
             <h3>Choose Images</h3>
-            <input type="file" name="image" onChange={(e) => this.handleChange(e, 'image')} />
+            <input type="file" name="image" onChange={(e) => this.handleChange(e, 'image')} multiple />
             <h3>Select Categories</h3>
             <select name="categerylist" form="newItem" onChange={(e) => this.handleChange(e, 'categories')}>
               <option value="Mens">Mens</option>
