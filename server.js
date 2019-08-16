@@ -97,7 +97,7 @@ app.post("/newItem", upload.single("image"), (req, res) => {
             description: desc,
             price: price,
             images: image,
-            cat,
+            category: cat,
             seller: user
         });
     res.send({ success: true });
