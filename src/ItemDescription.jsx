@@ -15,17 +15,15 @@ class UnconnectedItemDescription extends Component {
 
   handleClick = async item => {
     let data = new FormData();
-    data.append("item", this.props.item._id);
-    data.append("cat", this.props.item.category);
-    fetch("/addTocart", {
+    data.append("id", this.props.item._id);
+    let response = await fetch("/addTocart", {
       method: "POST",
       body: data,
       credentials: "include"
     });
-    let response = await fetch("/addTocart");
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
-    this.props.dispatch({ type: "cart", cartList: body });
+    this.props.dispatch({ type: "addTocart", addTocartItems: body });
   };
 
   render = () => {
