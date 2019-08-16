@@ -8,7 +8,8 @@ class UnconnectedItems extends Component {
     super(props);
     console.log(this.props.allItems);
     this.state = {
-      category: undefined
+      category: undefined,
+      itemsOnPage: this.props.allItems
     };
   }
 
@@ -40,10 +41,17 @@ class UnconnectedItems extends Component {
 
   render = () => {
     let toDisplayItems = this.props.allItems;
+    let itemsToRemove = toDisplayItems.length - 12;
     if (this.state.category !== undefined)
       toDisplayItems = this.props.allItems.filter(item => {
         return item.category === this.state.category;
       });
+    if (toDisplayItems.length > 12) {
+      for (var i = 0; i < itemsToRemove; i++) {
+        toDisplayItems.pop();
+      }
+    }
+    console.log(toDisplayItems.length);
     return (
       <div>
         <div className="flex container">
@@ -73,7 +81,6 @@ class UnconnectedItems extends Component {
             </form>
           </div>
         </div>
-
         <div className="flex container item-cont">
           {toDisplayItems.map(item => {
             return (
@@ -94,6 +101,7 @@ class UnconnectedItems extends Component {
             );
           })}
         </div>
+        <button onClick={this.handleShowMore}>Show more</button>
       </div>
     );
   };
