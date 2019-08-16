@@ -104,10 +104,10 @@ app.post("/newItem", upload.single("image"), (req, res) => {
 });
 
 app.post("/addTocart", upload.none(), (req, res) => {
-    let username = req.body.username;
+    let sessionId = req.cookies.sid;
+    let username = sessions[sessionId]
     let item = req.body.id;
-    let cat = req.body.cat;
-    dbo.collection(cat).findOne({ _id: item }),
+    dbo.collection('items').findOne({ _id: item }),
         (err, it) => {
             //this is for find the id of the item for stack it in the cart
             // collection with the username
@@ -124,12 +124,14 @@ app.post("/addTocart", upload.none(), (req, res) => {
                             res.send({ success: false });
                             return;
                         }
-                        if (username) {
+                        if (user) {
                             //we concat an object each time the user click on add to cart
                             // with categorie for property and the id of the item.
-                            let newItems = it.items.concat({ cat: ObjectID(item) });
-                            dbo.collection("cart").updateOne({ username, items: newItems });
-                            res.send({ success: true });
+                            let newItems = it.items.concat(ObjectID(item));
+                            dbo.collection("cart").updateOne({ username }, { items: newItems });
+                            console.log(it.items, "item list")
+                            console.log(it.items.length, "item length")
+                            res.send(it.items.length);
                             return;
                         }
                     };
