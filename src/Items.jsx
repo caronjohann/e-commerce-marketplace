@@ -9,47 +9,55 @@ class UnconnectedItems extends Component {
     console.log(this.props.allItems);
     this.state = {
       category: undefined,
-      itemsOnPage: this.props.allItems
+      showMoreClicks: 1
     };
   }
 
   handleWomens = evt => {
     console.log("clicked womens");
     evt.preventDefault();
-    this.setState({ category: "womens" });
+    this.setState({ category: "womens", showMoreClicks: 1 });
   };
 
   handleMens = evt => {
     evt.preventDefault();
-    this.setState({ category: "mens" });
+    this.setState({ category: "mens", showMoreClicks: 1 });
   };
 
   handleAccessories = evt => {
     evt.preventDefault();
-    this.setState({ category: "accessories" });
+    this.setState({ category: "accessories", showMoreClicks: 1 });
   };
 
   handleOther = evt => {
     evt.preventDefault();
-    this.setState({ category: "other" });
+    this.setState({ category: "other", showMoreClicks: 1 });
   };
 
   handleAll = evt => {
     evt.preventDefault();
-    this.setState({ category: undefined });
+    this.setState({ category: undefined, showMoreClicks: 1 });
+  };
+
+  handleShowMore = () => {
+    if (12 * this.state.showMoreClicks > this.props.allItems) {
+      return;
+    }
+    this.setState({ showMoreClicks: this.state.showMoreClicks + 1 });
   };
 
   render = () => {
     let toDisplayItems = this.props.allItems;
-    let itemsToRemove = toDisplayItems.length - 12;
+    let starterItems = 12;
     if (this.state.category !== undefined)
       toDisplayItems = this.props.allItems.filter(item => {
         return item.category === this.state.category;
       });
     if (toDisplayItems.length > 12) {
-      for (var i = 0; i < itemsToRemove; i++) {
-        toDisplayItems.pop();
-      }
+      toDisplayItems = toDisplayItems.slice(
+        0,
+        starterItems * this.state.showMoreClicks
+      );
     }
     console.log(toDisplayItems.length);
     return (
@@ -101,7 +109,9 @@ class UnconnectedItems extends Component {
             );
           })}
         </div>
-        <button onClick={this.handleShowMore}>Show more</button>
+        <div className="container">
+          <button onClick={this.handleShowMore}>Show more</button>
+        </div>
       </div>
     );
   };
