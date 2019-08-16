@@ -13,18 +13,19 @@ class UnconnectedItemDescription extends Component {
     this.setState({ currentItemClicked: index });
   };
 
-  handleClick = async item => {
+  handleClick = async () => {
     let data = new FormData();
-    data.append("item", this.props.item._id);
-    data.append("cat", this.props.item.category);
-    fetch("/addTocart", {
+    console.log(this.props.item._id)
+    data.append("id", this.props.item._id);
+    let response = await fetch("/addTocart", {
       method: "POST",
       body: data,
       credentials: "include"
     });
-    let response = await fetch("/addTocart");
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
+    console.log(body, "body")
+    this.props.dispatch({ type: "addTocart", addTocartItems: body });
   };
 
   render = () => {
@@ -62,7 +63,7 @@ class UnconnectedItemDescription extends Component {
   };
 }
 let mapStateToProps = st => {
-  return { allItems: st.allItems, cartList: st.cartList };
+  return { allItems: st.allItems };
 };
 let connectedItemDescription = connect(mapStateToProps)(
   UnconnectedItemDescription
