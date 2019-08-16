@@ -7,7 +7,7 @@ class NewItems extends Component {
       description: "",
       price: "",
       image: [],
-      categories: "Mens",
+      categories: "mens",
       addToItems: null
     };
   }
@@ -93,10 +93,10 @@ class NewItems extends Component {
               form="newItem"
               onChange={e => this.handleChange(e, "categories")}
             >
-              <option value="Mens">Mens</option>
-              <option value="Womens">Womens</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Other">Other</option>
+              <option value="mens">Mens</option>
+              <option value="womens">Womens</option>
+              <option value="accessories">Accessories</option>
+              <option value="other">Other</option>
             </select>
             <div>
               <input

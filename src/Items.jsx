@@ -28,11 +28,6 @@ class UnconnectedItems extends Component {
     this.setState({ category: "accessories" });
   };
 
-  handleAccessories = evt => {
-    evt.preventDefault();
-    this.setState({ category: "accessories" });
-  };
-
   handleOther = evt => {
     evt.preventDefault();
     this.setState({ category: "other" });
@@ -47,7 +42,7 @@ class UnconnectedItems extends Component {
     let toDisplayItems = this.props.allItems;
     if (this.state.category !== undefined)
       toDisplayItems = this.props.allItems.filter(item => {
-        return item.category == this.state.category;
+        return item.category === this.state.category;
       });
     return (
       <div>
