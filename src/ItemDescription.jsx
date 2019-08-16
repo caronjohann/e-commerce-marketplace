@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 class UnconnectedItemDescription extends Component {
@@ -15,7 +16,7 @@ class UnconnectedItemDescription extends Component {
 
   handleClick = async () => {
     let data = new FormData();
-    console.log(this.props.item._id)
+    console.log(this.props.item._id);
     data.append("id", this.props.item._id);
     let response = await fetch("/addTocart", {
       method: "POST",
@@ -24,8 +25,15 @@ class UnconnectedItemDescription extends Component {
     });
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
-    console.log(body, "body")
+    console.log(body, "body");
     this.props.dispatch({ type: "addTocart", addTocartItems: body });
+  };
+
+  handleSellerClicked = () => {
+    this.props.dispatch({
+      type: "seller-clicked",
+      sellerClicked: this.props.item.seller
+    });
   };
 
   render = () => {
@@ -56,6 +64,14 @@ class UnconnectedItemDescription extends Component {
           <div> {this.props.item.title}</div>
           <div> {this.props.item.description}</div>
           <div>${this.props.item.price}</div>
+          <div>
+            <Link
+              to={"/seller/" + this.props.item.seller}
+              onClick={this.handleSellerClicked}
+            >
+              {this.props.item.seller}
+            </Link>
+          </div>
           <button onClick={this.handleClick}> Add to cart </button>
         </div>
       </div>

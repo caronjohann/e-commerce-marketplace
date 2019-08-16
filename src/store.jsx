@@ -18,6 +18,9 @@ let reducer = (state, action) => {
   if (action.type === "logout") {
     return { ...state, username: "" };
   }
+  if (action.type === "seller-clicked") {
+    return { ...state, sellerClicked: action.sellerClicked };
+  }
   return state;
 };
 

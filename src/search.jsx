@@ -9,6 +9,13 @@ class UnconnectedSearch extends Component {
       typedSearch: evt.target.value
     });
   };
+  handleCloseSearch = () => {
+    this.props.dispatch({
+      type: "search",
+      typedSearch: ""
+    });
+    window.history.back();
+  };
   render = () => {
     return (
       <div>
@@ -21,15 +28,12 @@ class UnconnectedSearch extends Component {
           />
         </div>
         <div className="close">
-          <button onClick={() => {
-            window.history.back();
-          }}>Close</button>
+          <button onClick={this.handleCloseSearch}>Close</button>
         </div>
       </div>
     );
   };
 }
-
 
 let mapStateToProps = storeState => {
   return {

@@ -12,6 +12,7 @@ import ItemDescription from "./ItemDescription.jsx";
 import NewItems from "./NewItems.jsx";
 import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
+import Sellerpage from "./Sellerpage.jsx";
 
 class App extends Component {
   renderHomePage = () => {
@@ -57,6 +58,14 @@ class App extends Component {
     })[0];
     return <div>{<ItemDescription item={item} />}</div>;
   };
+  renderSellerPage = routerData => {
+    let seller = this.props.sellerClicked;
+    let items = this.props.allItems.filter(item => {
+      return item.seller === seller;
+    });
+    console.log(items, "checking items");
+    return <div>{<Sellerpage items={items} />}</div>;
+  };
 
   renderCartPage = () => {
     return <Cart />;
@@ -88,6 +97,13 @@ class App extends Component {
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
+
+          <Route
+            exact={true}
+            path="/seller/:_id"
+            render={this.renderSellerPage}
+          />
+
           <Route
             exact={true}
             path="/new-listing"
@@ -114,7 +130,8 @@ class App extends Component {
 let mapStateToProps = st => {
   return {
     allItems: st.allItems,
-    sid: st.sessionId
+    sid: st.sessionId,
+    sellerClicked: st.sellerClicked
   };
 };
 
