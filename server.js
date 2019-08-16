@@ -82,25 +82,23 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/newItem", upload.single("image"), (req, res) => {
-    console.log(req.file, "req.files");
-    let sessionId = req.cookies.sid;
-    let user = sessions[sessionId];
-    let title = req.body.title;
-    let desc = req.body.descrpition;
-    let cat = req.body.categories;
-    let price = req.body.price;
-    let image = ["/upload/" + req.file.filename];
-    dbo
-        .collection("items")
-        .insertOne({
-            title: title,
-            description: desc,
-            price: price,
-            images: image,
-            category: cat,
-            seller: user
-        });
-    res.send({ success: true });
+  console.log(req.file, "req.files");
+  let sessionId = req.cookies.sid;
+  let user = sessions[sessionId];
+  let title = req.body.title;
+  let desc = req.body.descrpition;
+  let cat = req.body.categories;
+  let price = req.body.price;
+  let image = ["/upload/" + req.file.filename];
+  dbo.collection("items").insertOne({
+    title: title,
+    description: desc,
+    price: price,
+    images: image,
+    category: cat,
+    seller: user
+  });
+  res.send({ success: true });
 });
 
 app.post("/addTocart", upload.none(), (req, res) => {
@@ -128,7 +126,9 @@ app.post("/addTocart", upload.none(), (req, res) => {
               //we concat an object each time the user click on add to cart
               // with categorie for property and the id of the item.
               let newItems = it.items.concat({ cat: ObjectID(item) });
-              dbo.collection("cart").updateOne({ username}, {items: newItems });
+              dbo
+                .collection("cart")
+                .updateOne({ username }, { items: newItems });
               res.send({ success: true });
               return;
             }

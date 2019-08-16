@@ -1,28 +1,30 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class UnconnectedSearchResults extends Component {
   render = () => {
     if (this.props.query === "" || undefined) {
       return <div />;
     }
     let searchResults = this.props.allItems.filter(each => {
-      let title = each.title.toLowerCase()
-      let desc = each.description.toLowerCase()
+      let title = each.title.toLowerCase();
+      let desc = each.description.toLowerCase();
       return (
-        title.includes(this.props.query) ||
-        desc.includes(this.props.query)
+        title.includes(this.props.query) || desc.includes(this.props.query)
       );
     });
     return (
-      <div>
+      <div className="flex container">
         {searchResults.map(each => {
           return (
-            <div className="flex">
-              <div>
-                <img src={each.images[0]} width="100px" />
-              </div>
-              <div>{each.title}</div>
-              <div>{each.price}</div>
+            <div>
+              <Link to={"/itemDescription/" + each._id}>
+                <div>
+                  <img src={each.images[0]} width="100px" />
+                </div>
+                <div>{each.title}</div>
+                <div>{each.price}</div>
+              </Link>
             </div>
           );
         })}

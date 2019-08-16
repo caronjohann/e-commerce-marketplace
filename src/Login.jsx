@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
@@ -37,17 +38,17 @@ class UnconnectedLogin extends Component {
       this.props.dispatch({
         type: "username",
         username: ""
-      })
+      });
       this.setState({ failedLogin: true });
       return;
     }
     if (body.success) {
-      console.log(body, "body")
+      console.log(body, "body");
       this.props.dispatch({
         type: "username",
         username: body.username,
         sid: body.sid
-      })
+      });
       this.setState({ failedLogin: false });
     }
   };

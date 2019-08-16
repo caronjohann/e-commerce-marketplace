@@ -16,7 +16,7 @@ class UnconnectedItemDescription extends Component {
   handleClick = async item => {
     let data = new FormData();
     data.append("id", this.props.item._id);
-    let response = await fetch("/addTocart", {
+    let response = await fetch("/checkout", {
       method: "POST",
       body: data,
       credentials: "include"

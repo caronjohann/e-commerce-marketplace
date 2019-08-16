@@ -14,6 +14,7 @@ import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
 
 class App extends Component {
+  
   renderHomePage = () => {
     return (
       <div>
