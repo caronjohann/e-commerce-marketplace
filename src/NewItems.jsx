@@ -12,18 +12,17 @@ class NewItems extends Component {
     };
   }
 
-
   handleChange = (event, name) => {
-    if (name === 'image') {
+    if (name === "image") {
       this.setState({
         [name]: event.target.files[0]
-      })
+      });
     } else {
       this.setState({
         [name]: event.target.value
-      })
+      });
     }
-  }
+  };
 
   submitHandler = async evt => {
     evt.preventDefault();
@@ -66,30 +65,45 @@ class NewItems extends Component {
     } else {
       return (
         <div>
-          <form id="newItem" encType="multipart/form-data" >
+          <form id="newItem" encType="multipart/form-data">
             {/* onSubmit={this.submitHandler}> */}
             <h3>Title</h3>
-            <input type="text" onChange={(e) => this.handleChange(e, 'title')} />
+            <input type="text" onChange={e => this.handleChange(e, "title")} />
             <h3>Description </h3>
-            <input type="text" onChange={(e) => this.handleChange(e, 'description')} />
+            <input
+              type="text"
+              onChange={e => this.handleChange(e, "description")}
+            />
             <h3>Price</h3>
-            <input type="number" min="0" onChange={(e) => this.handleChange(e, 'price')} />
+            <input
+              type="number"
+              min="0"
+              onChange={e => this.handleChange(e, "price")}
+            />
             <h3>Choose Images</h3>
             <input type="file" name="image" onChange={(e) => this.handleChange(e, 'image')} multiple />
             <h3>Select Categories</h3>
-            <select name="categerylist" form="newItem" onChange={(e) => this.handleChange(e, 'categories')}>
+            <select
+              name="categerylist"
+              form="newItem"
+              onChange={e => this.handleChange(e, "categories")}
+            >
               <option value="Mens">Mens</option>
               <option value="Womens">Womens</option>
               <option value="Accessories">Accessories</option>
               <option value="Other">Other</option>
             </select>
             <div>
-              <input type="submit" value="Add to Items" onClick={this.submitHandler} />
+              <input
+                type="submit"
+                value="Add to Items"
+                onClick={this.submitHandler}
+              />
             </div>
-          </form >
-        </div >
+          </form>
+        </div>
       );
     }
   };
 }
-export default NewItems
+export default NewItems;
