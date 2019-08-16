@@ -81,20 +81,24 @@ app.get("/logout", (req, res) => {
   delete sessions[sessionId];
 });
 
-app.post("/newItem", upload.single("image"), (req, res) => {
-  console.log(req.file, "req.files");
+app.post("/newItem", upload.array("image", 5), (req, res) => {
   let sessionId = req.cookies.sid;
   let user = sessions[sessionId];
   let title = req.body.title;
   let desc = req.body.descrpition;
   let cat = req.body.categories;
   let price = req.body.price;
-  let image = ["/upload/" + req.file.filename];
+  let images = req.files;
+  let img = [];
+  for (let i = 0; i < images.length; i++) {
+    img.push("/upload/" + req.files[i].filename);
+  }
+  console.log(img);
   dbo.collection("items").insertOne({
     title: title,
     description: desc,
     price: price,
-    images: image,
+    images: img,
     category: cat,
     seller: user
   });
@@ -102,41 +106,44 @@ app.post("/newItem", upload.single("image"), (req, res) => {
 });
 
 app.post("/addTocart", upload.none(), (req, res) => {
-  let username = req.body.username;
+  let sessionId = req.cookies.sid;
+  let username = sessions[sessionId];
   let item = req.body.id;
-  let cat = req.body.cat;
-  dbo.collection(cat).findOne({ _id: item }),
-    (err, it) => {
-      //this is for find the id of the item for stack it in the cart
-      // collection with the username
-      if (err) {
-        console.log(err, "add to cart error");
-        res.send({ success: false });
-      }
-      if (it._id === item) {
-        dbo.collection("cart").findOne({ username }),
-          (err, user) => {
-            //this is for find the good cart for stack the items inside of them.
-            if (err) {
-              console.log(err, "erreur find cart user");
-              res.send({ success: false });
-              return;
-            }
-            if (username) {
-              //we concat an object each time the user click on add to cart
-              // with categorie for property and the id of the item.
-              let newItems = it.items.concat({ cat: ObjectID(item) });
-              dbo
-                .collection("cart")
-                .updateOne({ username }, { items: newItems });
-              res.send({ success: true });
-              return;
-            }
-          };
-      }
-    };
-  res.send({ success: false });
-  return;
+  dbo.collection("items").findOne({ _id: ObjectID(item) }, (err, it) => {
+    console.log(it._id, "it");
+    console.log(item, "item");
+    //this is for find the id of the item for stack it in the cart
+    // collection with the username
+    if (err) {
+      console.log(err, "add to cart error");
+      res.send({ success: false });
+    }
+    if (it._id == item) {
+      dbo.collection("cart").findOne({ username: username }, (err, user) => {
+        console.log(user, "user");
+        //this is for find the good cart for stack the items inside of them.
+        if (err) {
+          console.log(err, "erreur find cart user");
+          res.send({ success: false });
+          return;
+        }
+        if (user.username === username) {
+          //we concat an object each time the user click on add to cart
+          // with categorie for property and the id of the item.
+          let newArr = [];
+          for (let i = 0; i < user.item.length; i++) {
+            newArr.items.push(user.item[i]);
+          }
+          newArr.push(items);
+          console.log(newArr, "new Items");
+          dbo.collection("cart").updateOne({ username }, { items: newArr });
+          console.log(newArr.length, "item length");
+          res.send(JSON.stringify(newArr.length));
+          return;
+        }
+      });
+    }
+  });
 });
 app.get("/send-items", (req, res) => {
   dbo

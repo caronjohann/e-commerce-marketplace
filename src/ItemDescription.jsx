@@ -13,8 +13,9 @@ class UnconnectedItemDescription extends Component {
     this.setState({ currentItemClicked: index });
   };
 
-  handleClick = async item => {
+  handleClick = async () => {
     let data = new FormData();
+    console.log(this.props.item._id);
     data.append("id", this.props.item._id);
     let response = await fetch("/checkout", {
       method: "POST",
@@ -23,6 +24,7 @@ class UnconnectedItemDescription extends Component {
     });
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
+    console.log(body, "body");
     this.props.dispatch({ type: "addTocart", addTocartItems: body });
   };
 

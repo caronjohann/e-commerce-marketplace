@@ -13,10 +13,10 @@ class Footer extends Component {
             <a>Returns & Exchange</a>{" "}
           </li>
           <li>
-            <a>Payement</a>
+            <a href="http://localhost:4000/shopping-cart">Payement</a>
           </li>
           <li>
-            <a>My Account</a>
+            <a href="http://localhost:4000/login">My Account</a>
           </li>
           <li>
             <a>Contact us</a>

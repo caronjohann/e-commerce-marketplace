@@ -10,7 +10,8 @@ class UnconnectedSearchResults extends Component {
       let title = each.title.toLowerCase();
       let desc = each.description.toLowerCase();
       return (
-        title.includes(this.props.query) || desc.includes(this.props.query)
+        title.includes(this.props.query.toLowerCase()) ||
+        desc.includes(this.props.query.toLowerCase())
       );
     });
     return (
@@ -18,13 +19,16 @@ class UnconnectedSearchResults extends Component {
         {searchResults.map(each => {
           return (
             <div>
-              <Link to={"/itemDescription/" + each._id}>
-                <div>
+              <div>
+                <Link to={"/itemDescription/" + each._id}>
                   <img src={each.images[0]} width="100px" />
-                </div>
-                <div>{each.title}</div>
-                <div>{each.price}</div>
-              </Link>
+                </Link>
+              </div>
+              <div>
+                {" "}
+                <Link to={"/itemDescription/" + each._id}>{each.title}</Link>
+              </div>
+              <div>${each.price}</div>
             </div>
           );
         })}
