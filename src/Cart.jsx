@@ -6,7 +6,8 @@ class UnconnectedCart extends Component {
         this.state = {
             username: this.props.user,
             allItems: [],
-            result: []
+            result: [],
+            total: 0
         };
     }
     renderCart = async () => {
@@ -27,15 +28,19 @@ class UnconnectedCart extends Component {
         body2 = JSON.parse(body2);
         this.setState({ allItems: body2 })
         let newArr = []
+        let priceTotal = 0
         for (let i = 0; i < this.props.cartList.length; i++) {
             for (let e = 0; e < this.state.allItems.length; e++) {
                 if (this.props.cartList[i] === this.state.allItems[e]._id) {
                     newArr.push(this.state.allItems[e])
+                    console.log(this.state.allItems[e].price)
+                    console.log(typeof parseInt(this.state.allItems[e].price))
+                    priceTotal += parseInt(this.state.allItems[e].price) * 100
                 }
             }
         }
-        this.setState({ result: newArr })
-
+        console.log(priceTotal)
+        this.setState({ result: newArr, total: priceTotal })
     }
     deleteItem = async evt => {
         evt.preventDefault()
@@ -77,6 +82,10 @@ class UnconnectedCart extends Component {
 
 
                 })}
+                <div className="totalBox">
+                    total : {this.state.total}$
+                </div>
+
                 <form >
                     <input type="submit" value="checkout"></input>
                 </form>

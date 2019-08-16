@@ -136,13 +136,12 @@ app.post("/addTocart", upload.none(), (req, res) => {
                             //we concat an object each time the user click on add to cart
                             // with categorie for property and the id of the item.
                             let newArr = []
-                            for (let i = 0; i < user.item.length; i++) {
-                                newArr.items.push(user.item[i]);
+                            for (let i = 0; i < user.items.length; i++) {
+                                newArr.push(user.items[i]);
                             }
                             newArr.push(item)
                             console.log(newArr, "new Items")
-                            dbo.collection("cart").updateOne({ username }, { items: newArr });
-                            console.log(newArr.length, "item length")
+                            dbo.collection("cart").updateOne({ username }, { $set: { items: newArr } });
                             res.send(JSON.stringify(newArr.length));
                             return;
                         }
