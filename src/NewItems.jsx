@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
-import { connect } from "http2";
+import { connect } from "react-redux";
 class UnconnectedNewItems extends Component {
   constructor(props) {
     super(props);
