@@ -60,18 +60,8 @@ class App extends Component {
     return <div>{<ItemDescription item={item} />}</div>;
   };
 
-<<<<<<< HEAD
-  renderCartPage = async () => {
-    let response = await fetch("/user-cart");
-    let responseBody = await response.text();
-    let body = JSON.parse(responseBody);
-    console.log(body, "body");
-=======
   renderCartPage = () => {
->>>>>>> d9fb3c9ed4122768383b4d00a5884c7ccbdcdb59
-    return (
-      <Cart />
-    );
+    return <Cart />;
   };
   renderListingPage = () => {
     return (
@@ -92,7 +82,6 @@ class App extends Component {
   };
 
   render = () => {
-
     return (
       <BrowserRouter>
         <div>
