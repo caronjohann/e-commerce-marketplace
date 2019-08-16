@@ -82,23 +82,25 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/newItem", upload.single("image"), (req, res) => {
-  console.log(req.file, "req.files");
-  let sessionId = req.cookies.sid;
-  let user = sessions[sessionId];
-  let title = req.body.title;
-  let desc = req.body.descrpition;
-  let cat = req.body.categories;
-  let price = req.body.price;
-  let image = ["/upload/" + req.file.filename];
-  dbo.collection("items").insertOne({
-    title: title,
-    description: desc,
-    price: price,
-    images: image,
-    cat,
-    seller: user
-  });
-  res.send({ success: true });
+    console.log(req.file, "req.files");
+    let sessionId = req.cookies.sid;
+    let user = sessions[sessionId];
+    let title = req.body.title;
+    let desc = req.body.descrpition;
+    let cat = req.body.categories;
+    let price = req.body.price;
+    let image = ["/upload/" + req.file.filename];
+    dbo
+        .collection("items")
+        .insertOne({
+            title: title,
+            description: desc,
+            price: price,
+            images: image,
+            category: cat,
+            seller: user
+        });
+    res.send({ success: true });
 });
 
 app.post("/addTocart", upload.none(), (req, res) => {
