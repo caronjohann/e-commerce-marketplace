@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 class UnconnectedItemDescription extends Component {
   constructor(props) {
@@ -11,6 +11,20 @@ class UnconnectedItemDescription extends Component {
   }
   imageClickHander = index => {
     this.setState({ currentItemClicked: index });
+  };
+
+  handleClick = async item => {
+    let data = new FormData();
+    data.append("item", this.props.item._id);
+    data.append("cat", this.props.item.category);
+    fetch("/addTocart", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
+    let response = await fetch("/addTocart");
+    let responseBody = await response.text();
+    let body = JSON.parse(responseBody);
   };
 
   render = () => {
@@ -41,14 +55,14 @@ class UnconnectedItemDescription extends Component {
           <div> {this.props.item.title}</div>
           <div> {this.props.item.description}</div>
           <div> {this.props.item.price}</div>
-          <Link to={"/shopping-cart/"}>Add to cart</Link>
+          <button onClick={this.handleClick}> Add to cart </button>
         </div>
       </div>
     );
   };
 }
 let mapStateToProps = st => {
-  return { allItems: st.allItems };
+  return { allItems: st.allItems, cartList: st.cartList };
 };
 let connectedItemDescription = connect(mapStateToProps)(
   UnconnectedItemDescription

@@ -6,24 +6,16 @@ class NewItems extends Component {
       title: "",
       description: "",
       price: "",
-      images: [],
-      categories: "items",
+      image: [],
+      categories: "Mens",
       addToItems: null
     };
   }
 
   handleChange = (event, name) => {
-    if (name === "images") {
-      let files = event.target.files;
-      console.log(event.target.files);
-      // let newImages = [];
-      // for (let i = 0; i < image.length; i++) {
-      //   let img = image[i];
-      //   let imgName = "/upload/" + img.name;
-      //   newImages.push(imgName);
-      // }
+    if (name === "image") {
       this.setState({
-        [name]: files
+        [name]: event.target.files[0]
       });
     } else {
       this.setState({
@@ -38,8 +30,7 @@ class NewItems extends Component {
     data.append("title", this.state.title);
     data.append("descrpition", this.state.description);
     data.append("price", this.state.price);
-    console.log(this.state.images);
-    data.append("files", this.state.images);
+    data.append("image", this.state.image);
     data.append("categories", this.state.categories);
     let response = await fetch("/newItem", {
       method: "POST",
@@ -74,7 +65,7 @@ class NewItems extends Component {
     } else {
       return (
         <div>
-          <form id="newItem" enctype="multipart/form-data">
+          <form id="newItem" encType="multipart/form-data">
             {/* onSubmit={this.submitHandler}> */}
             <h3>Title</h3>
             <input type="text" onChange={e => this.handleChange(e, "title")} />
@@ -92,9 +83,8 @@ class NewItems extends Component {
             <h3>Choose Images</h3>
             <input
               type="file"
-              name="images"
-              onChange={e => this.handleChange(e, "images")}
-              multiple="multiple"
+              name="image"
+              onChange={e => this.handleChange(e, "image")}
             />
             <h3>Select Categories</h3>
             <select
@@ -102,7 +92,7 @@ class NewItems extends Component {
               form="newItem"
               onChange={e => this.handleChange(e, "categories")}
             >
-              <option value="Mens">Items</option>
+              <option value="Mens">Mens</option>
               <option value="Womens">Womens</option>
               <option value="Accessories">Accessories</option>
               <option value="Other">Other</option>
