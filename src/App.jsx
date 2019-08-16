@@ -61,8 +61,13 @@ class App extends Component {
   };
 
   renderCartPage = () => {
+    return <Cart />;
+  };
+  renderListingPage = () => {
     return (
-      <Cart />
+      <div>
+        <NewItems />
+      </div>
     );
   };
   componentDidMount = async () => {
@@ -77,7 +82,6 @@ class App extends Component {
   };
 
   render = () => {
-
     return (
       <BrowserRouter>
         <div>
@@ -87,8 +91,13 @@ class App extends Component {
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
           <Route
             exact={true}
+            path="/new-listing"
+            render={this.renderListingPage}
+          />
+          <Route
+            exact={true}
             path="/shopping-cart"
-            render={() => this.renderCartPage()}
+            render={this.renderCartPage}
           />
           <Route
             exact={true}

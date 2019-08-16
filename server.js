@@ -1,15 +1,16 @@
-let express = require('express')
-let app = express()
-let MongoClient = require("mongodb").MongoClient
-let ObjectID = require("mongodb").ObjectID
-let sha1 = require('sha1')
-let multer = require('multer')
-let upload = multer({ dest: __dirname + '/upload/' })
-let reloadMagic = require('./reload-magic.js')
-let cookieParser = require('cookie-parser')
-reloadMagic(app)
-let dbo = undefined
-let url = "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority"
+let express = require("express");
+let app = express();
+let MongoClient = require("mongodb").MongoClient;
+let ObjectID = require("mongodb").ObjectID;
+let sha1 = require("sha1");
+let multer = require("multer");
+let upload = multer({ dest: __dirname + "/upload/" });
+let reloadMagic = require("./reload-magic.js");
+let cookieParser = require("cookie-parser");
+reloadMagic(app);
+let dbo = undefined;
+let url =
+  "mongodb+srv://ahmed:ahmed@cluster0-hlssn.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
     dbo = db.db("Market")
 })
@@ -55,22 +56,50 @@ app.post('/login', upload.none(), (req, res) => {
     if (username !== "" && password !== "") {
         dbo.collection("users").findOne({ username: username }, (err, user) => {
             if (err) {
-                console.log(err, "login error")
-                res.send({ success: false })
-                return
+              console.log(err, "erreur find cart user");
+              res.send({ success: false });
+              return;
             }
-            if (user === null) {
-                res.send({ success: false })
-                return
+            if (username) {
+              //we concat an object each time the user click on add to cart
+              // with categorie for property and the id of the item.
+              let newItems = it.items.concat({ cat: ObjectID(item) });
+              dbo.collection("cart").updateOne({ username, items: newItems });
+              res.send({ success: true });
+              return;
             }
-            if (user.password === hashedPwd) {
-                let sid = Math.floor(Math.random() * 10000000)
-                sessions[sid] = username
-                res.cookie('sid', sid)
-                res.send({ success: true, username: username, sid: sid })
-                return
-            }
-        })
+          };
+      }
+    };
+  res.send({ success: false });
+  return;
+});
+app.get("/send-items", (req, res) => {
+  dbo
+    .collection("items")
+    .find({})
+    .toArray((err, items) => {
+      if (err) {
+        console.log("error", err);
+        res.send({ success: false });
+        return;
+      }
+      res.send(JSON.stringify(items));
+    });
+});
+app.get("/user-cart", (req, res) => {
+  let sessionId = req.cookies.sid;
+  res.send({ user: sessions[sessionId] });
+});
+app.post("/checkout", upload.none(), (req, res) => {
+  let sessionId = req.cookies.sid;
+  let username = sessions[sessionId];
+  console.log(username, "username");
+  dbo.collection("cart").findOne({ username: username }, (err, user) => {
+    if (err) {
+      console.log(err, "cart error");
+      res.send({ success: false });
+      return;
     }
 ​
 })
