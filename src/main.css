@@ -50,6 +50,17 @@ body {
   align-items: center;
 }
 
+.totalBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: auto;
+  width: 35%;
+  border: 3px solid grey;
+  padding: 10px;
+  align-items: center;
+}
+
 .imgCart {
   height: 100px;
   display: flex;

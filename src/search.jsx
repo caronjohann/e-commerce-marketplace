@@ -21,12 +21,15 @@ class UnconnectedSearch extends Component {
           />
         </div>
         <div className="close">
-          <Link to="/">Close</Link>
+          <button onClick={() => {
+            window.history.back();
+          }}>Close</button>
         </div>
       </div>
     );
   };
 }
+
 
 let mapStateToProps = storeState => {
   return {

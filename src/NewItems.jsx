@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 class NewItems extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class NewItems extends Component {
   handleChange = (event, name) => {
     if (name === "image") {
       this.setState({
-        [name]: event.target.files[0]
+        [name]: event.target.files
       });
     } else {
       this.setState({
@@ -30,7 +31,9 @@ class NewItems extends Component {
     data.append("title", this.state.title);
     data.append("descrpition", this.state.description);
     data.append("price", this.state.price);
-    data.append("image", this.state.image);
+    for (let i = 0; i < this.state.image.length; i++) {
+      data.append("image", this.state.image[i]);
+    }
     data.append("categories", this.state.categories);
     let response = await fetch("/newItem", {
       method: "POST",

@@ -9,8 +9,8 @@ class UnconnectedSearchResults extends Component {
       let title = each.title.toLowerCase()
       let desc = each.description.toLowerCase()
       return (
-        title.includes(this.props.query) ||
-        desc.includes(this.props.query)
+        title.includes(this.props.query.toLowerCase()) ||
+        desc.includes(this.props.query.toLowerCase())
       );
     });
     return (
