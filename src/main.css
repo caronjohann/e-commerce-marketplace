@@ -80,10 +80,12 @@ body {
 }
 
 .suggestion {
-  margin-top: 20px
+  margin-top: 20px;
+  margin: 203px
 }
 
 .itemSugg {
   display: flex;
-  justify-content: row;
+  flex-direction: row;
+  justify-content: space-around;
 }

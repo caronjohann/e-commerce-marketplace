@@ -40,11 +40,10 @@ class UnconnectedItemDescription extends Component {
         console.log(item.category)
         return item
       }
-      if (toDisplayItems.length > 6) {
-        toDisplayItems = toDisplayItems.slice(0, 5);
-      }
-
     })
+    if (toDisplayItems.length > 6) {
+      toDisplayItems = toDisplayItems.slice(0, 5);
+    }
     return (
       <div className="itemDesc ">
         <div className="flex container">
