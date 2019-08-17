@@ -75,6 +75,15 @@ body {
   width: 200px;
 }
 
-.footer {
-  align-items: flex-end
+.itemDesc {
+  justify-content: column;
+}
+
+.suggestion {
+  margin-top: 20px
+}
+
+.itemSugg {
+  display: flex;
+  justify-content: row;
 }

@@ -60,8 +60,6 @@ class UnconnectedItems extends Component {
         starterItems * this.state.showMoreClicks
       );
     }
-
-    console.log(toDisplayItems.length);
     return (
       <div>
         <div className="flex container">
