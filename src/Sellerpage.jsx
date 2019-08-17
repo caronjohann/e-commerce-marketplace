@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 class SellerPage extends Component {
   render = () => {
@@ -10,7 +11,9 @@ class SellerPage extends Component {
             return (
               <div>
                 <div>
-                  <img src={item.images[0]} />
+                  <Link to={"/itemDescription/" + item._id}>
+                    <img src={item.images[0]} height="300px" width="300px" />
+                  </Link>
                 </div>
                 <div>{item.title}</div>
                 <div>{item.price}</div>
