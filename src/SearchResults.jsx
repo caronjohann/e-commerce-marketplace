@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class UnconnectedSearchResults extends Component {
   render = () => {
     if (this.props.query === "" || undefined) {
@@ -19,7 +20,9 @@ class UnconnectedSearchResults extends Component {
           return (
             <div className="flex">
               <div>
-                <img src={each.images[0]} width="100px" />
+                <Link to={"/itemDescription/" + each._id}>
+                  <img src={each.images[0]} width="100px" />
+                </Link>
               </div>
               <div>{each.title}</div>
               <div>{each.price}</div>
