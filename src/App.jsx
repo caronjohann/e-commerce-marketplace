@@ -12,7 +12,7 @@ import ItemDescription from "./ItemDescription.jsx";
 import NewItems from "./NewItems.jsx";
 import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
-import Sellerpage from "./Sellerpage.jsx";
+import SellerPage from "./SellerPage.jsx";
 
 class App extends Component {
   renderHomePage = () => {
@@ -65,7 +65,7 @@ class App extends Component {
       return item.seller === seller;
     });
     console.log(items, "checking items");
-    return <div>{<Sellerpage items={items} />}</div>;
+    return <div>{<SellerPage items={items} />}</div>;
   };
 
   renderCartPage = () => {

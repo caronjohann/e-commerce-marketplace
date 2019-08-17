@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-class Sellerpage extends Component {
+class SellerPage extends Component {
   render = () => {
     return (
       <div>
@@ -23,4 +23,4 @@ class Sellerpage extends Component {
   };
 }
 
-export default Sellerpage;
+export default SellerPage;

@@ -10,23 +10,21 @@ class UnconnectedItemDescription extends Component {
       currentItemClicked: 0
     };
   }
-  imageClickHander = index => {
+  imageClickHandler = index => {
     this.setState({ currentItemClicked: index });
   };
 
   handleClick = async () => {
     let data = new FormData();
-    console.log(this.props.item._id);
     data.append("id", this.props.item._id);
-    let response = await fetch("/addTocart", {
+    let response = await fetch("/addToCart", {
       method: "POST",
       body: data,
       credentials: "include"
     });
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
-    console.log(body, "body");
-    this.props.dispatch({ type: "addTocart", addTocartItems: body });
+    this.props.dispatch({ type: "addCartItems", addToCartItems: body });
   };
 
   handleSellerClicked = () => {
@@ -52,7 +50,7 @@ class UnconnectedItemDescription extends Component {
                 <img
                   src={each}
                   onClick={() => {
-                    this.imageClickHander(index);
+                    this.imageClickHandler(index);
                   }}
                   height="100px"
                 />

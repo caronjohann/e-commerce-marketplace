@@ -47,7 +47,8 @@ class UnconnectedItems extends Component {
   };
 
   render = () => {
-    let toDisplayItems = this.props.allItems;
+    let toDisplayItems = this.props.allItems
+
     let starterItems = 12;
     if (this.state.category !== undefined)
       toDisplayItems = this.props.allItems.filter(item => {
@@ -59,6 +60,7 @@ class UnconnectedItems extends Component {
         starterItems * this.state.showMoreClicks
       );
     }
+
     console.log(toDisplayItems.length);
     return (
       <div>
@@ -95,7 +97,7 @@ class UnconnectedItems extends Component {
               <div className="item">
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="200px" />
+                    <img src={item.images[0]} height="200px" width="200px" />
                   </Link>
                 </div>
                 <div>

@@ -13,7 +13,7 @@ class Footer extends Component {
             <a>Returns & Exchange</a>{" "}
           </li>
           <li>
-            <a>Payement</a>
+            <a>Payment</a>
           </li>
           <li>
             <a>My Account</a>

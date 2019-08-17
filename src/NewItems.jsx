@@ -29,7 +29,7 @@ class UnconnectedNewItems extends Component {
     evt.preventDefault();
     let data = new FormData();
     data.append("title", this.state.title);
-    data.append("descrpition", this.state.description);
+    data.append("description", this.state.description);
     data.append("price", this.state.price);
     data.append("fName", this.props.firstName)
     data.append('lName', this.props.lastName)
@@ -94,7 +94,7 @@ class UnconnectedNewItems extends Component {
             />
             <h3>Select Categories</h3>
             <select
-              name="categerylist"
+              name="categoriesList"
               form="newItem"
               onChange={e => this.handleChange(e, "categories")}
             >
@@ -120,7 +120,7 @@ let mapStateToProps = storeState => {
   return {
     username: storeState.username,
     firstName: storeState.firstName,
-    lastName: storeState.lastname
+    lastName: storeState.lastName
   };
 };
 let NewItems = connect(mapStateToProps)(UnconnectedNewItems)

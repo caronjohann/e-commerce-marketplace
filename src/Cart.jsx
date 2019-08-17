@@ -7,7 +7,8 @@ class UnconnectedCart extends Component {
             username: this.props.user,
             allItems: [],
             result: [],
-            total: 0
+            total: 0,
+            deleteStatus: false
         };
     }
     renderCart = async () => {
@@ -20,9 +21,7 @@ class UnconnectedCart extends Component {
         })
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
-        console.log(body, "body")
         this.props.dispatch({ type: "cart", cartList: body })
-        console.log(body)
         let response2 = await fetch("/send-items");
         let body2 = await response2.text();
         body2 = JSON.parse(body2);
@@ -33,14 +32,16 @@ class UnconnectedCart extends Component {
             for (let e = 0; e < this.state.allItems.length; e++) {
                 if (this.props.cartList[i] === this.state.allItems[e]._id) {
                     newArr.push(this.state.allItems[e])
-                    console.log(this.state.allItems[e].price)
-                    console.log(typeof parseInt(this.state.allItems[e].price))
                     priceTotal += parseFloat(this.state.allItems[e].price)
                 }
             }
         }
-        console.log(priceTotal)
         this.setState({ result: newArr, total: priceTotal })
+        if (this.state.deleteStatus) {
+            console.log(this.props.addToCartItems)
+            this.props.dispatch({ type: 'removeToCart', removeItems: this.props.addToCartItems })
+            this.setState({ deleteStatus: false })
+        }
     }
     deleteItem = async evt => {
         evt.preventDefault()
@@ -55,6 +56,7 @@ class UnconnectedCart extends Component {
         let responseBody = await response.text()
         let body = JSON.parse(responseBody)
         console.log(body, "body")
+        this.setState({ deleteStatus: true })
         this.renderCart()
     }
 
@@ -67,28 +69,30 @@ class UnconnectedCart extends Component {
     render = () => {
         return (
             <div>
-                {this.state.result.map(item => {
-                    return (
-                        <div className="checkoutBox">
-                            <img className="imgCart" src={item.images[0]} />
-                            <div>{item.title}</div>
-                            <div>{item.price}</div>
-                            <form onSubmit={this.deleteItem}>
-                                <input type="submit" onClick={() => { this.setState({ id: item._id }) }} value="Delete" />
-                            </form>
-                        </div>
-                    )
+                <div>
+                    {this.state.result.map(item => {
+                        return (
+                            <div className="checkoutBox">
+                                <img className="imgCart" src={item.images[0]} />
+                                <div>{item.title}</div>
+                                <div>{item.price}</div>
+                                <form onSubmit={this.deleteItem}>
+                                    <input type="submit" onClick={() => { this.setState({ id: item._id }) }} value="Delete" />
+                                </form>
+                            </div>
+                        )
 
 
 
-                })}
-                <div className="totalBox">
-                    total : {this.state.total}$
+                    })}
+                    <div className="totalBox">
+                        total : {this.state.total}$
                 </div>
 
-                <form >
-                    <input type="submit" value="checkout"></input>
-                </form>
+                    <form >
+                        <input type="submit" value="checkout"></input>
+                    </form>
+                </div>
             </div>
         );
     };
@@ -98,7 +102,8 @@ let mapStateToProps = state => {
         username: state.username,
         cartList: state.cartList,
         allItems: state.allItems,
-        sid: state.sessionId
+        sid: state.sessionId,
+        addToCartItems: state.addToCartItems
     };
 };
 let Cart = connect(mapStateToProps)(UnconnectedCart)

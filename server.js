@@ -75,6 +75,17 @@ app.post("/login", upload.none(), (req, res) => {
         });
     }
 });
+app.post("/update-cart", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let user = sessions[sessionId]
+    dbo.collection("cart").findOne({ username: user },
+        (err, user) => {
+            if (user) {
+                res.send({ cartLength: user.items.length })
+            }
+
+        })
+})
 
 app.get("/logout", (req, res) => {
     let sessionId = req.cookies.sid;
@@ -87,7 +98,7 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
     let user = sessions[sessionId];
     let name = req.body.fName.charAt(0).toUpperCase() + req.body.fName.slice(1) + " " + req.body.lName.charAt(0).toUpperCase() + req.body.lName.slice(1)
     let title = req.body.title;
-    let desc = req.body.descrpition;
+    let desc = req.body.description;
     let cat = req.body.categories;
     let price = req.body.price;
     let images = req.files
@@ -109,7 +120,7 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
     res.send({ success: true });
 });
 
-app.post("/addTocart", upload.none(), (req, res) => {
+app.post("/addToCart", upload.none(), (req, res) => {
     let sessionId = req.cookies.sid;
     let username = sessions[sessionId]
     let item = req.body.id;
@@ -129,13 +140,13 @@ app.post("/addTocart", upload.none(), (req, res) => {
                         console.log(user, "user")
                         //this is for find the good cart for stack the items inside of them.
                         if (err) {
-                            console.log(err, "erreur find cart user");
+                            console.log(err, "error find cart user");
                             res.send({ success: false });
                             return;
                         }
                         if (user.username === username) {
                             //we concat an object each time the user click on add to cart
-                            // with categorie for property and the id of the item.
+                            // with categories for property and the id of the item.
                             let newArr = []
                             for (let i = 0; i < user.items.length; i++) {
                                 newArr.push(user.items[i]);

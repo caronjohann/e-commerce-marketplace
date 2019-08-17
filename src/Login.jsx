@@ -41,14 +41,22 @@ class UnconnectedLogin extends Component {
       this.setState({ failedLogin: true });
       return;
     }
+    let response2 = await fetch("/update-cart", {
+      method: "POST",
+      credentials: "include"
+    })
+    let responseBody2 = await response2.text();
+    let body2 = JSON.parse(responseBody2);
+    console.log("parsed body", body2);
     if (body.success) {
-      console.log(body, "body")
+      console.log(body2, "body")
       this.props.dispatch({
         type: "username",
         username: body.username,
         sid: body.sid,
         firstName: body.fName,
-        lastName: body.lName
+        lastName: body.lName,
+        cartLength: body2.cartLength
       })
       this.setState({ failedLogin: false });
     }
@@ -63,23 +71,25 @@ class UnconnectedLogin extends Component {
     }
 
     return (
-      <div className="flex container">
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <h2>Login to your account</h2>
-            <h3>Email Address</h3>
-            <input type="email" onChange={this.handleUsername} />
-            <h3>Password</h3>
-            <input type="password" onChange={this.handlePassword} />
-            <input type="submit" value="Log In" />
-          </form>
-        </div>
-        <div>
-          <h2>
-            <Link to="/signup">Create new account</Link>
-          </h2>
-          <h3>Register an account account to sell and </h3>
-          <Link to="/">Return to marketplace</Link>
+      <div>
+        <div className="flex container">
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <h2>Login to your account</h2>
+              <h3>Email Address</h3>
+              <input type="email" onChange={this.handleUsername} />
+              <h3>Password</h3>
+              <input type="password" onChange={this.handlePassword} />
+              <input type="submit" value="Log In" />
+            </form>
+          </div>
+          <div>
+            <h2>
+              <Link to="/signup">Create new account</Link>
+            </h2>
+            <h3>Register an account account to sell and </h3>
+            <Link to="/">Return to marketplace</Link>
+          </div>
         </div>
       </div>
     );

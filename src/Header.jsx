@@ -15,7 +15,6 @@ class Header extends Component {
     });
   };
   render = () => {
-    console.log(this.props.firstName)
     if (this.props.username === "" || this.props.username === undefined) {
       return (
         <div className="flex container">
@@ -29,7 +28,6 @@ class Header extends Component {
             <Link to="/login">Login</Link>
           </div>
           <NavLink to="/shopping-cart/:uid">
-            <div />
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>
         </div>
@@ -51,9 +49,9 @@ class Header extends Component {
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
           <NavLink to="/shopping-cart">
-            <div />
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>
+          ({this.props.addToCartItems})
         </div>
       );
     }
@@ -63,7 +61,8 @@ class Header extends Component {
 let mapStateToProps = storeState => {
   return {
     username: storeState.username,
-    firstName: storeState.firstName
+    firstName: storeState.firstName,
+    addToCartItems: storeState.addToCartItems
   };
 };
 

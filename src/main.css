@@ -1,5 +1,5 @@
 body {
-  background-color: #bbb;
+  background-color: rgb(255, 255, 255);
   margin: 0;
 }
 
@@ -72,5 +72,9 @@ body {
 }
 
 .item {
-  width: 200px
+  width: 200px;
+}
+
+.footer {
+  align-items: flex-end
 }
