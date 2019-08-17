@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 class Header extends Component {
   logoutHandler = () => {
     this.props.dispatch({
-      type: "logout"
+      type: "logout", username: undefined
     });
   };
   render = () => {
@@ -19,7 +19,7 @@ class Header extends Component {
       return (
         <div className="flex container">
           <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" />
+            <img src="/assets/logo.jpg" alt="logo" className="logo" />
           </Link>
           <div>
             <Link to="/search">Search</Link>
@@ -27,16 +27,16 @@ class Header extends Component {
           <div>
             <Link to="/login">Login</Link>
           </div>
-          <NavLink to="/shopping-cart/:uid">
+          <NavLink to="/shopping-cart" >
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>
-        </div>
+        </div >
       );
     } else {
       return (
         <div className="flex container">
           <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" />
+            <img src="/assets/logo.jpg" alt="logo" className="logo" />
           </Link>
           <div>
             <Link to="/search">Search</Link>

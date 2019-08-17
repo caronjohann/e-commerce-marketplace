@@ -89,3 +89,8 @@ body {
   flex-direction: row;
   justify-content: space-around;
 }
+
+.logo {
+  height: 120px;
+  width: 219px;
+}

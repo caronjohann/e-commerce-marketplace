@@ -26,7 +26,7 @@ let reducer = (state, action) => {
     return { ...state, addToCartItems: action.addToCartItems };
   }
   if (action.type === "logout") {
-    return { ...state, username: "" };
+    return { ...state, username: undefined };
   }
   if (action.type === "seller-clicked") {
     return { ...state, sellerClicked: action.sellerClicked };
@@ -44,7 +44,7 @@ const store = createStore(
   {
     searchQuery: "",
     allItems: [],
-    username: "",
+    username: undefined,
     cartList: [],
     addToCartItems: 0
   },
