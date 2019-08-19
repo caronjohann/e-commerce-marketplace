@@ -1,5 +1,5 @@
 body {
-  background-color: #bbb;
+  background-color: rgb(255, 255, 255);
   margin: 0;
 }
 
@@ -53,9 +53,9 @@ body {
 .totalBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: auto;
-  width: 65%;
+  width: 35%;
   border: 3px solid grey;
   padding: 10px;
   align-items: center;
@@ -73,4 +73,24 @@ body {
 
 .item {
   width: 200px;
+}
+
+.itemDesc {
+  justify-content: column;
+}
+
+.suggestion {
+  margin-top: 20px;
+  margin: 203px
+}
+
+.itemSugg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.logo {
+  height: 120px;
+  width: 219px;
 }

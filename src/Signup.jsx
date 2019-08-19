@@ -13,6 +13,7 @@ class Signup extends Component {
   }
 
   handleChange = (evt, name) => {
+    console.log(evt.target.value)
     this.setState({
       [name]: evt.target.value
     });
@@ -63,7 +64,7 @@ class Signup extends Component {
             <h3>First Name</h3>
             <input
               type="text"
-              onChange={e => this.handleChange(e, "firsName")}
+              onChange={e => this.handleChange(e, "firstName")}
             />
             <h3>Last Name</h3>
             <input

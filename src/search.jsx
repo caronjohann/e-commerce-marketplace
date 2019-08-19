@@ -9,6 +9,13 @@ class UnconnectedSearch extends Component {
       typedSearch: evt.target.value
     });
   };
+  handleCloseSearch = () => {
+    this.props.dispatch({
+      type: "search",
+      typedSearch: ""
+    });
+    window.history.back();
+  };
   render = () => {
     return (
       <div>
@@ -21,7 +28,7 @@ class UnconnectedSearch extends Component {
           />
         </div>
         <div className="close">
-          <Link to="/">Close</Link>
+          <button onClick={this.handleCloseSearch}>Close</button>
         </div>
       </div>
     );

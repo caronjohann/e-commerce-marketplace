@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Footer extends Component {
   render = () => {
     return (
-      <div className="flex container">
+      <div className="flex container footer">
         <ul>
           CUSTOMER SERVICE
           <li>
@@ -13,7 +13,7 @@ class Footer extends Component {
             <a>Returns & Exchange</a>{" "}
           </li>
           <li>
-            <a href="http://localhost:4000/shopping-cart">Payement</a>
+            <a>Payment</a>
           </li>
           <li>
             <a href="http://localhost:4000/login">My Account</a>

@@ -12,9 +12,9 @@ import ItemDescription from "./ItemDescription.jsx";
 import NewItems from "./NewItems.jsx";
 import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
+import SellerPage from "./SellerPage.jsx";
 
 class App extends Component {
-  
   renderHomePage = () => {
     return (
       <div>
@@ -28,6 +28,7 @@ class App extends Component {
   renderSearchPage = () => {
     return (
       <div>
+        <Header />
         <div>
           <Search />
         </div>
@@ -35,42 +36,77 @@ class App extends Component {
         <div>
           <SearchResults />
         </div>
+        <Footer />
       </div>
     );
   };
   renderLoginPage = () => {
     return (
       <div>
+        <Header />
         <Login />
+        <Footer />
       </div>
     );
   };
   renderSignupPage = () => {
     return (
       <div>
+        <Header />
         <Signup />
+        <Footer />
       </div>
     );
   };
 
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
+    console.log(routerData);
     let item = this.props.allItems.filter(item => {
       return item._id === itemId;
     })[0];
-    return <div>{<ItemDescription item={item} />}</div>;
+    return (
+      <div>
+        <Header />
+        {<ItemDescription item={item} />}
+        <Footer />
+      </div>
+    );
+  };
+  renderSellerPage = routerData => {
+    let seller = this.props.sellerClicked;
+    let items = this.props.allItems.filter(item => {
+      return item.seller === seller;
+    });
+    console.log(items, "checking items");
+    return (
+      <div>
+        <Header />
+        {<SellerPage items={items} />}
+        <Footer />
+      </div>
+    );
   };
 
   renderCartPage = () => {
-    return <Cart />;
+    return (
+      <div>
+        <Header />
+        <Cart />
+        <Footer />
+      </div>
+    );
   };
   renderListingPage = () => {
     return (
       <div>
+        <Header />
         <NewItems />
+        <Footer />
       </div>
     );
   };
+
   componentDidMount = async () => {
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
@@ -90,6 +126,13 @@ class App extends Component {
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
           <Route exact={true} path="/signup" render={this.renderSignupPage} />
+
+          <Route
+            exact={true}
+            path="/seller/:_id"
+            render={this.renderSellerPage}
+          />
+
           <Route
             exact={true}
             path="/new-listing"
@@ -115,7 +158,8 @@ class App extends Component {
 let mapStateToProps = st => {
   return {
     allItems: st.allItems,
-    sid: st.sessionId
+    sid: st.sessionId,
+    sellerClicked: st.sellerClicked
   };
 };
 

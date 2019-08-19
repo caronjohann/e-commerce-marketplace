@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 class Header extends Component {
   logoutHandler = () => {
     this.props.dispatch({
-      type: "logout"
+      type: "logout", username: undefined
     });
   };
   render = () => {
@@ -19,7 +19,7 @@ class Header extends Component {
       return (
         <div className="flex container">
           <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" />
+            <img src="/assets/logo.jpg" alt="logo" className="logo" />
           </Link>
           <div>
             <Link to="/search">Search</Link>
@@ -27,17 +27,16 @@ class Header extends Component {
           <div>
             <Link to="/login">Login</Link>
           </div>
-          <NavLink to="/shopping-cart/:uid">
-            <div />
+          <NavLink to="/shopping-cart" >
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>
-        </div>
+        </div >
       );
     } else {
       return (
         <div className="flex container">
           <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" />
+            <img src="/assets/logo.jpg" alt="logo" className="logo" />
           </Link>
           <div>
             <Link to="/search">Search</Link>
@@ -46,13 +45,13 @@ class Header extends Component {
             <Link to="/new-listing">Create Listing</Link>
           </div>
           <div>
-            <a>{this.props.username}</a>
+            <a>Hi {this.props.firstName.charAt(0).toUpperCase() + this.props.firstName.slice(1)}</a>
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
           <NavLink to="/shopping-cart">
-            <div />
             <img src="/upload/13-512.png" width="20px" />
           </NavLink>
+          ({this.props.addToCartItems})
         </div>
       );
     }
@@ -60,7 +59,11 @@ class Header extends Component {
 }
 
 let mapStateToProps = storeState => {
-  return { username: storeState.username };
+  return {
+    username: storeState.username,
+    firstName: storeState.firstName,
+    addToCartItems: storeState.addToCartItems
+  };
 };
 
 let connectedHeader = connect(mapStateToProps)(Header);

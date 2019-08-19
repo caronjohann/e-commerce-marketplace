@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
-class NewItems extends Component {
+import { connect } from "react-redux";
+class UnconnectedNewItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,8 +29,10 @@ class NewItems extends Component {
     evt.preventDefault();
     let data = new FormData();
     data.append("title", this.state.title);
-    data.append("descrpition", this.state.description);
+    data.append("description", this.state.description);
     data.append("price", this.state.price);
+    data.append("fName", this.props.firstName)
+    data.append('lName', this.props.lastName)
     for (let i = 0; i < this.state.image.length; i++) {
       data.append("image", this.state.image[i]);
     }
@@ -50,6 +52,7 @@ class NewItems extends Component {
     }
     console.log("parsed body", body);
     this.setState({ addToItems: true });
+    this.props.dispatch({ type: "all-items", allItems: body.items })
   };
 
   render = () => {
@@ -92,7 +95,7 @@ class NewItems extends Component {
             />
             <h3>Select Categories</h3>
             <select
-              name="categerylist"
+              name="categoriesList"
               form="newItem"
               onChange={e => this.handleChange(e, "categories")}
             >
@@ -114,4 +117,12 @@ class NewItems extends Component {
     }
   };
 }
+let mapStateToProps = storeState => {
+  return {
+    username: storeState.username,
+    firstName: storeState.firstName,
+    lastName: storeState.lastName
+  };
+};
+let NewItems = connect(mapStateToProps)(UnconnectedNewItems)
 export default NewItems;

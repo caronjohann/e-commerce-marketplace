@@ -8,42 +8,58 @@ class UnconnectedItems extends Component {
     super(props);
     console.log(this.props.allItems);
     this.state = {
-      category: undefined
+      category: undefined,
+      showMoreClicks: 1
     };
   }
 
   handleWomens = evt => {
     console.log("clicked womens");
     evt.preventDefault();
-    this.setState({ category: "womens" });
+    this.setState({ category: "womens", showMoreClicks: 1 });
   };
 
   handleMens = evt => {
     evt.preventDefault();
-    this.setState({ category: "mens" });
+    this.setState({ category: "mens", showMoreClicks: 1 });
   };
 
   handleAccessories = evt => {
     evt.preventDefault();
-    this.setState({ category: "accessories" });
+    this.setState({ category: "accessories", showMoreClicks: 1 });
   };
 
   handleOther = evt => {
     evt.preventDefault();
-    this.setState({ category: "other" });
+    this.setState({ category: "other", showMoreClicks: 1 });
   };
 
   handleAll = evt => {
     evt.preventDefault();
-    this.setState({ category: undefined });
+    this.setState({ category: undefined, showMoreClicks: 1 });
+  };
+
+  handleShowMore = () => {
+    if (12 * this.state.showMoreClicks > this.props.allItems) {
+      return;
+    }
+    this.setState({ showMoreClicks: this.state.showMoreClicks + 1 });
   };
 
   render = () => {
-    let toDisplayItems = this.props.allItems;
+    let toDisplayItems = this.props.allItems
+
+    let starterItems = 12;
     if (this.state.category !== undefined)
       toDisplayItems = this.props.allItems.filter(item => {
         return item.category === this.state.category;
       });
+    if (toDisplayItems.length > 12) {
+      toDisplayItems = toDisplayItems.slice(
+        0,
+        starterItems * this.state.showMoreClicks
+      );
+    }
     return (
       <div>
         <div className="flex container">
@@ -73,26 +89,27 @@ class UnconnectedItems extends Component {
             </form>
           </div>
         </div>
-
         <div className="flex container item-cont">
           {toDisplayItems.map(item => {
             return (
               <div className="item">
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="200px" />
+                    <img src={item.images[0]} height="200px" width="200px" />
                   </Link>
                 </div>
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
                     {item.title}
-                    {<img src="/upload/13-512.png" width="10px" />}
                   </Link>
                 </div>
                 <div>${item.price}</div>
               </div>
             );
           })}
+        </div>
+        <div className="container">
+          <button onClick={this.handleShowMore}>Show more</button>
         </div>
       </div>
     );
