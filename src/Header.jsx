@@ -17,10 +17,8 @@ class Header extends Component {
   render = () => {
     if (this.props.username === "" || this.props.username === undefined) {
       return (
-        <div className="flex container">
-          <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" />
-          </Link>
+        <div className="flex container head">
+          <Link to="/">Trade Market</Link>
           <div>
             <Link to="/search">Search</Link>
           </div>
@@ -45,7 +43,11 @@ class Header extends Component {
             <Link to="/new-listing">Create Listing</Link>
           </div>
           <div>
-            <a>Hi {this.props.firstName.charAt(0).toUpperCase() + this.props.firstName.slice(1)}</a>
+            <a>
+              Hi{" "}
+              {this.props.firstName.charAt(0).toUpperCase() +
+                this.props.firstName.slice(1)}
+            </a>
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
           <NavLink to="/shopping-cart">
