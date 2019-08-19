@@ -47,7 +47,7 @@ class UnconnectedItems extends Component {
   };
 
   render = () => {
-    let toDisplayItems = this.props.allItems
+    let toDisplayItems = this.props.allItems;
 
     let starterItems = 12;
     if (this.state.category !== undefined)
@@ -62,31 +62,48 @@ class UnconnectedItems extends Component {
     }
     return (
       <div>
-        <div className="flex container">
+        <div className="hero container">
+          <div className="hero-text">
+            <h2>
+              <img src="assets/logo.svg" width="450px" />
+            </h2>
+            <h2 className="margin-bottom-20">
+              – An online collection of user stores for buying and selling
+              curated products.
+            </h2>
+            <div>
+              <Link to="/signup" className="sign-up-btn">
+                Signup
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="flex container cat-btns">
           <div>
-            <form onSubmit={this.handleAll}>
-              <input type="submit" value="All Products" />
-            </form>
+            <a className="category-btn" onClick={this.handleAll}>
+              All Products <span className="cat-arrow">↗</span>
+            </a>
           </div>
           <div>
-            <form onSubmit={this.handleWomens}>
-              <input type="submit" value="Women" />
-            </form>
+            <div>
+              <a className="category-btn" onClick={this.handleWomens}>
+                Womens <span className="cat-arrow">↗</span>
+              </a>
+            </div>
           </div>
           <div>
-            <form onSubmit={this.handleMens}>
-              <input type="submit" value=" Mens" />
-            </form>
+            <div>
+              <a className="category-btn" onClick={this.handleMens}>
+                Mens <span className="cat-arrow">↗</span>
+              </a>
+            </div>
           </div>
           <div>
-            <form onSubmit={this.handleAccessories}>
-              <input type="submit" value=" Accessories" />
-            </form>
-          </div>
-          <div>
-            <form onSubmit={this.handleOther}>
-              <input type="submit" value=" Other" />
-            </form>
+            <div>
+              <a className="category-btn" onClick={this.handleAccessories}>
+                Life & Home <span className="cat-arrow">↗</span>
+              </a>
+            </div>
           </div>
         </div>
         <div className="flex container item-cont">
@@ -99,9 +116,7 @@ class UnconnectedItems extends Component {
                   </Link>
                 </div>
                 <div>
-                  <Link to={"/itemDescription/" + item._id}>
-                    {item.title}
-                  </Link>
+                  <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
                 </div>
                 <div>${item.price}</div>
               </div>
