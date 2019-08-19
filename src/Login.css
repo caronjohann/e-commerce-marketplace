@@ -1,0 +1,23 @@
+body {
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.loginContainer {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.loginFlex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: row;
+}
+
+.number {
+    align-content: flex-start
+}

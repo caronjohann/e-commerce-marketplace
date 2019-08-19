@@ -81,7 +81,7 @@ app.post("/update-cart", upload.none(), (req, res) => {
     dbo.collection("cart").findOne({ username: user },
         (err, user) => {
             if (user) {
-                res.send({ cartLength: user.items.length })
+                res.send({ cartLength: user.items.length, cart: user.items })
             }
 
         })
@@ -164,7 +164,7 @@ app.post("/addToCart", upload.none(), (req, res) => {
                             newArr.push(item)
                             console.log(newArr, "new Items")
                             dbo.collection("cart").updateOne({ username }, { $set: { items: newArr } });
-                            res.send(JSON.stringify(newArr.length));
+                            res.send({ arrLength: newArr.length, list: newArr });
                             return;
                         }
                     });
@@ -227,9 +227,7 @@ app.post("/deleteItemCart", upload.none(), (req, res) => {
                 return item !== id;
             });
             let cartId = user._id;
-            dbo
-                .collection("cart")
-                .updateOne({ _id: ObjectID(cartId) }, { $set: { items: newCart } });
+            dbo.collection("cart").updateOne({ _id: ObjectID(cartId) }, { $set: { items: newCart } });
             res.send({ success: true });
             return;
         }
@@ -238,7 +236,24 @@ app.post("/deleteItemCart", upload.none(), (req, res) => {
         return;
     });
 });
-// app.post('sellerItemsList')
+
+app.post('/save-stripe-token', upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid;
+    let username = sessions[sessionId];
+    dbo.collection("cart").findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log(err, "cart error");
+            res.send({ success: false });
+            return;
+        }
+        if (username) {
+            dbo.collection("cart").updateOne({ _id: ObjectID(cartId) }, { $set: { items: [] } });
+            res.send({ success: true });
+            return;
+        }
+        res.send({ success: true })
+    })
+})
 
 app.all("/*", (req, res, next) => {
     // needed for react router

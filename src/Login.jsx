@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import "./Login.css"
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +57,8 @@ class UnconnectedLogin extends Component {
         sid: body.sid,
         firstName: body.fName,
         lastName: body.lName,
-        cartLength: body2.cartLength
+        cartLength: body2.cartLength,
+        cart: body2.cart
       })
       this.setState({ failedLogin: false });
     }
@@ -72,15 +74,22 @@ class UnconnectedLogin extends Component {
 
     return (
       <div>
-        <div className="flex container">
-          <div>
+        <div className="loginFlex loginContainer">
+          <div >
             <form onSubmit={this.handleSubmit}>
-              <h2>Login to your account</h2>
-              <h3>Email Address</h3>
+              <div className="loginForm">
+                <h6 className="number">1.</h6>
+                <h3>Could you tell us your username?</h3>
+              </div>
               <input type="email" onChange={this.handleUsername} />
-              <h3>Password</h3>
-              <input type="password" onChange={this.handlePassword} />
-              <input type="submit" value="Log In" />
+              <div className="loginForm">
+                <h6 className="number">2.</h6>
+                <h3>We will also need your password</h3>
+              </div>
+              <div>
+                <input type="password" onChange={this.handlePassword} />
+              </div>
+              <input type="submit" value="Login" />
             </form>
           </div>
           <div>
