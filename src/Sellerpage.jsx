@@ -6,17 +6,17 @@ class SellerPage extends Component {
     return (
       <div>
         <h1>{this.props.items[0].seller} Items For Sale</h1>
-        <div>
+        <div className="flex container item-cont">
           {this.props.items.map(item => {
             return (
-              <div>
+              <div className="item">
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="300px" width="300px" />
+                    <img src={item.images[0]} height="200px" width="200px" />
                   </Link>
                 </div>
                 <div>{item.title}</div>
-                <div>{item.price}</div>
+                <div className="item-price">${item.price} CAD</div>
               </div>
             );
           })}

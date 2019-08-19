@@ -54,13 +54,13 @@ class UnconnectedItemDescription extends Component {
             <div>
               {this.props.item.images.map((each, index) => {
                 return (
-                  <div className="flex container column">
+                  <div className="column">
                     <img
                       src={each}
                       onClick={() => {
                         this.imageClickHandler(index);
                       }}
-                      height="100px"
+                      height="80px"
                     />
                   </div>
                 );
@@ -73,47 +73,49 @@ class UnconnectedItemDescription extends Component {
               />
             </div>
           </div>
-          <div className="description">
+          <div>
             <div className="item-title"> {this.props.item.title}</div>
-            <div className="item-price">$ {this.props.item.price} CAD </div>
+            <div className="item-title">${this.props.item.price} CAD </div>
             {"  "}
             {"  "}
             <div className="item-descript"> {this.props.item.description}</div>
+
             <div className="item-seller">
               <Link
                 to={"/seller/" + this.props.item.seller}
                 onClick={this.handleSellerClicked}
               >
-                {this.props.item.seller}
+                {this.props.item.seller}'s Store
               </Link>
             </div>
-            <button className="addTocartbutton" onClick={this.handleClick}>
-              {" "}
-              Add to cart{" "}
-            </button>
+            <br />
+            <div>
+              <button className="addTocartbutton" onClick={this.handleClick}>
+                {" "}
+                Add to cart{" "}
+              </button>
+            </div>
           </div>
         </div>
-        <div className="suggestion">
-          <a>Suggestion</a>
-          <div className="itemSugg">
-            {toDisplayItems.map(item => {
-              return (
-                <div className="item">
-                  <div>
-                    <Link to={"/itemDescription/" + item._id}>
-                      <img src={item.images[0]} height="200px" width="200px" />
-                    </Link>
-                  </div>
-                  <div>
-                    <Link to={"/itemDescription/" + item._id}>
-                      {item.title}
-                    </Link>
-                  </div>
-                  <div>${item.price}</div>
+        <div className="suggestion container">
+          <h2>Similar Items</h2>
+        </div>
+        <div className="flex container itemSugg">
+          {toDisplayItems.map(item => {
+            return (
+              <div className="each-item">
+                <div>
+                  <Link to={"/itemDescription/" + item._id}>
+                    <img src={item.images[0]} height="250px" width="200px" />
+                  </Link>
                 </div>
-              );
-            })}
-          </div>
+                <div>
+                  <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
+                </div>
+                <div className="item-price">${item.price} CAD</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
