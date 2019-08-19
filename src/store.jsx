@@ -16,7 +16,8 @@ let reducer = (state, action) => {
       sessionId: action.sid,
       firstName: action.firstName,
       lastName: action.lastName,
-      addToCartItems: action.cartLength
+      addToCartItems: action.cartLength,
+      cart: action.cart
     };
   }
   if (action.type === "cart") {
@@ -35,6 +36,9 @@ let reducer = (state, action) => {
     let newCartNumber = action.removeItems - 1
     console.log(newCartNumber)
     return { ...state, addToCartItems: newCartNumber }
+  }
+  if (action.type === 'checkout') {
+    return { ...state, addToCartItems: action.addToCartItems }
   }
   return state;
 };

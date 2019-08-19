@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import './signup.css'
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -58,7 +59,7 @@ class Signup extends Component {
       );
     } else {
       return (
-        <div>
+        <div >
           <form onSubmit={this.submitHandler}>
             <h2>Register</h2>
             <h3>First Name</h3>

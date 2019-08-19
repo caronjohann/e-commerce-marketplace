@@ -6,7 +6,8 @@ class UnconnectedItemDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItemClicked: 0
+      currentItemClicked: 0,
+      cart: []
     };
   }
   imageClickHandler = index => {
@@ -23,7 +24,9 @@ class UnconnectedItemDescription extends Component {
     });
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
-    this.props.dispatch({ type: "addCartItems", addToCartItems: body });
+    console.log(body)
+    this.setState({ cart: body.list })
+    this.props.dispatch({ type: "addCartItems", addToCartItems: body.arrLength });
   };
 
   handleSellerClicked = () => {
@@ -32,7 +35,6 @@ class UnconnectedItemDescription extends Component {
       sellerClicked: this.props.item.seller
     });
   };
-
   render = () => {
     let toDisplayItems = this.props.allItems;
     toDisplayItems = toDisplayItems.filter(item => {
@@ -122,7 +124,10 @@ class UnconnectedItemDescription extends Component {
   };
 }
 let mapStateToProps = st => {
-  return { allItems: st.allItems };
+  return {
+    allItems: st.allItems,
+    cart: st.cart
+  };
 };
 let connectedItemDescription = connect(mapStateToProps)(
   UnconnectedItemDescription

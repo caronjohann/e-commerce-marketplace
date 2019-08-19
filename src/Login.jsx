@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import "./Login.css"
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +57,8 @@ class UnconnectedLogin extends Component {
         sid: body.sid,
         firstName: body.fName,
         lastName: body.lName,
-        cartLength: body2.cartLength
+        cartLength: body2.cartLength,
+        cart: body2.cart
       })
       this.setState({ failedLogin: false });
     }
@@ -73,23 +74,32 @@ class UnconnectedLogin extends Component {
 
     return (
       <div>
-        <div className="flex container">
-          <div>
+        <div className="loginFlex loginContainer container flex">
+          <div className="login">
             <form onSubmit={this.handleSubmit}>
-              <h2>Login to your account</h2>
-              <h3>Email Address</h3>
-              <input type="email" onChange={this.handleUsername} />
-              <h3>Password</h3>
-              <input type="password" onChange={this.handlePassword} />
-              <input type="submit" value="Log In" />
+              <div className="loginForm">
+                <a className="number">1.</a>
+                <h3>Could you tell us your username?</h3>
+              </div>
+              <input type="email" onChange={this.handleUsername} placeholder="Type your username here." className="inputForm" />
+              <div className="loginForm">
+                <a className="number">2.</a>
+                <h3>We will also need your password</h3>
+              </div>
+              <div>
+                <input type="password" onChange={this.handlePassword} placeholder="Type your password here." className="inputForm" />
+              </div>
+              <input type="submit" value="Login" className="submitLogin" />
             </form>
           </div>
-          <div>
+          <div className="signup">
             <h2>
-              <Link to="/signup">Create new account</Link>
+              <Link to="/signup" className="signupLink">Create new account</Link>
             </h2>
-            <h3>Register an account account to sell and </h3>
-            <Link to="/">Return to marketplace</Link>
+            <div className="regText">Register an account account to sell and </div>
+            <div className="link">
+              <Link to="/" ><span className='arrow'>←</span> Return to marketplace</Link>
+            </div>
           </div>
         </div>
       </div>
