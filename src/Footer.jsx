@@ -7,15 +7,17 @@ class Footer extends Component {
         <hr />
         <div className="flex container footer">
           <ul>
-            Customer Service
             <li>
-              <a>Help/FAQ </a>
+              <p className="footer-title">Customer Service</p>
             </li>
             <li>
-              <a>Returns & Exchange</a>{" "}
+              <a>FAQ</a>
             </li>
             <li>
-              <a>Payment</a>
+              <a>Return Policy</a>
+            </li>
+            <li>
+              <a>Payments</a>
             </li>
             <li>
               <a>My Account</a>
@@ -26,30 +28,43 @@ class Footer extends Component {
           </ul>
 
           <ul>
-            Follow Us
             <li>
-              <a>Youtube </a>
+              <p className="footer-title">Follow Us</p>
             </li>
             <li>
-              <a>Facebook </a>
+              <a>Instagram</a>
             </li>
             <li>
-              <a>Newsletter </a>
+              <a>Twitter</a>
+            </li>
+            <li>
+              <a>Facebook</a>
+            </li>
+            <li>
+              <a>Pinterest</a>
             </li>
           </ul>
 
           <ul>
-            About Us
+            <li>
+              <p className="footer-title">About Us</p>
+            </li>
             <li>
               <a>Office </a>
             </li>
             <li>
-              <a>Stores </a>
+              <a>Affiliates </a>
             </li>
             <li>
               <a>Work with us</a>
             </li>
           </ul>
+        </div>
+        <div className="container">
+          <p>Back to Top</p>
+          <p className="footer-copy">
+            &copy; 2019 Trade Market – All Rights Reserved
+          </p>
         </div>
       </div>
     );
