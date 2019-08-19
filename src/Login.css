@@ -2,7 +2,6 @@
     margin-top: 10%;
 }
 
-
 .loginForm {
     display: flex;
     flex-direction: row;
@@ -11,17 +10,16 @@
 .number {
     margin-right: 5px;
     font-size: 50%;
-    transform: translateY(+35%)
+    transform: translateY(+35%);
 }
 
 .login {
     width: 400px;
-
 }
 
 .signup {
     width: 400px;
-    margin-left: 10%
+    margin-left: 10%;
 }
 
 .signupLink {
@@ -29,7 +27,7 @@
     text-align: center;
     background-color: #000;
     color: white;
-    font-size: 100%;
+    font-size: 16px;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
@@ -42,7 +40,7 @@
     background-color: white;
     color: black;
     border: none;
-    font-size: 80%;
+    font-size: 16px;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 100%;
@@ -54,25 +52,22 @@
     transition: all 0.3s ease;
 }
 
-
 .arrow {
     opacity: 0;
     transition: all 0.3s ease;
-
 }
-
 
 .inputForm {
     background-color: transparent;
     width: 100%;
     resize: none;
+    font-size: 14px;
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    border-bottom-color: #DCDCDC;
+    border-bottom: 1px solid #dcdcdc;
     padding-bottom: 10px;
     margin-bottom: 30px;
-
 }
 
 .inputForm:focus {
@@ -89,11 +84,11 @@
 }
 
 .inputForm:focus::placeholder {
-    color: transparent
+    color: transparent;
 }
 
 .regText {
-    color: #D2CECE;
+    color: #d2cece;
     margin-bottom: 60px;
 }
 
@@ -102,5 +97,5 @@
 }
 
 .link:hover {
-    transform: translateX(-10px)
+    transform: translateX(-10px);
 }

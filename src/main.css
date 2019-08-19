@@ -10,6 +10,11 @@
   box-sizing: border-box;
 }
 
+h3,
+h2 {
+  font-weight: normal;
+}
+
 h2 {
   margin: 0;
   padding: 0;
