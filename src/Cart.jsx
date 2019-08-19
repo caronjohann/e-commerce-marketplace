@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Login from "./Login.jsx";
+import StripeCheckout from 'react-stripe-checkout';
 class UnconnectedCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.user,
+            username: this.props.username,
             allItems: [],
             result: [],
             total: 0,
@@ -47,6 +48,22 @@ class UnconnectedCart extends Component {
             this.setState({ deleteStatus: false });
         }
     };
+
+    onToken = async token => {
+        let response = await fetch('/save-stripe-token', {
+            method: 'POST',
+            body: JSON.stringify(token),
+        })
+        let responseBody = await response.text()
+        let body = JSON.parse(responseBody);
+        if (body.success) {
+            this.props.dispatch({ type: 'checkout', addToCartItems: 0 })
+            alert(`thank you for your purchase, ${this.props.firstName}`);
+            this.renderCart()
+        }
+
+    }
+
     deleteItem = async evt => {
         evt.preventDefault();
         let data = new FormData();
@@ -100,9 +117,10 @@ class UnconnectedCart extends Component {
                     })}
                     <div className="totalBox">total : {this.state.total}$</div>
 
-                    <form>
-                        <input type="submit" value="checkout" />
-                    </form>
+                    <div><StripeCheckout
+                        token={this.onToken}
+                        stripeKey="pk_test_8l4JXUo5a7x8FBxatzwcYun400u6hJY5PF"
+                    /></div>
                 </div>
             </div>
         );
@@ -115,7 +133,8 @@ let mapStateToProps = state => {
         cartList: state.cartList,
         allItems: state.allItems,
         sid: state.sessionId,
-        addToCartItems: state.addToCartItems
+        addToCartItems: state.addToCartItems,
+        firstName: state.firstName
     };
 };
 let Cart = connect(mapStateToProps)(UnconnectedCart);

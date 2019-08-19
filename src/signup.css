@@ -1,0 +1,25 @@
+.inputForm {
+    background-color: transparent;
+    width: 100%;
+    resize: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: #DCDCDC;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+
+}
+
+.inputForm:focus {
+    outline: none;
+    border: none;
+    height: 40px;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    background-color: transparent;
+    font-size: 30px;
+    line-height: 38px;
+    transition: all 0.2s ease 0s;
+}
