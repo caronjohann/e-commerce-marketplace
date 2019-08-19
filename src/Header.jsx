@@ -16,6 +16,7 @@ class Header extends Component {
     });
   };
   render = () => {
+    console.log(this.props.firstName)
     if (this.props.username === "" || this.props.username === undefined) {
       return (
         <div className="flex container head">
@@ -44,11 +45,7 @@ class Header extends Component {
             <Link to="/new-listing">Create Listing</Link>
           </div>
           <div>
-            <a>
-              Hi{" "}
-              {this.props.firstName.charAt(0).toUpperCase() +
-                this.props.firstName.slice(1)}
-            </a>
+            <a>Hi {this.props.firstName.charAt(0).toUpperCase() + this.props.firstName.slice(1)}</a>
             <button onClick={this.logoutHandler}>Logout</button>
           </div>
           <NavLink to="/shopping-cart">
