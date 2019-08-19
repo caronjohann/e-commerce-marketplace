@@ -38,7 +38,7 @@ class UnconnectedLogin extends Component {
       this.props.dispatch({
         type: "username",
         username: ""
-      })
+      });
       this.setState({ failedLogin: true });
       return;
     }
@@ -74,30 +74,32 @@ class UnconnectedLogin extends Component {
 
     return (
       <div>
-        <div className="loginFlex loginContainer">
-          <div >
+        <div className="loginFlex loginContainer container flex">
+          <div className="login">
             <form onSubmit={this.handleSubmit}>
               <div className="loginForm">
-                <h6 className="number">1.</h6>
+                <a className="number">1.</a>
                 <h3>Could you tell us your username?</h3>
               </div>
-              <input type="email" onChange={this.handleUsername} />
+              <input type="email" onChange={this.handleUsername} placeholder="Type your username here." className="inputForm" />
               <div className="loginForm">
-                <h6 className="number">2.</h6>
+                <a className="number">2.</a>
                 <h3>We will also need your password</h3>
               </div>
               <div>
-                <input type="password" onChange={this.handlePassword} />
+                <input type="password" onChange={this.handlePassword} placeholder="Type your password here." className="inputForm" />
               </div>
-              <input type="submit" value="Login" />
+              <input type="submit" value="Login" className="submitLogin" />
             </form>
           </div>
-          <div>
+          <div className="signup">
             <h2>
-              <Link to="/signup">Create new account</Link>
+              <Link to="/signup" className="signupLink">Create new account</Link>
             </h2>
-            <h3>Register an account account to sell and </h3>
-            <Link to="/">Return to marketplace</Link>
+            <div className="regText">Register an account account to sell and </div>
+            <div className="link">
+              <Link to="/" ><span className='arrow'>←</span> Return to marketplace</Link>
+            </div>
           </div>
         </div>
       </div>

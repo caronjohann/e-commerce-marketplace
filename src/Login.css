@@ -1,17 +1,7 @@
-body {
-    background-color: rgb(255, 255, 255);
-    margin: 0;
-}
-
 .loginContainer {
-    max-width: 1160px;
-    margin: 0 auto;
+    margin-top: 10%;
 }
 
-.loginFlex {
-    display: flex;
-    justify-content: space-between;
-}
 
 .loginForm {
     display: flex;
@@ -19,5 +9,98 @@ body {
 }
 
 .number {
-    align-content: flex-start
+    margin-right: 5px;
+    font-size: 50%;
+    transform: translateY(+35%)
+}
+
+.login {
+    width: 400px;
+
+}
+
+.signup {
+    width: 400px;
+    margin-left: 10%
+}
+
+.signupLink {
+    display: block;
+    text-align: center;
+    background-color: #000;
+    color: white;
+    font-size: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.submitLogin {
+    display: block;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border: none;
+    font-size: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.link {
+    transition: all 0.3s ease;
+}
+
+
+.arrow {
+    opacity: 0;
+    transition: all 0.3s ease;
+
+}
+
+
+.inputForm {
+    background-color: transparent;
+    width: 100%;
+    resize: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: #DCDCDC;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+
+}
+
+.inputForm:focus {
+    outline: none;
+    border: none;
+    height: 40px;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    background-color: transparent;
+    font-size: 30px;
+    line-height: 38px;
+    transition: all 0.2s ease 0s;
+}
+
+.inputForm:focus::placeholder {
+    color: transparent
+}
+
+.regText {
+    color: #D2CECE;
+    margin-bottom: 60px;
+}
+
+.link:hover .arrow {
+    opacity: 1;
+}
+
+.link:hover {
+    transform: translateX(-10px)
 }

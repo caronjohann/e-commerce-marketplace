@@ -61,11 +61,17 @@ class App extends Component {
 
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
-    console.log(routerData)
+    console.log(routerData);
     let item = this.props.allItems.filter(item => {
       return item._id === itemId;
     })[0];
-    return <div><Header />{<ItemDescription item={item} />}<Footer /></div>;
+    return (
+      <div>
+        <Header />
+        {<ItemDescription item={item} />}
+        <Footer />
+      </div>
+    );
   };
   renderSellerPage = routerData => {
     let seller = this.props.sellerClicked;
@@ -73,7 +79,13 @@ class App extends Component {
       return item.seller === seller;
     });
     console.log(items, "checking items");
-    return <div><Header />{<SellerPage items={items} />}<Footer /></div>;
+    return (
+      <div>
+        <Header />
+        {<SellerPage items={items} />}
+        <Footer />
+      </div>
+    );
   };
 
   renderCartPage = () => {

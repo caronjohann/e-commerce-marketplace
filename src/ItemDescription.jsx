@@ -36,45 +36,52 @@ class UnconnectedItemDescription extends Component {
     });
   };
   render = () => {
-    let toDisplayItems = this.props.allItems
+    let toDisplayItems = this.props.allItems;
     toDisplayItems = toDisplayItems.filter(item => {
-      if (item.category === this.props.item.category && item.title !== this.props.item.title) {
-        console.log(item.category)
-        return item
+      if (
+        item.category === this.props.item.category &&
+        item.title !== this.props.item.title
+      ) {
+        console.log(item.category);
+        return item;
       }
-    })
+    });
     if (toDisplayItems.length > 6) {
       toDisplayItems = toDisplayItems.slice(0, 5);
     }
     return (
-      <div className="itemDesc ">
+      <div className="itemDesc">
         <div className="flex container">
-          <div>
+          <div className="flex container">
             <div>
-              <img
-                src={this.props.item.images[this.state.currentItemClicked]}
-                height="200px"
-              />
-            </div>
-            <div className="flex container">
               {this.props.item.images.map((each, index) => {
                 return (
-                  <img
-                    src={each}
-                    onClick={() => {
-                      this.imageClickHandler(index);
-                    }}
-                    height="100px"
-                  />
+                  <div className="flex container column">
+                    <img
+                      src={each}
+                      onClick={() => {
+                        this.imageClickHandler(index);
+                      }}
+                      height="100px"
+                    />
+                  </div>
                 );
               })}
             </div>
-          </div>
-          <div>
-            <div> {this.props.item.title}</div>
-            <div> {this.props.item.description}</div>
-            <div>${this.props.item.price}</div>
             <div>
+              <img
+                src={this.props.item.images[this.state.currentItemClicked]}
+                height="500px"
+              />
+            </div>
+          </div>
+          <div className="description">
+            <div className="item-title"> {this.props.item.title}</div>
+            <div className="item-price">$ {this.props.item.price} CAD </div>
+            {"  "}
+            {"  "}
+            <div className="item-descript"> {this.props.item.description}</div>
+            <div className="item-seller">
               <Link
                 to={"/seller/" + this.props.item.seller}
                 onClick={this.handleSellerClicked}
