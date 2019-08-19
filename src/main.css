@@ -1,6 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: #f8f8f7;
+  font-family: "Roboto", sans-serif;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li a {
+  font-size: 13px;
+  color: #797777;
+}
+
+ul li {
+  margin-top: 20px;
+}
+
+.footer {
+  padding: 150px 0;
+}
+
+hr {
+  height: 1px;
+  color: #f1f1f1;
+  background-color: #f1f1f1;
+  border: none;
+}
+
+.head {
+  padding: 20px 40px;
 }
 
 .overlay {
@@ -32,15 +70,13 @@ body {
 .container {
   max-width: 1160px;
   margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .flex {
   display: flex;
   justify-content: space-between;
-}
-
-.description {
-  max-width: 400px;
 }
 
 .checkoutBox {
@@ -97,39 +133,4 @@ body {
 .logo {
   height: 120px;
   width: 219px;
-}
-
-.column {
-  left: 0px;
-  max-width: 95%;
-  padding: 0 4px;
-}
-.item-title {
-  font-size: 24px;
-  font-weight: 300;
-  display: block;
-  padding: 1px;
-}
-.item-price {
-  font-size: 18px;
-  font-weight: 300;
-  display: block;
-  padding: 1px;
-}
-.item-descript {
-  font-family: serif;
-  word-break: keep-all;
-  padding: 10px;
-}
-.item-seller {
-  font-family: serif;
-  word-break: keep-all;
-  padding: 20px;
-}
-.addTocartbutton {
-  background-color: black border=none;
-  color: white;
-  padding: 15px 32 px;
-  text-align: center;
-  text-decoration: antiquewhite;
 }
