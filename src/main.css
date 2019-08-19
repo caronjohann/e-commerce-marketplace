@@ -39,6 +39,10 @@ body {
   justify-content: space-between;
 }
 
+.description {
+  max-width: 400px;
+}
+
 .checkoutBox {
   display: flex;
   flex-direction: row;
@@ -81,7 +85,7 @@ body {
 
 .suggestion {
   margin-top: 20px;
-  margin: 203px
+  margin: 203px;
 }
 
 .itemSugg {
@@ -93,4 +97,39 @@ body {
 .logo {
   height: 120px;
   width: 219px;
+}
+
+.column {
+  left: 0px;
+  max-width: 95%;
+  padding: 0 4px;
+}
+.item-title {
+  font-size: 24px;
+  font-weight: 300;
+  display: block;
+  padding: 1px;
+}
+.item-price {
+  font-size: 18px;
+  font-weight: 300;
+  display: block;
+  padding: 1px;
+}
+.item-descript {
+  font-family: serif;
+  word-break: keep-all;
+  padding: 10px;
+}
+.item-seller {
+  font-family: serif;
+  word-break: keep-all;
+  padding: 20px;
+}
+.addTocartbutton {
+  background-color: black border=none;
+  color: white;
+  padding: 15px 32 px;
+  text-align: center;
+  text-decoration: antiquewhite;
 }
