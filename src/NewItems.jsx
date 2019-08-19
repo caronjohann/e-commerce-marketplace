@@ -52,6 +52,7 @@ class UnconnectedNewItems extends Component {
     }
     console.log("parsed body", body);
     this.setState({ addToItems: true });
+    this.props.dispatch({ type: "all-items", allItems: body.items })
   };
 
   render = () => {

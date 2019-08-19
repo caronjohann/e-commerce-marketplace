@@ -121,9 +121,16 @@ hr {
 
 .suggestion {
   margin-top: 20px;
+  margin: 203px;
 }
 
 .itemSugg {
   display: flex;
-  justify-content: row;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.logo {
+  height: 120px;
+  width: 219px;
 }

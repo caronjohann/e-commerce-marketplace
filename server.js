@@ -117,7 +117,17 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
             category: cat,
             seller: name
         });
-    res.send({ success: true });
+    dbo
+        .collection("items")
+        .find({})
+        .toArray((err, items) => {
+            if (err) {
+                console.log("error", err);
+                res.send({ success: false });
+                return;
+            }
+            res.send({ success: true, items: items });
+        });
 });
 
 app.post("/addToCart", upload.none(), (req, res) => {

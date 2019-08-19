@@ -18,7 +18,9 @@ class App extends Component {
   renderHomePage = () => {
     return (
       <div>
+        <Header />
         <Items />
+        <Footer />
       </div>
     );
   };
@@ -26,6 +28,7 @@ class App extends Component {
   renderSearchPage = () => {
     return (
       <div>
+        <Header />
         <div>
           <Search />
         </div>
@@ -33,20 +36,25 @@ class App extends Component {
         <div>
           <SearchResults />
         </div>
+        <Footer />
       </div>
     );
   };
   renderLoginPage = () => {
     return (
       <div>
+        <Header />
         <Login />
+        <Footer />
       </div>
     );
   };
   renderSignupPage = () => {
     return (
       <div>
+        <Header />
         <Signup />
+        <Footer />
       </div>
     );
   };
@@ -57,7 +65,7 @@ class App extends Component {
     let item = this.props.allItems.filter(item => {
       return item._id === itemId;
     })[0];
-    return <div>{<ItemDescription item={item} />}</div>;
+    return <div><Header />{<ItemDescription item={item} />}<Footer /></div>;
   };
   renderSellerPage = routerData => {
     let seller = this.props.sellerClicked;
@@ -65,19 +73,28 @@ class App extends Component {
       return item.seller === seller;
     });
     console.log(items, "checking items");
-    return <div>{<SellerPage items={items} />}</div>;
+    return <div><Header />{<SellerPage items={items} />}<Footer /></div>;
   };
 
   renderCartPage = () => {
-    return <Cart />;
+    return (
+      <div>
+        <Header />
+        <Cart />
+        <Footer />
+      </div>
+    );
   };
   renderListingPage = () => {
     return (
       <div>
+        <Header />
         <NewItems />
+        <Footer />
       </div>
     );
   };
+
   componentDidMount = async () => {
     // fetching all items from /send-items endpoint
     let response = await fetch("/send-items");
@@ -93,7 +110,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
           <Route exact={true} path="/" render={this.renderHomePage} />
           <Route exact={true} path="/search" render={this.renderSearchPage} />
           <Route exact={true} path="/login" render={this.renderLoginPage} />
@@ -120,7 +136,6 @@ class App extends Component {
             path="/itemDescription/:_id"
             render={this.renderItemDescriptionPage}
           />
-          <Footer />
         </div>
       </BrowserRouter>
       // <div><NewItems /></div>
