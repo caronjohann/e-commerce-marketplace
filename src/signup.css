@@ -1,6 +1,36 @@
+html {
+    /* scroll-behavior: smooth; */
+}
+
+.signupForms {
+    justify-content: center;
+    margin-left: 45%;
+    /* scroll-behavior: smooth; */
+}
+
+.linkSignup {
+    margin: 20px;
+}
+
+.titleAndInput {
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+}
+
+.whiteBox {
+    background-size: 30%;
+    background-color: red
+}
+
+#down {
+    margin-top: 100%;
+    padding-bottom: 25%;
+}
+
 .inputForm {
     background-color: transparent;
-    width: 100%;
+    max-width: 400px;
     resize: none;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -8,10 +38,123 @@
     border-bottom-color: #DCDCDC;
     padding-bottom: 10px;
     margin-bottom: 30px;
-
 }
 
-.inputForm:focus {
+.form {
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: slide;
+}
+
+@-webkit-keyframes slide {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 45%;
+        width: 100%;
+        opacity: 1.0;
+    }
+}
+
+.form2 {
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-name: slide2;
+}
+
+@-webkit-keyframes slide2 {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 50%;
+        opacity: 1.0;
+    }
+}
+
+.form3 {
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-name: slide3;
+}
+
+@-webkit-keyframes slide3 {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 50%;
+        opacity: 1.0;
+    }
+}
+
+.form4 {
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-name: slide4;
+}
+
+@-webkit-keyframes slide4 {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 50%;
+        opacity: 1.0;
+    }
+}
+
+.form5 {
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-name: slide5;
+}
+
+@-webkit-keyframes slide5 {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 50%;
+        opacity: 1.0;
+    }
+}
+
+.form6 {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: slide6;
+}
+
+@-webkit-keyframes slide6 {
+    from {
+        margin-left: 101%;
+        width: 100%;
+        opacity: 0.1;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 50%;
+        opacity: 1.0;
+    }
+}
+
+.inputForm .inputForm:focus {
     outline: none;
     border: none;
     height: 40px;
@@ -21,5 +164,25 @@
     background-color: transparent;
     font-size: 30px;
     line-height: 38px;
-    transition: all 0.2s ease 0s;
+    transition: all 0.8s ease 0s;
+}
+
+.submitSignup {
+    display: block;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 400px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submitSignup:active {
+    background-color: rgb(240, 240, 240);
+    transform: translateY(4px)
 }

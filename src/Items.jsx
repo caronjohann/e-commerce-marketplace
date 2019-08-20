@@ -24,15 +24,11 @@ class UnconnectedItems extends Component {
     this.setState({ category: "mens", showMoreClicks: 1 });
   };
 
-  handleAccessories = evt => {
+  handleLifeAndHome = evt => {
     evt.preventDefault();
-    this.setState({ category: "accessories", showMoreClicks: 1 });
+    this.setState({ category: "lifeAndHome", showMoreClicks: 1 });
   };
 
-  handleOther = evt => {
-    evt.preventDefault();
-    this.setState({ category: "other", showMoreClicks: 1 });
-  };
 
   handleAll = evt => {
     evt.preventDefault();
@@ -100,7 +96,7 @@ class UnconnectedItems extends Component {
           </div>
           <div>
             <div>
-              <a className="category-btn" onClick={this.handleAccessories}>
+              <a className="category-btn" onClick={this.handleLifeAndHome}>
                 Life & Home <span className="cat-arrow">↗</span>
               </a>
             </div>

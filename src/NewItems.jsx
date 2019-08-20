@@ -52,7 +52,6 @@ class UnconnectedNewItems extends Component {
     }
     console.log("parsed body", body);
     this.setState({ addToItems: true });
-    this.props.dispatch({ type: "all-items", allItems: body.items })
   };
 
   render = () => {
@@ -101,8 +100,7 @@ class UnconnectedNewItems extends Component {
             >
               <option value="mens">Mens</option>
               <option value="womens">Womens</option>
-              <option value="accessories">Accessories</option>
-              <option value="other">Other</option>
+              <option value="lifeAndHome">Life & Home</option>
             </select>
             <div>
               <input

@@ -119,15 +119,6 @@ class UnconnectedItemDescription extends Component {
             );
           })}
         </div>
-        <div>
-          <div> {this.props.item.title}</div>
-          <div> {this.props.item.description}</div>
-          <div>${this.props.item.price}</div>
-          <button onClick={this.handleClick}> Add to cart </button>
-        </div>
-        <div>
-          <a>Suggestion</a>
-        </div>
       </div>
     );
   };

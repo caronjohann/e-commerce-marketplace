@@ -1,5 +1,6 @@
 .loginContainer {
     margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .loginForm {
@@ -40,12 +41,18 @@
     background-color: white;
     color: black;
     border: none;
+    outline: none;
     font-size: 16px;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 100%;
     cursor: pointer;
     margin-top: 10px;
+}
+
+.submitLogin:active {
+    background-color: rgb(240, 240, 240);
+    transform: translateY(4px)
 }
 
 .link {
@@ -62,12 +69,13 @@
     width: 100%;
     resize: none;
     font-size: 14px;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-top-color: transparent;
     border-bottom: 1px solid #dcdcdc;
     padding-bottom: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+}
+
+.inputForm::placeholder {
+    color: #d2cece
 }
 
 .inputForm:focus {

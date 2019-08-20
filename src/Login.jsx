@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Login.css"
+import Items from "./Items.jsx";
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      failedLogin: false
+      failedLogin: undefined
     };
   }
   handleUsername = evt => {
@@ -39,7 +40,7 @@ class UnconnectedLogin extends Component {
         type: "username",
         username: ""
       });
-      this.setState({ failedLogin: true });
+      this.setState({ failedLogin: false });
       return;
     }
     let response2 = await fetch("/update-cart", {
@@ -60,14 +61,22 @@ class UnconnectedLogin extends Component {
         cartLength: body2.cartLength,
         cart: body2.cart
       })
-      this.setState({ failedLogin: false });
+      this.setState({ failedLogin: true });
+      return
     }
   };
   render = () => {
-    if (this.state.failedLogin) {
+    if (this.state.failedLogin === false) {
       return (
         <div>
           <h2>Login failed, please try again</h2>
+        </div>
+      );
+    }
+    if (this.state.failedLogin === true) {
+      return (
+        <div>
+          <Items />
         </div>
       );
     }

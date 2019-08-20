@@ -17,6 +17,7 @@ import "./ItemDescription.css";
 
 class App extends Component {
   renderHomePage = () => {
+    this.renderListingItems()
     return (
       <div>
         <Header />
@@ -108,15 +109,19 @@ class App extends Component {
     );
   };
 
-  componentDidMount = async () => {
-    // fetching all items from /send-items endpoint
+  renderListingItems = async () => {
     let response = await fetch("/send-items");
     let body = await response.text();
     body = JSON.parse(body);
+    console.log(body)
     this.props.dispatch({
       type: "all-items",
       allItems: body
     });
+  }
+  componentDidMount = async () => {
+    // fetching all items from /send-items endpoint
+    this.renderListingItems()
   };
 
   render = () => {
