@@ -13,6 +13,7 @@ import NewItems from "./NewItems.jsx";
 import Cart from "./Cart.jsx";
 import Footer from "./Footer.jsx";
 import SellerPage from "./SellerPage.jsx";
+import "./ItemDescription.css";
 
 class App extends Component {
   renderHomePage = () => {

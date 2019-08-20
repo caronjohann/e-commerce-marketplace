@@ -207,21 +207,6 @@ ul li {
   width: 200px;
 }
 
-.itemDesc {
-  justify-content: column;
-}
-
-.suggestion {
-  margin-top: 20px;
-  margin: 203px;
-}
-
-.itemSugg {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
 .logo {
   height: 120px;
   width: 219px;
