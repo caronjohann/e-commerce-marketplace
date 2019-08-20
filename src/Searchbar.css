@@ -1,0 +1,74 @@
+.searchBarForm {
+  margin-left: 300px;
+  background-color: transparent;
+  width: 50%;
+  resize: none;
+  font-size: 30px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 10px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.searchBarForm:focus {
+  outline: none;
+  border: none;
+  /* height: 40px; */
+  /* display: block; */
+  width: 50%;
+  font-family: inherit;
+  background-color: transparent;
+  font-size: 30px;
+  /* line-height: 38px; */
+  transition: all 0.2s ease 0s;
+}
+
+.searchBarForm:focus::placeholder {
+  color: transparent;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+}
+.close {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.searchBarResult {
+  /* margin-top: 50px; */
+  flex-wrap: nowrap;
+}
+
+.search-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  border-bottom: 1px solid lightgrey;
+  cursor: pointer;
+}
+
+.search-item:hover .search-images,
+.search-item:hover .search-descript,
+.search-item:hover .search-price {
+  transform: translateX(5px);
+}
+
+.search-images,
+.search-descript,
+.search-price {
+  transition: all 0.3s ease;
+}
+
+.search-images {
+  margin-bottom: 10px;
+}
+
+.searchbar-bottom {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
