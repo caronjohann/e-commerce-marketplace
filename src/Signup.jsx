@@ -15,7 +15,6 @@ class Signup extends Component {
   }
 
   handleChange = (evt, name) => {
-    console.log(evt.target.value)
     this.setState({
       [name]: evt.target.value
     });
@@ -24,7 +23,6 @@ class Signup extends Component {
   nextForm = () => {
     this.setState({ click: this.state.click + 1 })
     return
-
   }
 
   submitHandler = async evt => {

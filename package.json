@@ -41,6 +41,8 @@
     "sha1": "^1.1.1",
     "shelljs": "^0.8.3",
     "stripe": "^7.8.0",
+    "swal": "^0.1.0",
+    "sweetalert2": "^8.16.2",
     "webpack-inject-plugin": "^1.5.0",
     "ws": "^7.0.0"
   }
