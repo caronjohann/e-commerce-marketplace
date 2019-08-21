@@ -1,5 +1,5 @@
 .searchBarForm {
-  margin-left: 300px;
+  margin-left: 340px;
   background-color: transparent;
   width: 50%;
   resize: none;
@@ -16,13 +16,10 @@
 .searchBarForm:focus {
   outline: none;
   border: none;
-  /* height: 40px; */
-  /* display: block; */
   width: 50%;
   font-family: inherit;
   background-color: transparent;
   font-size: 30px;
-  /* line-height: 38px; */
   transition: all 0.2s ease 0s;
 }
 
@@ -35,9 +32,7 @@
   cursor: pointer;
   font-size: 30px;
 }
-/* .wholeSearch {
-  margin-bottom: 100px;
-} */
+
 .searchBarResult {
   /* margin-top: 50px; */
   flex-wrap: nowrap;
@@ -86,21 +81,3 @@
 .search-link:hover {
   transform: translateX(-10px);
 }
-
-/* .linkbeforesearch {
-  transition: all 0.3s ease;
-  text-align: center;
-  margin-top: 100px;
-  margin-bottom: 140px;
-}
-.arrowbeforesearch {
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-.linkbeforesearch:hover.arrow {
-  opacity: 1;
-}
-
-.linkbeforesearch:hover {
-  transform: translateX(-10px);
-} */
