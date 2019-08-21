@@ -16,11 +16,13 @@
 
 .login {
   width: 400px;
+  animation: slideup 0.5s ease 1;
 }
 
 .signup {
   width: 400px;
   margin-left: 10%;
+  animation: slideup 0.5s ease 1;
 }
 
 .signupLink {
@@ -41,12 +43,18 @@
   background-color: white;
   color: black;
   border: none;
+  outline: none;
   font-size: 16px;
   padding-top: 15px;
   padding-bottom: 15px;
   width: 100%;
   cursor: pointer;
   margin-top: 10px;
+}
+
+.submitLogin:active {
+  background-color: rgb(240, 240, 240);
+  transform: translateY(4px);
 }
 
 .link {
@@ -63,9 +71,13 @@
   width: 100%;
   resize: none;
   font-size: 16px;
-  border-bottom: 1px solid #d2cece;
+  border-bottom: 1px solid #dcdcdc;
   padding-bottom: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+}
+
+.inputForm::placeholder {
+  color: #d2cece;
 }
 
 .inputForm::placeholder {

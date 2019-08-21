@@ -39,14 +39,14 @@ class UnconnectedItems extends Component {
     });
   };
 
-  handleAccessories = evt => {
+  handleLifeAndHome = evt => {
     evt.preventDefault();
     let newCount = this.props.allItems.filter(each => {
-      return each.category === "Accessories";
+      return each.category === "Life & Home";
     });
     newCount = newCount.length;
     this.setState({
-      category: "Accessories",
+      category: "Life & Home",
       showMoreClicks: 1,
       count: newCount
     });
@@ -88,12 +88,10 @@ class UnconnectedItems extends Component {
       <div>
         <div className="hero container">
           <div className="hero-text">
-            <h2>
-              <img src="assets/logo.svg" width="450px" />
-            </h2>
+            <h2 className="logo-text">Trade Market</h2>
             <h2 className="margin-bottom-20">
-              – An online collection of user stores for buying and selling
-              curated products.
+              An online collection of user stores for buying and selling curated
+              products.
             </h2>
             <div>
               <Link to="/signup" className="sign-up-btn">
@@ -124,7 +122,7 @@ class UnconnectedItems extends Component {
           </div>
           <div>
             <div>
-              <a className="category-btn" onClick={this.handleAccessories}>
+              <a className="category-btn" onClick={this.handleLifeAndHome}>
                 Life & Home <span className="cat-arrow">↗</span>
               </a>
             </div>
@@ -151,7 +149,12 @@ class UnconnectedItems extends Component {
           })}
         </div>
         <div className="container show-more">
-          <a onClick={this.handleShowMore}>Show more</a>
+          <div className="down-arrow">
+            <a>↓</a>
+          </div>
+          <div>
+            <a onClick={this.handleShowMore}>Show more</a>
+          </div>
         </div>
       </div>
     );
