@@ -50,7 +50,7 @@ class UnconnectedItemDescription extends Component {
       }
     });
     if (toDisplayItems.length > 6) {
-      toDisplayItems = toDisplayItems.slice(0, 5);
+      toDisplayItems = toDisplayItems.slice(0, 4);
     }
     return (
       <div className="itemDesc">

@@ -1,17 +1,18 @@
 .signupForms {
     justify-content: center;
-    margin-left: 45%;
-    /* scroll-behavior: smooth; */
+    margin-left: 35%;
 }
 
 .linkSignup {
-    margin: 20px;
+    margin-left: 35%;
+    margin-top: 50px;
+    margin-bottom: 150px
 }
 
 .titleAndInput {
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 .whiteBox {
@@ -37,6 +38,7 @@
 }
 
 .form {
+    margin-top: 200px;
     animation: slideup 0.8s ease 1;
 }
 
@@ -47,7 +49,6 @@
 .form3 {
     animation: slideup 0.8s ease 1;
 }
-
 
 .form4 {
     animation: slideup 0.8s ease 1;

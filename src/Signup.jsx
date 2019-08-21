@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
+import Items from "./Items.jsx";
 import './signup.css'
 class Signup extends Component {
   constructor(props) {
@@ -46,25 +48,31 @@ class Signup extends Component {
     }
     console.log("parsed body", body);
     this.setState({ registered: true });
+    Swal.fire({
+      text: 'Acount created.',
+      showConfirmButton: false,
+      timer: 1000
+    })
   };
 
   inputForm = () => {
     if (this.state.click === 0) {
       return (
-        <div><div className="titleAndInput">
-          <div className="loginForm form2">
-            <a className="number">1.</a>
-            <h3>First Name</h3>
-          </div>
-          <input
-            type="text"
-            onChange={e => this.handleChange(e, "firstName")}
-            placeholder="Enter your first name"
-            value={this.state.firstName}
-            className="inputForm form2"
-          />
-          <button onClick={this.nextForm} className="submitSignup">Next</button>
-        </div></div>
+        <div>
+          <div className="titleAndInput">
+            <div className="loginForm form2">
+              <a className="number">1.</a>
+              <h3>Please enter your first name</h3>
+            </div>
+            <input
+              type="text"
+              onChange={e => this.handleChange(e, "firstName")}
+              placeholder="Type your name here"
+              value={this.state.firstName}
+              className="inputForm form2"
+            />
+            <button onClick={this.nextForm} className="submitSignup">Next</button>
+          </div></div>
       )
     }
     if (this.state.click === 1) {
@@ -73,13 +81,13 @@ class Signup extends Component {
           <div className="titleAndInput form3">
             <div className="loginForm">
               <a className="number">2.</a>
-              <h3>Last Name</h3>
+              <h3>Now, please enter your last name</h3>
             </div>
 
             <input
               type="text"
               onChange={e => this.handleChange(e, "lastName")}
-              placeholder="Enter your last name"
+              placeholder="type your last name here"
               value={this.state.lastName}
               className="inputForm"
             />
@@ -89,15 +97,13 @@ class Signup extends Component {
     }
     if (this.state.click === 2) {
       return (
-        <div>
-          <div className="titleAndInput form4">
-            <div className="loginForm">
-              <a className="number">3.</a>
-              <h3>Email Address</h3>
-            </div>
-            <input type="email" onChange={e => this.handleChange(e, "username")} value={this.state.username} placeholder="Enter your email address" className="inputForm" />
-            <button onClick={this.nextForm} className="submitSignup">Next</button>
+        <div className="titleAndInput form4">
+          <div className="loginForm">
+            <a className="number">3.</a>
+            <h3>We will also need your email address</h3>
           </div>
+          <input type="email" onChange={e => this.handleChange(e, "username")} value={this.state.username} placeholder="Type your email here" className="inputForm" />
+          <button onClick={this.nextForm} className="submitSignup">Next</button>
         </div>
       )
     }
@@ -108,13 +114,13 @@ class Signup extends Component {
             <div className="titleAndInput form5">
               <div className="loginForm">
                 <a className="number">4.</a>
-                <h3>Password</h3>
+                <h3>Now, please choose a secure password</h3>
               </div>
               <input
                 type="password"
                 onChange={e => this.handleChange(e, "password")}
                 value={this.state.password}
-                placeholder="Enter your password"
+                placeholder="Type your password here"
                 className="inputForm"
               />
             </div>
@@ -137,9 +143,7 @@ class Signup extends Component {
     if (this.state.registered === true) {
       return (
         <div>
-          <h2>
-            Your account has been created! <a>Return to marketplace</a>
-          </h2>
+          <Items />
         </div>
       );
     } else if (this.state.registered === false) {
@@ -152,7 +156,7 @@ class Signup extends Component {
       return (
         <div className="main">
           <form onSubmit={this.submitHandler}>
-            <h2 className="signupForms form">Register</h2>
+            <h2 className="signupForms form">Create your account</h2>
             <div className="signupForms">
               {this.inputForm()}
             </div>

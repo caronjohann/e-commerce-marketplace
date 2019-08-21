@@ -58,7 +58,6 @@ class UnconnectedCart extends Component {
         let body = JSON.parse(responseBody);
         if (body.success) {
             this.props.dispatch({ type: 'checkout', addToCartItems: 0 })
-            alert(`thank you for your purchase, ${this.props.firstName}`);
             this.renderCart()
         }
 

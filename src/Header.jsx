@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-// import Logo from "./Logo.jsx";
-// import Search from "./Search.jsx";
-// import Login from "./Login.jsx";
-// import Signup from "./Signup.jsx";
-// import Cart from "./Cart.jsx";
-// import Banner from "./Banner.jsx";
 
 class Header extends Component {
   constructor(props) {
@@ -36,7 +30,6 @@ class Header extends Component {
     console.log(this.props.firstName);
     if (this.props.username === "" || this.props.username === undefined) {
       return (
-        // <div className="container">
         <div className={this.state.activeClass}>
           <div className="flex container">
             <div className="lgo">
@@ -64,7 +57,6 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        // </div>
       );
     } else {
       return (

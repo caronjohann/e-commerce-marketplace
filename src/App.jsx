@@ -121,7 +121,6 @@ class App extends Component {
     });
   };
   componentDidMount = async () => {
-    // fetching all items from /send-items endpoint
     this.renderListingItems();
   };
 
