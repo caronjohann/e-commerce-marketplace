@@ -93,11 +93,11 @@ class UnconnectedItems extends Component {
               An online collection of user stores for buying and selling curated
               products.
             </h2>
-            <div>
+            {/* <div>
               <Link to="/signup" className="sign-up-btn">
                 Signup
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex container cat-btns">
