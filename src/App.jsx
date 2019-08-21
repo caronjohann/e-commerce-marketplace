@@ -15,6 +15,8 @@ import Footer from "./Footer.jsx";
 import SellerPage from "./SellerPage.jsx";
 import "./ItemDescription.css";
 import "./Searchbar.css";
+import "./Cart.css";
+
 
 class App extends Component {
   renderHomePage = () => {

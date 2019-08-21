@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Login from "./Login.jsx";
-import StripeCheckout from 'react-stripe-checkout';
+import StripeCheckout from "react-stripe-checkout";
+import { Link } from "react-router-dom";
 class UnconnectedCart extends Component {
     constructor(props) {
         super(props);
@@ -50,18 +51,18 @@ class UnconnectedCart extends Component {
     };
 
     onToken = async token => {
-        let response = await fetch('/save-stripe-token', {
-            method: 'POST',
-            body: JSON.stringify(token),
-        })
-        let responseBody = await response.text()
+        let response = await fetch("/save-stripe-token", {
+            method: "POST",
+            body: JSON.stringify(token)
+        });
+        let responseBody = await response.text();
         let body = JSON.parse(responseBody);
         if (body.success) {
-            this.props.dispatch({ type: 'checkout', addToCartItems: 0 })
-            this.renderCart()
+            this.props.dispatch({ type: "checkout", addToCartItems: 0 });
+            alert(`thank you for your purchase, ${this.props.firstName}`);
+            this.renderCart();
         }
-
-    }
+    };
 
     deleteItem = async evt => {
         evt.preventDefault();
@@ -96,36 +97,52 @@ class UnconnectedCart extends Component {
         return (
             <div>
                 <div>
+                    <div className="title">Shopping Cart</div>
+                    <div className="flex container">
+                        <div className="itemInCart">Item</div>
+                        <div className="SubtotalInCart">Subtotal</div>
+                    </div>
                     {this.state.result.map(item => {
                         return (
                             <div className="checkoutBox">
                                 <img className="imgCart" src={item.images[0]} />
                                 <div>{item.title}</div>
-                                <div>{item.price}</div>
                                 <form onSubmit={this.deleteItem}>
                                     <input
+                                        className="removeButton"
                                         type="submit"
                                         onClick={() => {
                                             this.setState({ id: item._id });
                                         }}
-                                        value="Delete"
+                                        value="Remove"
                                     />
                                 </form>
+                                <div className="checkoutprice">${item.price}</div>
                             </div>
                         );
                     })}
-                    <div className="totalBox">total : {this.state.total}$</div>
-
-                    <div><StripeCheckout className="submitSignup"
-                        token={this.onToken}
-                        amount={this.state.total}
-                        stripeKey="pk_test_8l4JXUo5a7x8FBxatzwcYun400u6hJY5PF"
-                    />
-                        <button className="submitSignup" /></div>
+                    <div className="totalBox">
+                        Grand total{" "}
+                        <span className="checkoutprice"> ${this.state.total}</span>
+                    </div>
+                    <div className="flex container pay">
+                        <div className="cart-link">
+                            {" "}
+                            <Link to={"/"}>
+                                <span className="cart-arrow">←</span>Return to marketplace
+              </Link>
+                        </div>
+                        <div className="payButton">
+                            Procceed to Payment
+              <StripeCheckout
+                                token={this.onToken}
+                                stripeKey="pk_test_8l4JXUo5a7x8FBxatzwcYun400u6hJY5PF"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
-
     };
 }
 let mapStateToProps = state => {

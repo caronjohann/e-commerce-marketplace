@@ -9,7 +9,7 @@ class SellerPage extends Component {
           {" "}
           <h2>{this.props.items[0].seller} Items For Sale</h2>
         </div>
-       
+
         <div className="flex container items-sold">
           {this.props.items.map(item => {
             return (
@@ -19,7 +19,7 @@ class SellerPage extends Component {
                     <img src={item.images[0]} height="200px" width="165px" />
                   </Link>
                 </div>
-                <div>{item.title}</div>
+                <div className="each-item">{item.title}</div>
                 <div className="item-price">${item.price} CAD</div>
               </div>
             );
