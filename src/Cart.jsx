@@ -97,14 +97,14 @@ class UnconnectedCart extends Component {
         return (
             <div>
                 <div>
-                    <div className="title">Shopping Cart</div>
+                    <div className="title container">Shopping Cart</div>
                     <div className="flex container">
                         <div className="itemInCart">Item</div>
                         <div className="SubtotalInCart">Subtotal</div>
                     </div>
                     {this.state.result.map(item => {
                         return (
-                            <div className="checkoutBox">
+                            <div className="checkoutBox container">
                                 <img className="imgCart" src={item.images[0]} />
                                 <div>{item.title}</div>
                                 <form onSubmit={this.deleteItem}>
@@ -121,7 +121,7 @@ class UnconnectedCart extends Component {
                             </div>
                         );
                     })}
-                    <div className="totalBox">
+                    <div className="totalBox container">
                         Grand total{" "}
                         <span className="checkoutprice"> ${this.state.total}</span>
                     </div>
