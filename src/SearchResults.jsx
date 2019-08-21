@@ -15,23 +15,31 @@ class UnconnectedSearchResults extends Component {
       );
     });
     return (
-      <div className="flex container">
+      <div className="container searchBarResult">
         {searchResults.map(each => {
           return (
-            <div>
+            <div className="container search-item">
               <div>
                 <Link to={"/itemDescription/" + each._id}>
-                  <img src={each.images[0]} width="100px" />
-                </Link>
+                  <img
+                    className="search-images"
+                    src={each.images[0]}
+                    width="50px"
+                  />
+                </Link>{" "}
               </div>
-              <div>
-                {" "}
-                <Link to={"/itemDescription/" + each._id}>{each.title}</Link>
+              <div className="search-descript">
+                <Link to={"/itemDescription/" + each._id}>{each.title} </Link>
               </div>
-              <div>${each.price}</div>
+              <Link to={"/itemDescription/" + each._id}>
+                <div className="search-price">${each.price}</div>{" "}
+              </Link>
             </div>
           );
         })}
+        <div className="search-link">
+          <Link to={"/"}><span className='search-arrow'>←</span>Return to marketplace</Link>
+        </div>
       </div>
     );
   };

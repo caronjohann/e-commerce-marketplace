@@ -5,14 +5,18 @@ class SellerPage extends Component {
   render = () => {
     return (
       <div>
-        <h1>{this.props.items[0].seller} Items For Sale</h1>
-        <div className="flex container item-cont">
+        <div className="container seller-items">
+          {" "}
+          <h2>{this.props.items[0].seller} Items For Sale</h2>
+        </div>
+       
+        <div className="flex container items-sold">
           {this.props.items.map(item => {
             return (
               <div className="item">
-                <div>
+                <div className="each-item">
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="200px" width="200px" />
+                    <img src={item.images[0]} height="200px" width="165px" />
                   </Link>
                 </div>
                 <div>{item.title}</div>
