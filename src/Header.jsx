@@ -34,10 +34,8 @@ class Header extends Component {
       );
     } else {
       return (
-        <div className="flex container">
-          <Link to="/">
-            <img src="/assets/logo.jpg" alt="logo" className="logo" />
-          </Link>
+        <div className="flex container head">
+          <Link to="/">Trade Market</Link>
           <div>
             <Link to="/search">Search</Link>
           </div>

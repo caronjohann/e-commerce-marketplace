@@ -117,7 +117,7 @@ class UnconnectedCart extends Component {
                     })}
                     <div className="totalBox">total : {this.state.total}$</div>
 
-                    <div className="submitSignup"><StripeCheckout
+                    <div><StripeCheckout className="submitSignup"
                         token={this.onToken}
                         stripeKey="pk_test_8l4JXUo5a7x8FBxatzwcYun400u6hJY5PF"
                     /></div>
