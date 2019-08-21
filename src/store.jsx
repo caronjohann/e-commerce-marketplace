@@ -15,9 +15,7 @@ let reducer = (state, action) => {
       username: action.username,
       sessionId: action.sid,
       firstName: action.firstName,
-      lastName: action.lastName,
-      addToCartItems: action.cartLength,
-      cart: action.cart
+      lastName: action.lastName
     };
   }
   if (action.type === "cart") {

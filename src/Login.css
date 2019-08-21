@@ -1,101 +1,109 @@
 .loginContainer {
-  margin-top: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .loginForm {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .number {
-  margin-right: 5px;
-  font-size: 50%;
-  transform: translateY(+35%);
+    margin-right: 5px;
+    font-size: 50%;
+    transform: translateY(+35%);
 }
 
 .login {
-  width: 400px;
+    width: 400px;
 }
 
 .signup {
-  width: 400px;
-  margin-left: 10%;
+    width: 400px;
+    margin-left: 10%;
 }
 
 .signupLink {
-  display: block;
-  text-align: center;
-  background-color: #000;
-  color: white;
-  font-size: 16px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 100%;
-  margin-bottom: 30px;
+    display: block;
+    text-align: center;
+    background-color: #000;
+    color: white;
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
 .submitLogin {
-  display: block;
-  text-align: center;
-  background-color: white;
-  color: black;
-  border: none;
-  font-size: 16px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  width: 100%;
-  cursor: pointer;
-  margin-top: 10px;
+    display: block;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submitLogin:active {
+    background-color: rgb(240, 240, 240);
+    transform: translateY(4px)
 }
 
 .link {
-  transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .arrow {
-  opacity: 0;
-  transition: all 0.3s ease;
+    opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .inputForm {
-  background-color: transparent;
-  width: 100%;
-  resize: none;
-  font-size: 14px;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  border-bottom: 1px solid #dcdcdc;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
+    background-color: transparent;
+    width: 100%;
+    resize: none;
+    font-size: 14px;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+}
+
+.inputForm::placeholder {
+    color: #d2cece
 }
 
 .inputForm:focus {
-  outline: none;
-  border: none;
-  height: 40px;
-  display: block;
-  width: 100%;
-  font-family: inherit;
-  background-color: transparent;
-  font-size: 30px;
-  line-height: 38px;
-  transition: all 0.2s ease 0s;
+    outline: none;
+    border: none;
+    height: 40px;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    background-color: transparent;
+    font-size: 30px;
+    line-height: 38px;
+    transition: all 0.2s ease 0s;
 }
 
 .inputForm:focus::placeholder {
-  color: transparent;
+    color: transparent;
 }
 
 .regText {
-  color: #d2cece;
-  margin-bottom: 60px;
+    color: #d2cece;
+    margin-bottom: 60px;
 }
 
 .link:hover .arrow {
-  opacity: 1;
+    opacity: 1;
 }
 
 .link:hover {
-  transform: translateX(-10px);
+    transform: translateX(-10px);
 }

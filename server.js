@@ -81,7 +81,7 @@ app.post("/update-cart", upload.none(), (req, res) => {
     dbo.collection("cart").findOne({ username: user },
         (err, user) => {
             if (user) {
-                res.send({ cartLength: user.items.length, cart: user.items })
+                res.send({ cartLength: user.items.length })
             }
 
         })
@@ -93,9 +93,6 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/newItem", upload.array("image", 5), (req, res) => {
-
-    let sessionId = req.cookies.sid;
-    let user = sessions[sessionId];
     let name = req.body.fName.charAt(0).toUpperCase() + req.body.fName.slice(1) + " " + req.body.lName.charAt(0).toUpperCase() + req.body.lName.slice(1)
     let title = req.body.title;
     let desc = req.body.description;
@@ -117,17 +114,7 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
             category: cat,
             seller: name
         });
-    dbo
-        .collection("items")
-        .find({})
-        .toArray((err, items) => {
-            if (err) {
-                console.log("error", err);
-                res.send({ success: false });
-                return;
-            }
-            res.send({ success: true, items: items });
-        });
+    res.send({ success: true })
 });
 
 app.post("/addToCart", upload.none(), (req, res) => {
@@ -249,9 +236,7 @@ app.post('/save-stripe-token', upload.none(), (req, res) => {
         if (username) {
             dbo.collection("cart").updateOne({ _id: ObjectID(cartId) }, { $set: { items: [] } });
             res.send({ success: true });
-            return;
         }
-        res.send({ success: true })
     })
 })
 
