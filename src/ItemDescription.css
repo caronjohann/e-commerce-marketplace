@@ -6,7 +6,7 @@
 .item-title {
   position: relative;
   right: 130px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
   display: block;
   padding: 5px;
@@ -33,7 +33,7 @@
   right: 130px;
   background-color: white;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   padding: 20px;
   width: 390px;
   margin-left: 300px;
@@ -41,7 +41,7 @@
 
 .item-seller:active {
   background-color: rgb(240, 240, 240);
-  transform: translateY(4px)
+  transform: translateY(4px);
 }
 
 .two-clicks {
@@ -53,17 +53,19 @@
   right: 130px;
   border-top: 1px solid #0c1012;
   background: #08141c;
-  background: -webkit-gradient(linear,
-      left top,
-      left bottom,
-      from(#04090d),
-      to(#08141c));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#04090d),
+    to(#08141c)
+  );
   background: black;
   padding: 20px;
   color: white;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: 16px;
   font-family: Sans-Serif;
   text-decoration: none;
   vertical-align: middle;
@@ -74,7 +76,7 @@
 
 .addTocartbutton:active {
   background-color: rgb(49, 49, 49);
-  transform: translateY(4px)
+  transform: translateY(4px);
 }
 
 .flexItems {
@@ -101,12 +103,15 @@
 }
 
 .each-item {
+  margin-top: 5px;
   margin-right: 60px;
   width: 200px;
+  font-size: 14px;
 }
 
 .item-price {
-  font-size: 16px;
+  margin-top: 5px;
+  font-size: 14px;
   color: rgb(141, 135, 135);
 }
 

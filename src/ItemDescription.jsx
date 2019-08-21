@@ -50,7 +50,7 @@ class UnconnectedItemDescription extends Component {
       }
     });
     if (toDisplayItems.length > 6) {
-      toDisplayItems = toDisplayItems.slice(0, 5);
+      toDisplayItems = toDisplayItems.slice(0, 4);
     }
     return (
       <div className="itemDesc">
@@ -85,7 +85,7 @@ class UnconnectedItemDescription extends Component {
             {"  "}
             <div className="item-descript"> {this.props.item.description}</div>
 
-            <div >
+            <div>
               <Link
                 to={"/seller/" + this.props.item.seller}
                 className="item-seller"
@@ -110,15 +110,15 @@ class UnconnectedItemDescription extends Component {
           {toDisplayItems.map(item => {
             return (
               <div className="each-item">
-                <div>
+                <div className="img-obj">
                   <Link to={"/itemDescription/" + item._id}>
                     <img src={item.images[0]} height="200px" width="165px" />
                   </Link>
                 </div>
-                <div>
+                <div className="item-descrip">
                   <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
                 </div>
-                <div className="item-price">${item.price} CAD</div>
+                <div className="small-item-price">${item.price} CAD</div>
               </div>
             );
           })}
