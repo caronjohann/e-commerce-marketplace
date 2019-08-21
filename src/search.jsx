@@ -19,17 +19,22 @@ class UnconnectedSearch extends Component {
   render = () => {
     return (
       <div>
-        <div className="searchbar">
-          <input
-            type="text"
-            onChange={this.handleQuery}
-            value={this.props.query}
-            placeholder="Search...."
-          />
-        </div>
-        <div className="close">
-          <button onClick={this.handleCloseSearch}>Close</button>
-        </div>
+        <input
+          className="searchBarForm"
+          type="text"
+          onChange={this.handleQuery}
+          value={this.props.query}
+          placeholder="Type your key words here...."
+        />
+        <a className="close" onClick={this.handleCloseSearch}>
+          {" "}
+          X
+        </a>
+        {/* <div className="linkbeforesearch">
+          <Link to={"/"}>
+            <span className="arrowbeforesearch">←</span>Return to marketplace
+          </Link>
+        </div> */}
       </div>
     );
   };

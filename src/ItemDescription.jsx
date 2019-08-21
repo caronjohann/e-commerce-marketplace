@@ -24,9 +24,12 @@ class UnconnectedItemDescription extends Component {
     });
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
-    console.log(body)
-    this.setState({ cart: body.list })
-    this.props.dispatch({ type: "addCartItems", addToCartItems: body.arrLength });
+    console.log(body);
+    this.setState({ cart: body.list });
+    this.props.dispatch({
+      type: "addCartItems",
+      addToCartItems: body.arrLength
+    });
   };
 
   handleSellerClicked = () => {
@@ -100,7 +103,7 @@ class UnconnectedItemDescription extends Component {
           </div>
         </div>
         <div className="suggestion container">
-          <h2>Similar Items</h2>
+          <h3>Similar Items</h3>
         </div>
         <div className="flex container itemSugg">
           {toDisplayItems.map(item => {
@@ -108,7 +111,7 @@ class UnconnectedItemDescription extends Component {
               <div className="each-item">
                 <div>
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="250px" width="200px" />
+                    <img src={item.images[0]} height="200px" width="165px" />
                   </Link>
                 </div>
                 <div>
