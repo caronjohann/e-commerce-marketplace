@@ -72,7 +72,15 @@ class UnconnectedItems extends Component {
   render = () => {
     console.log(this.props.allItems);
     let toDisplayItems = this.props.allItems;
-    let amountOfItems = this.props.allItems.length;
+    let amountOfItems = 0
+    if (this.state.category === "All Products") {
+      amountOfItems = this.props.allItems.length;
+    } else {
+      let cat = this.props.allItems.filter(cat => {
+        return cat.category === this.state.category
+      })
+      amountOfItems = cat.length
+    }
     let starterItems = 12;
     if (this.state.category !== "All Products")
       toDisplayItems = this.props.allItems.filter(item => {

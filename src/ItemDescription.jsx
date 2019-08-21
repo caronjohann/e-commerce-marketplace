@@ -54,8 +54,8 @@ class UnconnectedItemDescription extends Component {
     }
     return (
       <div className="itemDesc">
-        <div className="flex container">
-          <div className="flex container">
+        <div className="flexItems container">
+          <div className="flexItems container">
             <div>
               {this.props.item.images.map((each, index) => {
                 return (

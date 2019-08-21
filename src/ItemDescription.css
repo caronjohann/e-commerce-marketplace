@@ -77,6 +77,11 @@
   transform: translateY(4px)
 }
 
+.flexItems {
+  display: flex;
+  justify-content: space-between;
+}
+
 .itemDesc {
   position: relative;
   right: 110px;
