@@ -104,17 +104,19 @@ app.post("/newItem", upload.array("image", 5), (req, res) => {
         img.push("/upload/" + req.files[i].filename)
     }
     console.log(img)
-    dbo
-        .collection("items")
-        .insertOne({
-            title: title,
-            description: desc,
-            price: price,
-            images: img,
-            category: cat,
-            seller: name
-        });
-    res.send({ success: true })
+    if (name === "Undefined Undefined") {
+        res.send({ success: false })
+    }
+    dbo.collection("items").insertOne({
+        title: title,
+        description: desc,
+        price: price,
+        images: img,
+        category: cat,
+        seller: name
+    }).then(result => {
+        res.send({ success: true, item: result.ops[0] })
+    })
 });
 
 app.post("/addToCart", upload.none(), (req, res) => {
