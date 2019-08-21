@@ -29,6 +29,9 @@
   padding: 10px;
   align-items: center;
   flex-wrap: nowrap;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
 }
 .imgCart {
   height: 100px;
@@ -58,6 +61,9 @@
   padding-top: 50px;
   padding-bottom: 50px;
   align-content: center;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
 }
 /* .payButton {
   display: flex;
