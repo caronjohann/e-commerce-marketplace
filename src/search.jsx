@@ -30,6 +30,11 @@ class UnconnectedSearch extends Component {
           {" "}
           X
         </a>
+        {/* <div className="linkbeforesearch">
+          <Link to={"/"}>
+            <span className="arrowbeforesearch">←</span>Return to marketplace
+          </Link>
+        </div> */}
       </div>
     );
   };

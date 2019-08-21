@@ -37,8 +37,8 @@ class UnconnectedSearchResults extends Component {
             </div>
           );
         })}
-        <div className="searchbar-bottom">
-          <Link to={"/"}>Return to marketplace</Link>
+        <div className="search-link">
+          <Link to={"/"}><span className='search-arrow'>←</span>Return to marketplace</Link>
         </div>
       </div>
     );
