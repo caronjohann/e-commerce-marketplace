@@ -12,7 +12,7 @@ class UnconnectedNewItems extends Component {
       description: "",
       price: "",
       image: [],
-      categories: "mens",
+      categories: "Mens",
       addToItems: null,
       click: 0
     };
@@ -150,9 +150,9 @@ class UnconnectedNewItems extends Component {
             onChange={e => this.handleChange(e, "categories")}
             className="inputForm"
           >
-            <option value="mens">Mens</option>
-            <option value="womens">Womens</option>
-            <option value="lifeAndHome">Life & Home</option>
+            <option value="Mens">Mens</option>
+            <option value="Womens">Womens</option>
+            <option value="Life &amp; Home">Life & Home</option>
           </select>
           <div>
             <input

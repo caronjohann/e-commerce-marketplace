@@ -54,8 +54,8 @@ class UnconnectedItemDescription extends Component {
     }
     return (
       <div className="itemDesc">
-        <div className="flex container">
-          <div className="flex container">
+        <div className="flexItems container">
+          <div className="flexItems container">
             <div>
               {this.props.item.images.map((each, index) => {
                 return (
@@ -85,9 +85,10 @@ class UnconnectedItemDescription extends Component {
             {"  "}
             <div className="item-descript"> {this.props.item.description}</div>
 
-            <div className="item-seller">
+            <div >
               <Link
                 to={"/seller/" + this.props.item.seller}
+                className="item-seller"
                 onClick={this.handleSellerClicked}
               >
                 {this.props.item.seller}'s Store

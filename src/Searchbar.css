@@ -1,8 +1,13 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+
 .searchBarForm {
-  margin-left: 340px;
   background-color: transparent;
-  width: 50%;
+  width: 90%;
   resize: none;
+  align-items: center;
   font-size: 30px;
   border-left-color: transparent;
   border-right-color: transparent;
@@ -14,10 +19,15 @@
   animation: slideup 0.5s ease 1;
 }
 
+.searchBarForm::placeholder {
+  color: #d2cece
+}
+
 .searchBarForm:focus {
   outline: none;
   border: none;
-  width: 50%;
+  align-items: center;
+  width: 100%;
   font-family: inherit;
   background-color: transparent;
   font-size: 30px;
@@ -29,14 +39,22 @@
   border-bottom: 1px solid #000;
   padding-bottom: 10px;
 }
+
 .close {
   cursor: pointer;
-  font-size: 30px;
+  width: 48px;
+  margin-top: 55px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
 
+/* .wholeSearch {
+  margin-bottom: 100px;
+} */
 .searchBarResult {
   /* margin-top: 50px; */
   flex-wrap: nowrap;
+
 }
 
 .search-item {
@@ -45,13 +63,14 @@
   align-items: center;
   text-align: center;
   margin-top: 10px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid #dcdcdc;
   cursor: pointer;
 }
 
 .search-item:hover .search-images,
 .search-item:hover .search-descript,
 .search-item:hover .search-price {
+  text-align: center;
   transform: translateX(5px);
 }
 
@@ -65,20 +84,32 @@
   margin-bottom: 10px;
 }
 
+.search-descript {
+  color: rgb(49, 49, 49)
+}
+
 .search-link {
   transition: all 0.3s ease;
   text-align: center;
   margin-top: 100px;
   margin-bottom: 140px;
 }
+
 .search-arrow {
   opacity: 0;
   transition: all 0.3s ease;
+  margin: auto 0;
 }
-.search-link:hover .search-arrow {
+
+.search-item:hover .search-arrow {
   opacity: 1;
+  margin-right: 15px
 }
 
 .search-link:hover {
   transform: translateX(-10px);
+}
+
+.search-price {
+  color: grey
 }

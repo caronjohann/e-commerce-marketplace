@@ -18,23 +18,17 @@ class UnconnectedSearch extends Component {
   };
   render = () => {
     return (
-      <div>
+      <div className="searchForm container">
         <input
           className="searchBarForm"
           type="text"
           onChange={this.handleQuery}
           value={this.props.query}
-          placeholder="Type your key words here...."
+          placeholder="Type your key word here...."
         />
         <a className="close" onClick={this.handleCloseSearch}>
-          {" "}
-          X
+          <img src="https://img.icons8.com/windows/96/000000/multiply.png" width="48px" />
         </a>
-        {/* <div className="linkbeforesearch">
-          <Link to={"/"}>
-            <span className="arrowbeforesearch">←</span>Return to marketplace
-          </Link>
-        </div> */}
       </div>
     );
   };

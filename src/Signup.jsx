@@ -95,7 +95,6 @@ class Signup extends Component {
               <a className="number">3.</a>
               <h3>Email Address</h3>
             </div>
-
             <input type="email" onChange={e => this.handleChange(e, "username")} value={this.state.username} placeholder="Enter your email address" className="inputForm" />
             <button onClick={this.nextForm} className="submitSignup">Next</button>
           </div>

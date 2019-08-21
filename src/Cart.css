@@ -45,6 +45,7 @@
   outline: inherit;
 }
 .checkoutprice {
+  margin-left: 10px;
   color: grey;
 }
 .totalBox {

@@ -37,117 +37,28 @@
 }
 
 .form {
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-name: slide;
-}
-
-@-webkit-keyframes slide {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 45%;
-        width: 100%;
-        opacity: 1.0;
-    }
+    animation: slideup 0.8s ease 1;
 }
 
 .form2 {
-    -webkit-animation-duration: 0.6s;
-    -webkit-animation-name: slide2;
-}
-
-@-webkit-keyframes slide2 {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 0%;
-        width: 50%;
-        opacity: 1.0;
-    }
+    animation: slideup 0.8s ease 1;
 }
 
 .form3 {
-    -webkit-animation-duration: 0.7s;
-    -webkit-animation-name: slide3;
+    animation: slideup 0.8s ease 1;
 }
 
-@-webkit-keyframes slide3 {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 0%;
-        width: 50%;
-        opacity: 1.0;
-    }
-}
 
 .form4 {
-    -webkit-animation-duration: 0.8s;
-    -webkit-animation-name: slide4;
-}
-
-@-webkit-keyframes slide4 {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 0%;
-        width: 50%;
-        opacity: 1.0;
-    }
+    animation: slideup 0.8s ease 1;
 }
 
 .form5 {
-    -webkit-animation-duration: 0.9s;
-    -webkit-animation-name: slide5;
-}
-
-@-webkit-keyframes slide5 {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 0%;
-        width: 50%;
-        opacity: 1.0;
-    }
+    animation: slideup 0.8s ease 1;
 }
 
 .form6 {
-    -webkit-animation-duration: 1s;
-    -webkit-animation-name: slide6;
-}
-
-@-webkit-keyframes slide6 {
-    from {
-        margin-left: 101%;
-        width: 100%;
-        opacity: 0.1;
-    }
-
-    to {
-        margin-left: 0%;
-        width: 50%;
-        opacity: 1.0;
-    }
+    animation: slideup 0.8s ease 1;
 }
 
 .inputForm .inputForm:focus {
@@ -196,6 +107,11 @@
     width: 400px;
     cursor: pointer;
     margin-bottom: 30px;
+}
+
+.choseFile:active {
+    background-color: rgb(49, 49, 49);
+    transform: translateY(4px)
 }
 
 .choseFile [type=file] {
