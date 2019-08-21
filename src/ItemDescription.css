@@ -89,7 +89,7 @@
   right: 110px;
   justify-content: column;
   margin-left: 130px;
-  margin-top: 65px;
+  margin-top: 150px;
 }
 
 .suggestion {
@@ -100,6 +100,7 @@
 
 .itemSugg {
   width: 100%;
+  margin-bottom: 150px;
 }
 
 .each-item {

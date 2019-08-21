@@ -74,7 +74,7 @@ class UnconnectedItemDescription extends Component {
             <div>
               <img
                 src={this.props.item.images[this.state.currentItemClicked]}
-                height="500px"
+                width="500px"
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ class UnconnectedItemDescription extends Component {
               <div className="each-item">
                 <div className="img-obj">
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="200px" width="165px" />
+                    <img src={item.images[0]} width="200px" />
                   </Link>
                 </div>
                 <div className="item-descrip">

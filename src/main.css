@@ -98,11 +98,6 @@ ul {
   font-size: 16px;
 }
 
-.lgo {
-  /* padding-bottom: 3px;
-  border-bottom: 2px solid #000; */
-}
-
 .log-cart {
   display: flex;
   justify-content: space-between;
@@ -217,13 +212,15 @@ ul {
 
 .item-cont {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+  align-items: flex-start;
+  flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 100px;
 }
 
 .item {
-  padding-right: 20px;
+  padding-right: 55px;
   padding-bottom: 20px;
 }
 
@@ -274,7 +271,8 @@ ul {
 /* footer styles */
 
 .footer {
-  padding: 100px 0;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 hr {
