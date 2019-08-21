@@ -62,10 +62,24 @@ ul {
 }
 
 .sign-up-btn {
-  background-color: black;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background-color: #000;
   color: white;
+  font-size: 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 215px;
+  cursor: pointer;
   font-size: 18px;
   padding: 15px 80px;
+}
+
+.sign-up-btn:active {
+  background-color: rgb(49, 49, 49);
+  transform: translateY(4px)
 }
 
 /* category styles */
@@ -205,16 +219,4 @@ ul li {
 .logo {
   height: 120px;
   width: 219px;
-}
-
-.stripe-button-el>span {
-  display: block;
-  text-align: center;
-  background-color: #000;
-  color: white;
-  font-size: 16px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 100%;
-  margin-bottom: 30px;
 }

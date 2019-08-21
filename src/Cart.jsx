@@ -119,8 +119,10 @@ class UnconnectedCart extends Component {
 
                     <div><StripeCheckout className="submitSignup"
                         token={this.onToken}
+                        amount={this.state.total}
                         stripeKey="pk_test_8l4JXUo5a7x8FBxatzwcYun400u6hJY5PF"
-                    /></div>
+                    />
+                        <button className="submitSignup" /></div>
                 </div>
             </div>
         );

@@ -35,6 +35,11 @@
     margin-bottom: 30px;
 }
 
+.signupLink:active {
+    background-color: rgb(49, 49, 49);
+    transform: translateY(4px)
+}
+
 .submitLogin {
     display: block;
     text-align: center;

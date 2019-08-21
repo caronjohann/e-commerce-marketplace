@@ -198,6 +198,11 @@
     margin-bottom: 30px;
 }
 
+.choseFile:active {
+    background-color: rgb(49, 49, 49);
+    transform: translateY(4px)
+}
+
 .choseFile [type=file] {
     cursor: inherit;
     display: block;

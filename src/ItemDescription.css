@@ -2,6 +2,7 @@
   margin-right: 10px;
   margin-bottom: 6px;
 }
+
 .item-title {
   position: relative;
   right: 130px;
@@ -18,23 +19,31 @@
   right: 130px;
   font-family: sans-serif;
   word-break: keep-all;
-  font-size: 16px;
+  font-size: 14px;
   color: dimgray;
   margin-top: 40px;
   margin-bottom: 50px;
   width: 390px;
   margin-left: 300px;
 }
+
 .item-seller {
+  display: block;
   position: relative;
   right: 130px;
   background-color: white;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   padding: 20px;
   width: 390px;
   margin-left: 300px;
 }
+
+.item-seller:active {
+  background-color: rgb(240, 240, 240);
+  transform: translateY(4px)
+}
+
 .two-clicks {
   line-height: 2.5;
 }
@@ -44,17 +53,17 @@
   right: 130px;
   border-top: 1px solid #0c1012;
   background: #08141c;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#04090d),
-    to(#08141c)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(#04090d),
+      to(#08141c));
   background: black;
   padding: 20px;
   color: white;
-  font-size: 18px;
+  border: none;
+  outline: none;
+  font-size: 20px;
   font-family: Sans-Serif;
   text-decoration: none;
   vertical-align: middle;
@@ -62,15 +71,12 @@
   cursor: pointer;
   margin-left: 300px;
 }
-.addTocartbutton:hover {
-  border-top-color: #5faad9;
-  background: #5faad9;
-  color: #ccc;
-}
+
 .addTocartbutton:active {
-  border-top-color: #1b435e;
-  background: #1b435e;
+  background-color: rgb(49, 49, 49);
+  transform: translateY(4px)
 }
+
 .itemDesc {
   position: relative;
   right: 110px;
@@ -98,9 +104,11 @@
   font-size: 16px;
   color: rgb(141, 135, 135);
 }
+
 .seller-items {
   margin-top: 65px;
 }
+
 .items-sold {
   flex-wrap: wrap;
   margin-top: 50px;

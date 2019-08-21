@@ -18,22 +18,25 @@ class UnconnectedSearchResults extends Component {
       <div className="container searchBarResult">
         {searchResults.map(each => {
           return (
-            <div className="container search-item">
-              <div>
+            <div>
+              <div className="container search-item">
+                <div>
+                  <Link to={"/itemDescription/" + each._id} style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                    <div className="search-arrow">→</div>
+                    <img
+                      className="search-images"
+                      src={each.images[0]}
+                      width="50px"
+                    />
+                  </Link>{" "}
+                </div>
+                <div className="search-descript">
+                  <Link to={"/itemDescription/" + each._id} style={{ color: "#595858" }}>{each.title} </Link>
+                </div>
                 <Link to={"/itemDescription/" + each._id}>
-                  <img
-                    className="search-images"
-                    src={each.images[0]}
-                    width="50px"
-                  />
-                </Link>{" "}
+                  <div className="search-price">${each.price}</div>{" "}
+                </Link>
               </div>
-              <div className="search-descript">
-                <Link to={"/itemDescription/" + each._id}>{each.title} </Link>
-              </div>
-              <Link to={"/itemDescription/" + each._id}>
-                <div className="search-price">${each.price}</div>{" "}
-              </Link>
             </div>
           );
         })}

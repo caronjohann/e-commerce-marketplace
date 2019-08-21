@@ -85,9 +85,10 @@ class UnconnectedItemDescription extends Component {
             {"  "}
             <div className="item-descript"> {this.props.item.description}</div>
 
-            <div className="item-seller">
+            <div >
               <Link
                 to={"/seller/" + this.props.item.seller}
+                className="item-seller"
                 onClick={this.handleSellerClicked}
               >
                 {this.props.item.seller}'s Store
