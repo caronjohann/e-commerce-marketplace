@@ -18,7 +18,7 @@ import "./Searchbar.css";
 
 class App extends Component {
   renderHomePage = () => {
-    this.renderListingItems()
+    this.renderListingItems();
     return (
       <div>
         <Header />
@@ -64,7 +64,7 @@ class App extends Component {
 
   renderItemDescriptionPage = routerData => {
     let itemId = routerData.match.params._id;
-    console.log(routerData)
+    console.log(routerData);
     let item = this.props.allItems.filter(item => {
       return item._id === itemId;
     })[0];
@@ -114,15 +114,15 @@ class App extends Component {
     let response = await fetch("/send-items");
     let body = await response.text();
     body = JSON.parse(body);
-    console.log(body)
+    console.log(body);
     this.props.dispatch({
       type: "all-items",
       allItems: body
     });
-  }
+  };
   componentDidMount = async () => {
     // fetching all items from /send-items endpoint
-    this.renderListingItems()
+    this.renderListingItems();
   };
 
   render = () => {
