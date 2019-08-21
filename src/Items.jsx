@@ -8,7 +8,8 @@ class UnconnectedItems extends Component {
     super(props);
     console.log(this.props.allItems);
     this.state = {
-      category: undefined,
+      category: "All Products",
+      count: null,
       showMoreClicks: 1
     };
   }
@@ -16,27 +17,49 @@ class UnconnectedItems extends Component {
   handleWomens = evt => {
     console.log("clicked womens");
     evt.preventDefault();
-    this.setState({ category: "womens", showMoreClicks: 1 });
+    let newCount = this.props.allItems.filter(each => {
+      return each.category === "Womens";
+    });
+    this.setState({
+      category: "Womens",
+      showMoreClicks: 1,
+      count: newCount.length
+    });
   };
 
   handleMens = evt => {
     evt.preventDefault();
-    this.setState({ category: "mens", showMoreClicks: 1 });
+    let newCount = this.props.allItems.filter(each => {
+      return each.category === "Mens";
+    });
+    this.setState({
+      category: "Mens",
+      showMoreClicks: 1,
+      count: newCount
+    });
   };
 
   handleAccessories = evt => {
     evt.preventDefault();
-    this.setState({ category: "accessories", showMoreClicks: 1 });
-  };
-
-  handleOther = evt => {
-    evt.preventDefault();
-    this.setState({ category: "other", showMoreClicks: 1 });
+    let newCount = this.props.allItems.filter(each => {
+      return each.category === "Accessories";
+    });
+    newCount = newCount.length;
+    this.setState({
+      category: "Accessories",
+      showMoreClicks: 1,
+      count: newCount
+    });
   };
 
   handleAll = evt => {
     evt.preventDefault();
-    this.setState({ category: undefined, showMoreClicks: 1 });
+    let newCount = this.props.allItems.length;
+    this.setState({
+      category: "All Products",
+      showMoreClicks: 1,
+      count: newCount
+    });
   };
 
   handleShowMore = () => {
@@ -47,10 +70,11 @@ class UnconnectedItems extends Component {
   };
 
   render = () => {
+    console.log(this.props.allItems);
     let toDisplayItems = this.props.allItems;
-
+    let amountOfItems = this.props.allItems.length;
     let starterItems = 12;
-    if (this.state.category !== undefined)
+    if (this.state.category !== "All Products")
       toDisplayItems = this.props.allItems.filter(item => {
         return item.category === this.state.category;
       });
@@ -106,25 +130,28 @@ class UnconnectedItems extends Component {
             </div>
           </div>
         </div>
-        <div className="flex container item-cont">
+        <div className="container cat-text">
+          {this.state.category} ({amountOfItems})
+        </div>
+        <div className="container item-cont">
           {toDisplayItems.map(item => {
             return (
               <div className="item">
-                <div>
+                <div className="img-obj">
                   <Link to={"/itemDescription/" + item._id}>
-                    <img src={item.images[0]} height="200px" width="200px" />
+                    <img src={item.images[0]} width="200px" />
                   </Link>
                 </div>
-                <div>
+                <div className="item-descrip">
                   <Link to={"/itemDescription/" + item._id}>{item.title}</Link>
                 </div>
-                <div>${item.price}</div>
+                <div className="small-item-price">${item.price}</div>
               </div>
             );
           })}
         </div>
-        <div className="container">
-          <button onClick={this.handleShowMore}>Show more</button>
+        <div className="container show-more">
+          <a onClick={this.handleShowMore}>Show more</a>
         </div>
       </div>
     );

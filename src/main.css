@@ -43,6 +43,18 @@ ul {
   margin-bottom: 40px;
 }
 
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* navigation styles */
 
 .head {
@@ -71,12 +83,17 @@ ul {
 /* category styles */
 
 .cat-btns {
-  padding-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .cat-arrow {
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.cat-text {
+  margin-bottom: 30px;
+  font-size: 14px;
 }
 
 .category-btn {
@@ -99,6 +116,42 @@ ul {
 
 .category-btn:hover .cat-arrow {
   opacity: 1;
+}
+
+/* items display styles */
+
+.item-cont {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.item {
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.item-descrip {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.small-item-price {
+  font-size: 14px;
+  color: #b6b6b6;
+  margin-top: 5px;
+}
+
+.img-obj {
+  height: 250px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.show-more {
+  margin-bottom: 100px;
+  text-align: center;
 }
 
 /* footer styles */
@@ -159,18 +212,6 @@ ul li {
   padding-bottom: 50px;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.flex {
-  display: flex;
-  justify-content: space-between;
-}
-
 .checkoutBox {
   display: flex;
   flex-direction: row;
@@ -197,14 +238,6 @@ ul li {
   height: 100px;
   display: flex;
   align-items: flex-start;
-}
-
-.item-cont {
-  flex-wrap: wrap;
-}
-
-.item {
-  width: 200px;
 }
 
 .logo {
