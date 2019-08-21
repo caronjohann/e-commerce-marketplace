@@ -20,7 +20,7 @@
 }
 
 .searchBarForm::placeholder {
-  color: #d2cece
+  color: #d2cece;
 }
 
 .searchBarForm:focus {
@@ -54,7 +54,6 @@
 .searchBarResult {
   /* margin-top: 50px; */
   flex-wrap: nowrap;
-
 }
 
 .search-item {
@@ -85,7 +84,7 @@
 }
 
 .search-descript {
-  color: rgb(49, 49, 49)
+  color: rgb(49, 49, 49);
 }
 
 .search-link {
@@ -103,13 +102,17 @@
 
 .search-item:hover .search-arrow {
   opacity: 1;
-  margin-right: 15px
+  margin-right: 15px;
+}
+.search-link:hover .search-arrow {
+  opacity: 1;
+  margin-right: 15px;
 }
 
-.search-link:hover {
+.search-:hover {
   transform: translateX(-10px);
 }
 
 .search-price {
-  color: grey
+  color: grey;
 }
