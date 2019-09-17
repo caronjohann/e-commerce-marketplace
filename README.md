@@ -13,4 +13,4 @@ Technologies include:
 - Express 
 - Multer
 
-![screenshot](marketplace_screenshot)
+![screenshot](marketplace_screenshot.png)
