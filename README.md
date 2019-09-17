@@ -5,7 +5,13 @@ An e-commerce marketplace developed with a team of three developers. The user ca
 
 Technologies include: 
 
-React.js, Redux, CSS, Node.js, MongoDB, Express, Multer
+- React.js 
+- Redux 
+- CSS 
+- Node.js 
+- MongoDB 
+- Express 
+- Multer
 
 To start the server, run `nodemon server.js`
 
