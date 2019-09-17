@@ -13,7 +13,3 @@ Technologies include:
 - Express 
 - Multer
 
-To start the server, run `nodemon server.js`
-
-Launch project at `http://localhost:4000/` 
-
